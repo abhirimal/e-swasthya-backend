@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eswasthya_db
+    username: password
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  #automatically update database schema
+    show-sql: true  #Display sql queries in logs
+
+server:
+    port:8080
+
