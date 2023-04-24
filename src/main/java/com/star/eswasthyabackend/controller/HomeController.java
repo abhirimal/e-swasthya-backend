@@ -12,6 +12,11 @@ public class HomeController {
         return "Hello World";
     }
 
+    @GetMapping("/failureUrl")
+    public String failure(){
+        return "Authentication Failed";
+    }
+
 
 
 
