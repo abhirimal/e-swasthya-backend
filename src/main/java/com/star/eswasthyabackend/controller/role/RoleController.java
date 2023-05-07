@@ -20,5 +20,6 @@ public class RoleController {
     @PostMapping("/add-new-role")
     public Integer addNewRoles(@RequestBody Role role){
         return roleService.addNewRole(role);
+
     }
 }

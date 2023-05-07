@@ -1,10 +1,11 @@
 package com.star.eswasthyabackend.utility;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
-
+import java.security.Key;
 import java.util.Date;
 
 @Service
@@ -15,6 +16,7 @@ public class JWTUtil {
 
     public String generateToken(Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + 864000000);
 
@@ -22,13 +24,14 @@ public class JWTUtil {
                 .setSubject(principal.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            Key key = Keys.hmacShaKeyFor(secret.getBytes());
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException ex) {
             System.out.println("Invalid JWT token");
@@ -43,7 +46,8 @@ public class JWTUtil {
     }
 
     public String getUsernameFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
 }

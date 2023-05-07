@@ -19,7 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -34,7 +33,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http);
         http.csrf().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/**").permitAll()
