@@ -24,7 +24,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("from 1");
         User userByUsername = userRepository.loadUserByUsername(username);
 
        List<GrantedAuthority> grantedAuthorities =
