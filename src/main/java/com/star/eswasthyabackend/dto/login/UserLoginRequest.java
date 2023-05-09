@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.dto.user.login;
+package com.star.eswasthyabackend.dto.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

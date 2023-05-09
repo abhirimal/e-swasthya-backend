@@ -1,9 +1,8 @@
 package com.star.eswasthyabackend.controller.auth;
 
-import com.star.eswasthyabackend.dto.user.JwtResponse;
-import com.star.eswasthyabackend.dto.user.login.UserLoginRequest;
+import com.star.eswasthyabackend.dto.JwtResponse;
+import com.star.eswasthyabackend.dto.login.UserLoginRequest;
 import com.star.eswasthyabackend.utility.JWTUtil;
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

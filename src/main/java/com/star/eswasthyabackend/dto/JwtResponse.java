@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.dto.user;
+package com.star.eswasthyabackend.dto;
 
 import lombok.Getter;
 
