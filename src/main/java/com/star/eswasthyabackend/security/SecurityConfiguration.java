@@ -36,17 +36,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeHttpRequests()
                 .antMatchers("/**").permitAll()
-                .antMatchers("/admin/**").permitAll()
-                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/api/user/**").hasAnyAuthority("USER")
-                .antMatchers("/api/dashboard").hasAnyAuthority("USER","ADMIN")
-                .anyRequest().authenticated()
-                .and().
-                formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/")
-                .failureUrl("/failureUrl")
-                .and().sessionManagement()
+                .antMatchers("/api/auth/authenticate").permitAll()
+//                .antMatchers("/admin/**").permitAll()
+//                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
+//                .antMatchers("/api/user/**").hasAnyAuthority("USER")
+//                .antMatchers("/api/dashboard").hasAnyAuthority("USER","ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }

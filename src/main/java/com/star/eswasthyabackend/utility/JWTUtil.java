@@ -4,15 +4,16 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 
-@Service
+@Component
 public class JWTUtil {
 
 
-    private final String secret = "mySecretKey";
+    private final String secret = "3hJ7mKpFqRtUwXyZaB8cVnE9x1i2g4o5N6l0sPdWfG";
 
     public String generateToken(Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
@@ -22,9 +23,11 @@ public class JWTUtil {
 
         return Jwts.builder()
                 .setSubject(principal.getUsername())
+                .claim("authority", principal.getAuthorities())
+                .claim("username", principal.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
