@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.security;
 
+import com.star.eswasthyabackend.config.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,14 +10,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CustomUserDetailsService customUserDetailsService;
 
-    public SecurityConfiguration(CustomUserDetailsService customUserDetailsService) {
+    private final JwtAuthenticationFilter jwtFilter;
+
+    public SecurityConfiguration(CustomUserDetailsService customUserDetailsService, JwtAuthenticationFilter jwtFilter) {
         this.customUserDetailsService = customUserDetailsService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Bean
@@ -35,19 +40,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers("/admin/**").permitAll()
-                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/api/user/**").hasAnyAuthority("USER")
-                .antMatchers("/api/dashboard").hasAnyAuthority("USER","ADMIN")
-                .anyRequest().authenticated()
-                .and().
-                formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/")
-                .failureUrl("/failureUrl")
-                .and().sessionManagement()
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/api/auth/authenticate").permitAll()
+//                .antMatchers("/admin/**").permitAll()
+//                .antMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
+//                .antMatchers("/api/user/**").hasAnyAuthority("USER")
+//                .antMatchers("/api/dashboard").hasAnyAuthority("USER","ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
 
