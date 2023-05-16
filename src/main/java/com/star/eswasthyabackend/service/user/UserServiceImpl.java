@@ -1,37 +1,45 @@
 package com.star.eswasthyabackend.service.user;
 
 import com.star.eswasthyabackend.dto.user.UserRequestDto;
+import com.star.eswasthyabackend.exception.UserAlreadyExistsException;
 import com.star.eswasthyabackend.model.Role;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.repository.RoleRepository;
 import com.star.eswasthyabackend.repository.UserRepository;
 import com.star.eswasthyabackend.security.SecurityConfiguration;
+import com.star.eswasthyabackend.service.GenerateTokenService;
+import com.star.eswasthyabackend.service.UserAccountVerificationService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final SecurityConfiguration securityConfiguration;
-
     private final RoleRepository roleRepository;
+    private final UserAccountVerificationService accountVerificationService;
 
-    public UserServiceImpl(UserRepository userRepository, SecurityConfiguration securityConfiguration, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.securityConfiguration = securityConfiguration;
-        this.roleRepository = roleRepository;
-    }
+    private final GenerateTokenService generateTokenService;
+
 
     @Override
     public Integer addNewUser(UserRequestDto userRequestDto) {
         User newUser = new User();
+        if(userRepository.loadUserByUsername(userRequestDto.getUsername()) != null){
+            throw new UserAlreadyExistsException("User already exists for given username.");
+        }
         newUser.setId(userRequestDto.getId());
         newUser.setPassword(securityConfiguration.getPasswordEncoder().encode(userRequestDto.getPassword()));
         newUser.setUsername(userRequestDto.getUsername());
+        newUser.setEmail(userRequestDto.getEmail());
         newUser.setIsVerified(false);
+        String token = generateTokenService.generateToken();
+        newUser.setToken(token);
 
         List<Role> roleList = new ArrayList<>();
 
@@ -43,22 +51,9 @@ public class UserServiceImpl implements UserService {
         newUser.setRoles(roleList);
         userRepository.saveAndFlush(newUser);
 
-        return newUser.getId();
+        //send verification email
+        accountVerificationService.verifyAccount(userRequestDto.getEmail(), newUser.getId(), token);
 
-//        for (Integer roleId : userRequestDto.getRolesId()) {
-//            Role role = new Role();
-//            if (roleId == Role.ROLE_ID_ADMIN) {
-//                role.setRoleName(Role.ROLE_ADMIN);
-//            } else if (roleId == Role.ROLE_ID_PATIENT) {
-//                role.setRoleName(Role.ROLE_PATIENT);
-//            } else if (roleId == Role.ROLE_ID_DOCTOR) {
-//                role.setRoleName((Role.ROLE_DOCTOR));
-//            } else if (roleId == Role.ROLE_ID_SUPPORT) {
-//                role.setRoleName(Role.ROLE_SUPPORT);
-//            } else {
-//                throw new RuntimeException("Unknown Role Name");
-//            }
-//            roleList.add(role);
-//        }
+        return newUser.getId();
     }
 }

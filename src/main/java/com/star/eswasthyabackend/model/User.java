@@ -24,6 +24,10 @@ public class User {
 
     private String password;
 
+    private String email;
+
+    private String token;
+
     private Boolean isVerified;
 
     @ManyToMany

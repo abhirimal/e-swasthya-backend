@@ -13,7 +13,7 @@ import java.util.Date;
 public class JWTUtil {
 
 
-    private final String secret = "3hJ7mKpFqRtUwXyZaB8cVnE9x1i2g4o5N6l0sPdWfG";
+        private final String secret = "3hJ7mKpFqRtUwXyZaB8cVnE9x1i2g4o5N6l0sPdWfG";
 
     public String generateToken(Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
