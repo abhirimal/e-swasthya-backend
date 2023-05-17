@@ -11,5 +11,20 @@ spring:
     show-sql: true  #Display sql queries in logs
 
 server:
-    port: 9080
+    port: 8080
+
+#    email configuration
+spring.mail:
+    host: smtp.gmail.com
+    port: 587
+    username: info.eswasthya.app@gmail.com
+    password: gbyzwmhuqupfyspb
+    properties:
+      mail:
+        smtp:
+          trust: smtp.gmail.com
+          starttls:
+            enable: true
+        auth: true
+
 

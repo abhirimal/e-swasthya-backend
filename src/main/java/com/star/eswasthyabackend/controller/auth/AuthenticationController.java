@@ -2,11 +2,13 @@ package com.star.eswasthyabackend.controller.auth;
 
 import com.star.eswasthyabackend.dto.JwtResponse;
 import com.star.eswasthyabackend.dto.login.UserLoginRequest;
+import com.star.eswasthyabackend.exception.BadCredentialsException;
 import com.star.eswasthyabackend.utility.JWTUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,18 +26,17 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticateUser(@RequestBody UserLoginRequest loginRequest){
-        System.out.println("before entering auth");
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        System.out.println("Exiting auth");
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        try{
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtUtil.generateToken(authentication);
+            return ResponseEntity.ok(new JwtResponse(jwt));
+        }
+        catch (AuthenticationException e){
+            throw new BadCredentialsException("Incorrect username or password");
+        }
 
-        String jwt = jwtUtil.generateToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
-    @GetMapping("/dashboard")
-    public String helloWorld(){
-        return "Hello World";
-    }
 }
