@@ -11,7 +11,7 @@ spring:
     show-sql: true  #Display sql queries in logs
 
 server:
-    port: 9080
+    port: 8080
 
 #    email configuration
 spring.mail:

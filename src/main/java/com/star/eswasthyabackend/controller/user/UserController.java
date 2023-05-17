@@ -1,13 +1,11 @@
 package com.star.eswasthyabackend.controller.user;
 
+import com.star.eswasthyabackend.dto.SuccessResponse;
 import com.star.eswasthyabackend.dto.user.UserRequestDto;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.service.user.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -22,9 +20,19 @@ public class UserController {
     }
 
     @PostMapping("/admin")
-    public ResponseEntity<?> addNewUser(@RequestBody UserRequestDto userRequestDto){
-        userService.addNewUser(userRequestDto);
-        return ResponseEntity.ok("User created Successfully");
+    public ResponseEntity<SuccessResponse> addNewUser(@RequestBody UserRequestDto userRequestDto){
+        return ResponseEntity.ok(new SuccessResponse("User Registered successfully",userService.addNewUser(userRequestDto)));
+    }
+
+    @GetMapping("/verify-account/{id}/{token}")
+    public ResponseEntity<SuccessResponse> verifyUserAccount(@PathVariable Integer id, @PathVariable String token){
+
+        return ResponseEntity.ok(new SuccessResponse("Account Verified Successfully.",userService.verifyAccount(id, token)));
+    }
+
+    @GetMapping("/dashboard")
+    public String helloWorld(){
+        return "Hello World";
     }
 
 

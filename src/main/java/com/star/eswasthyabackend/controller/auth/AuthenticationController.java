@@ -39,8 +39,4 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping("/dashboard")
-    public String helloWorld(){
-        return "Hello World";
-    }
 }

@@ -7,6 +7,5 @@ public interface UserService {
 
      Integer addNewUser(UserRequestDto userRequestDto);
 
-
-
+    Boolean verifyAccount(Integer id, String token);
 }
