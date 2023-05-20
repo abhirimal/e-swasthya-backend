@@ -1,6 +1,5 @@
 package com.star.eswasthyabackend.service.user;
 
-import com.star.eswasthyabackend.dto.login.UserLoginRequest;
 import com.star.eswasthyabackend.dto.user.UserRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Role;
@@ -8,7 +7,7 @@ import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.repository.RoleRepository;
 import com.star.eswasthyabackend.repository.UserRepository;
 import com.star.eswasthyabackend.security.SecurityConfiguration;
-import com.star.eswasthyabackend.service.VerificationService;
+import com.star.eswasthyabackend.service.VerificationAndResetService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -27,14 +26,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final SecurityConfiguration securityConfiguration;
     private final RoleRepository roleRepository;
-    private final VerificationService accountVerificationService;
+    private final VerificationAndResetService accountVerificationAndResetService;
 
     @Override
     public Integer addNewUser(UserRequestDto userRequestDto) {
-        UserLoginRequest userLoginRequest = new UserLoginRequest();
-        userLoginRequest = null;
-        userLoginRequest.getEmail();
-
         User newUser = new User();
         if (userRepository.loadUserByUsername(userRequestDto.getEmail()) != null) {
             throw new AppException("User already exists for given email.", HttpStatus.BAD_REQUEST);
@@ -63,7 +58,7 @@ public class UserServiceImpl implements UserService {
         newUser.setRoles(roleList);
         userRepository.saveAndFlush(newUser);
         //send verification email
-        accountVerificationService.verifyAccount(userRequestDto.getEmail(), newUser.getId(), verificationToken);
+        accountVerificationAndResetService.verifyOrResetAccount(userRequestDto.getEmail(), newUser.getId(), verificationToken);
 
         return newUser.getId();
     }
@@ -97,5 +92,27 @@ public class UserServiceImpl implements UserService {
         userRepository.save(existingUser);
 
         return true;
+    }
+
+    @Override
+    public void resendVerificationLink(Integer id) {
+
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(()-> new AppException("User doesn't exist.", HttpStatus.BAD_REQUEST));
+
+        if (Boolean.TRUE.equals(existingUser.getIsVerified())){
+            throw new AppException("User is already verified. Please log in.", HttpStatus.BAD_REQUEST);
+        }
+
+        String email = existingUser.getEmail();
+        LocalTime tokenSentTime = LocalTime.now();
+        UUID uuid = UUID.randomUUID();
+        String verificationToken = uuid.toString();
+
+        existingUser.setVerificationToken(verificationToken);
+        existingUser.setVerifyTokenGenTime(tokenSentTime);
+        userRepository.save(existingUser);
+
+        accountVerificationAndResetService.verifyOrResetAccount(email, id, verificationToken);
     }
 }

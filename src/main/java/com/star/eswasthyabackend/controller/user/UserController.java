@@ -11,7 +11,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("sign-up")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
@@ -20,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/admin")
+    @PostMapping("/sign-up")
     public ResponseEntity<ApiResponse> addNewUser(@Valid @RequestBody UserRequestDto userRequestDto){
         return ResponseEntity.ok(new ApiResponse(true, "User Registered successfully",userService.addNewUser(userRequestDto)));
     }
@@ -29,6 +29,12 @@ public class UserController {
     public ResponseEntity<ApiResponse> verifyUserAccount(@PathVariable Integer id, @PathVariable String token){
 
         return ResponseEntity.ok(new ApiResponse(true, "Account Verified Successfully.",userService.verifyAccount(id, token)));
+    }
+
+    @GetMapping("/verification-resend-email/{id}")
+    public ResponseEntity<?> resendVerificationLink(@PathVariable Integer id){
+        userService.resendVerificationLink(id);
+        return ResponseEntity.ok(new ApiResponse(true, "Verification email sent successfully.", null));
     }
 
     @GetMapping("/dashboard")
