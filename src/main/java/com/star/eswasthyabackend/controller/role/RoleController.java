@@ -2,13 +2,11 @@ package com.star.eswasthyabackend.controller.role;
 
 import com.star.eswasthyabackend.model.Role;
 import com.star.eswasthyabackend.service.role.RoleService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/admin")
 @RestController
+@CrossOrigin("*")
 public class RoleController {
 
     private final RoleService roleService;
