@@ -26,7 +26,7 @@ public class AuthenticationController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody UserLoginRequest loginRequest){
         try{
             Authentication authentication = authenticationManager.authenticate(
