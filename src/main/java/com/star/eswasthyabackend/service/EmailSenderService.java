@@ -1,6 +1,8 @@
 package com.star.eswasthyabackend.service;
 
+import com.star.eswasthyabackend.exception.AppException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,11 @@ public class EmailSenderService {
         message.setText(body);
         message.setSubject(subject);
 
-        javaMailSender.send(message);
-        System.out.println("Mail Sent! ");
-
+        try {
+            javaMailSender.send(message);
+            System.out.println("Mail Sent! ");
+        } catch (Exception e) {
+            throw new AppException("Email not sent. Invalid Email.", HttpStatus.BAD_REQUEST);
+        }
     }
 }

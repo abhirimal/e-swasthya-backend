@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.service.user;
 
+import com.star.eswasthyabackend.dto.login.UserLoginRequest;
 import com.star.eswasthyabackend.dto.user.UserRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Role;
@@ -30,6 +31,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer addNewUser(UserRequestDto userRequestDto) {
+        UserLoginRequest userLoginRequest = new UserLoginRequest();
+        userLoginRequest = null;
+        userLoginRequest.getEmail();
+
         User newUser = new User();
         if (userRepository.loadUserByUsername(userRequestDto.getEmail()) != null) {
             throw new AppException("User already exists for given email.", HttpStatus.BAD_REQUEST);
@@ -51,7 +56,8 @@ public class UserServiceImpl implements UserService {
         List<Role> roleList = new ArrayList<>();
 
         for (Integer roleId : userRequestDto.getRolesId()) {
-            Role role = roleRepository.findById(roleId).orElse(null);
+            Role role = roleRepository.findById(roleId)
+                    .orElseThrow(() -> new AppException("Role doesn't exist.", HttpStatus.BAD_REQUEST));
             roleList.add(role);
         }
         newUser.setRoles(roleList);
@@ -65,21 +71,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean verifyAccount(Integer userId, String verifyToken) {
         User existingUser = userRepository.findById(userId).orElseThrow(
-                ()-> new AppException("This token is not associated with any user.", HttpStatus.BAD_REQUEST)
+                () -> new AppException("This token is not associated with any user.", HttpStatus.BAD_REQUEST)
         );
+
+        if (Boolean.TRUE.equals(existingUser.getIsVerified())) {
+            throw new AppException("Invalid Token. Please try again!", HttpStatus.BAD_REQUEST);
+        }
         String databaseToken = existingUser.getVerificationToken();
         LocalTime sentTime = existingUser.getVerifyTokenGenTime();
         LocalTime currentTime = LocalTime.now();
 
-        long timeDifference = Duration.between(sentTime, currentTime).toNanos();
+        long timeDifference = Duration.between(sentTime, currentTime).toSeconds();
 
         if (timeDifference > 1800) {
-            throw new AppException("Link has expired.", HttpStatus.BAD_REQUEST);
+            throw new AppException("Link has expired. Please try again!", HttpStatus.BAD_REQUEST);
         }
 
         if (!Objects.equals(verifyToken, databaseToken)) {
-            throw new AppException("Invalid token", HttpStatus.BAD_REQUEST);
+            throw new AppException("Invalid Token. Please try again!", HttpStatus.BAD_REQUEST);
         }
+
+        existingUser.setIsVerified(true);
+        existingUser.setVerificationToken(null);
+        existingUser.setVerifyTokenGenTime(null);
+        userRepository.save(existingUser);
 
         return true;
     }

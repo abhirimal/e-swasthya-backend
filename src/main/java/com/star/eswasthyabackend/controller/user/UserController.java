@@ -4,7 +4,10 @@ import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.user.UserRequestDto;
 import com.star.eswasthyabackend.service.user.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
@@ -18,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/admin")
-    public ResponseEntity<ApiResponse> addNewUser(@RequestBody UserRequestDto userRequestDto){
+    public ResponseEntity<ApiResponse> addNewUser(@Valid @RequestBody UserRequestDto userRequestDto){
         return ResponseEntity.ok(new ApiResponse(true, "User Registered successfully",userService.addNewUser(userRequestDto)));
     }
 
