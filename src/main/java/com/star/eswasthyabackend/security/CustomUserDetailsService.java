@@ -23,13 +23,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User userByUsername = userRepository.loadUserByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User userByUsername = userRepository.loadUserByUsername(email);
 
        List<GrantedAuthority> grantedAuthorities =
                 userByUsername.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(
-                        userByUsername.getUsername(), userByUsername.getPassword(), grantedAuthorities);
+                        userByUsername.getEmail(), userByUsername.getPassword(), grantedAuthorities);
     }
 }

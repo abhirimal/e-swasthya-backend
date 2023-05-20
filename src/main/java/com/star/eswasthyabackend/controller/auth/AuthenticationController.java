@@ -2,8 +2,9 @@ package com.star.eswasthyabackend.controller.auth;
 
 import com.star.eswasthyabackend.dto.JwtResponse;
 import com.star.eswasthyabackend.dto.login.UserLoginRequest;
-import com.star.eswasthyabackend.exception.BadCredentialsException;
+import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.utility.JWTUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,13 +29,13 @@ public class AuthenticationController {
     public ResponseEntity<?> authenticateUser(@RequestBody UserLoginRequest loginRequest){
         try{
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtil.generateToken(authentication);
             return ResponseEntity.ok(new JwtResponse(jwt));
         }
         catch (AuthenticationException e){
-            throw new BadCredentialsException("Incorrect username or password");
+            throw new AppException("Incorrect email or password", HttpStatus.BAD_REQUEST);
         }
 
     }

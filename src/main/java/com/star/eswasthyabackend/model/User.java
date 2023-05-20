@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -20,15 +22,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    private String username;
+    private String firstName;
+
+    private String lastName;
 
     private String password;
 
+    @Column(nullable = false)
     private String email;
 
-    private String token;
+    private String verificationToken;
 
     private Boolean isVerified;
+
+    private LocalTime verifyTokenGenTime;
+
+    private String resetToken;
+
+    private Boolean resetEnabled;
+
+    private LocalTime resetTokenGenTime;
 
     @ManyToMany
     @JoinTable(name = "user_role",
