@@ -1,7 +1,5 @@
 package com.star.eswasthyabackend.dto.user;
 
-import com.star.eswasthyabackend.model.Role;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UserRequestDto {
+public class UserSignUpRequest {
     private Integer id;
 
     @NotBlank(message = "Email is required.")
