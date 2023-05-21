@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -37,11 +36,11 @@ public class User {
 
     private LocalTime verifyTokenGenTime;
 
-    private String resetToken;
+    private String resetPasswordToken;
 
-    private Boolean resetEnabled;
+    private Boolean resetPasswordEnabled;
 
-    private LocalTime resetTokenGenTime;
+    private LocalTime resetPasswordTokenGenTime;
 
     @ManyToMany
     @JoinTable(name = "user_role",

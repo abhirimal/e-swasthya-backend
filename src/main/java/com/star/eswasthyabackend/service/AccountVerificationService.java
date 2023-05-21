@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class VerificationAndResetService {
+public class AccountVerificationService {
 
     private final EmailSenderService emailSenderService;
     public void verifyOrResetAccount(String email, Integer userId, String token){
