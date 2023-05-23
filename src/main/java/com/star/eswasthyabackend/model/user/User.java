@@ -1,5 +1,6 @@
-package com.star.eswasthyabackend.model;
+package com.star.eswasthyabackend.model.user;
 
+import com.star.eswasthyabackend.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.security;
-import com.star.eswasthyabackend.model.User;
-import com.star.eswasthyabackend.repository.UserRepository;
+import com.star.eswasthyabackend.model.user.User;
+import com.star.eswasthyabackend.repository.user.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

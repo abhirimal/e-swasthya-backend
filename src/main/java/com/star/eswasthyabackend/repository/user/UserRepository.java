@@ -1,6 +1,6 @@
-package com.star.eswasthyabackend.repository;
+package com.star.eswasthyabackend.repository.user;
 
-import com.star.eswasthyabackend.model.User;
+import com.star.eswasthyabackend.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
