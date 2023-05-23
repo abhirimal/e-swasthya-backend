@@ -42,6 +42,8 @@ public class User {
 
     private LocalTime resetPasswordTokenGenTime;
 
+    private Boolean isFormFilled;
+
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = {@JoinColumn(name = "user_id")},

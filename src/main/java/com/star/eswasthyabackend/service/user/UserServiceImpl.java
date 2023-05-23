@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(securityConfiguration.getPasswordEncoder().encode(userSignUpRequest.getPassword()));
         newUser.setIsVerified(false);
         newUser.setResetPasswordEnabled(false);
+        newUser.setIsFormFilled(false);
 
         UUID uuid = UUID.randomUUID();
         String verificationToken = uuid.toString();
@@ -135,7 +136,6 @@ public class UserServiceImpl implements UserService {
 
         user.setResetPasswordToken(resetToken);
         user.setResetPasswordTokenGenTime(resetTokenGenTime);
-        user.setResetPasswordEnabled(true);
         userRepository.save(user);
 
         emailSenderService.sendEmail(email,
@@ -160,6 +160,7 @@ public class UserServiceImpl implements UserService {
         if(timeDifference>18000){
             throw new AppException("Link has expired. Please try again.", HttpStatus.BAD_REQUEST);
         }
+        existingUser.setResetPasswordEnabled(true);
         existingUser.setResetPasswordToken(null);
         existingUser.setResetPasswordTokenGenTime(null);
         userRepository.save(existingUser);
