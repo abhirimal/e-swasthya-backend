@@ -22,45 +22,59 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<ApiResponse> addNewUser(@Valid @RequestBody UserSignUpRequest userSignUpRequest){
-        return ResponseEntity.ok(new ApiResponse(true, "User Registered successfully",userService.addNewUser(userSignUpRequest)));
+    public ResponseEntity<ApiResponse> addNewUser(@Valid @RequestBody UserSignUpRequest userSignUpRequest) {
+        return ResponseEntity.ok(new ApiResponse(true,
+                "User Registered successfully. Email has been sent to " + userSignUpRequest.getEmail()+
+                        ". Follow the instruction to activate your account.",
+                userService.addNewUser(userSignUpRequest))
+        );
     }
 
     @GetMapping("/verify-account/{id}/{token}")
-    public ResponseEntity<ApiResponse> verifyUserAccount(@PathVariable Integer id, @PathVariable String token){
+    public ResponseEntity<ApiResponse> verifyUserAccount(@PathVariable Integer id, @PathVariable String token) {
 
-        return ResponseEntity.ok(new ApiResponse(true, "Account Verified Successfully.",userService.verifyAccount(id, token)));
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Account Verified Successfully.",
+                userService.verifyAccount(id, token))
+        );
     }
 
-    @GetMapping("/verification-resend-email/{id}")
-    public ResponseEntity<?> resendVerificationLink(@PathVariable Integer id){
-        userService.resendVerificationLink(id);
-        return ResponseEntity.ok(new ApiResponse(true, "Verification link is sent in your mail successfully.", null));
+    @GetMapping("/verification-resend-email/{email}")
+    public ResponseEntity<?> resendVerificationLink(@PathVariable String email) {
+        userService.resendVerificationLink(email);
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Email has been sent to " + email +
+                        ". Follow the instruction to activate your account.",
+                null)
+        );
     }
 
     @GetMapping("reset-password-request/{email}")
-    public ResponseEntity<?> resetPasswordRequest(@Email(message = "good email") @PathVariable String email){
+    public ResponseEntity<?> resetPasswordRequest(@PathVariable String email) {
         userService.resetPasswordRequest(email);
-        return ResponseEntity.ok(new ApiResponse(true, "Reset password link is sent in your mail successfully", null));
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Email has been sent to " + email +
+                        ". Follow the instruction to activate your account.",
+                null)
+        );
     }
 
     @GetMapping("verify-reset-password-link/{id}/{token}")
-    public ResponseEntity<?> verifyResetPasswordLink(@PathVariable Integer id, @PathVariable String token){
+    public ResponseEntity<?> verifyResetPasswordLink(@PathVariable Integer id, @PathVariable String token) {
 
         return ResponseEntity.ok(new ApiResponse(true,
-                "Token validated successfully.", userService.verifyResetPasswordLink(id, token)));
+                "Token validated successfully.",
+                userService.verifyResetPasswordLink(id, token))
+        );
     }
 
     @PostMapping("change-password")
-    public ResponseEntity<?> changePassword(@RequestBody UserResetPasswordRequest passwordRequest){
+    public ResponseEntity<?> changePassword(@RequestBody UserResetPasswordRequest passwordRequest) {
         userService.changePassword(passwordRequest);
-        return ResponseEntity.ok(new ApiResponse(true,"Password changed Successfully.", null));
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Password changed successfully. Please login to your account.",
+                null)
+        );
     }
-
-    @GetMapping("/dashboard")
-    public String helloWorld(){
-        return "Hello World";
-    }
-
 
 }

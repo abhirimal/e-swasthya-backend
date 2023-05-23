@@ -4,15 +4,14 @@ import com.star.eswasthyabackend.dto.user.UserResetPasswordRequest;
 import com.star.eswasthyabackend.dto.user.UserSignUpRequest;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Role;
-import com.star.eswasthyabackend.model.User;
+import com.star.eswasthyabackend.model.user.User;
 import com.star.eswasthyabackend.repository.RoleRepository;
-import com.star.eswasthyabackend.repository.UserRepository;
+import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.security.SecurityConfiguration;
 import com.star.eswasthyabackend.service.EmailSenderService;
 import com.star.eswasthyabackend.service.AccountVerificationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -76,7 +75,7 @@ public class UserServiceImpl implements UserService {
         );
 
         if (Boolean.TRUE.equals(existingUser.getIsVerified())) {
-            throw new AppException("Invalid Token. Please try again!", HttpStatus.BAD_REQUEST);
+            throw new AppException("Your account is already verified. Please Login to continue.", HttpStatus.BAD_REQUEST);
         }
         String databaseToken = existingUser.getVerificationToken();
         LocalTime sentTime = existingUser.getVerifyTokenGenTime();
@@ -101,16 +100,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void resendVerificationLink(Integer id) {
+    public void resendVerificationLink(String email) {
 
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(()-> new AppException("User doesn't exist.", HttpStatus.BAD_REQUEST));
+        User existingUser = userRepository.loadUserByUsername(email);
 
-        if (Boolean.TRUE.equals(existingUser.getIsVerified())){
-            throw new AppException("User is already verified. Please log in.", HttpStatus.BAD_REQUEST);
+        if(existingUser==null){
+            throw new AppException("User doesn't exist.", HttpStatus.BAD_REQUEST);
         }
 
-        String email = existingUser.getEmail();
+        if (Boolean.TRUE.equals(existingUser.getIsVerified())){
+            throw new AppException("Email address is already verified.Please login to continue.",
+                    HttpStatus.BAD_REQUEST);
+        }
+
         LocalTime tokenSentTime = LocalTime.now();
         UUID uuid = UUID.randomUUID();
         String verificationToken = uuid.toString();
@@ -119,7 +121,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setVerifyTokenGenTime(tokenSentTime);
         userRepository.save(existingUser);
 
-        accountAccountVerificationService.verifyOrResetAccount(email, id, verificationToken);
+        accountAccountVerificationService.verifyOrResetAccount(email, existingUser.getId(), verificationToken);
     }
 
     @Override

@@ -9,7 +9,7 @@ public interface UserService {
 
     Boolean verifyAccount(Integer id, String token);
 
-    void resendVerificationLink(Integer id);
+    void resendVerificationLink(String email);
 
     void resetPasswordRequest(String email);
 

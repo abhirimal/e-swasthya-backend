@@ -1,13 +1,13 @@
 package com.star.eswasthyabackend.utility;
 
-import com.star.eswasthyabackend.repository.UserRepository;
+import com.star.eswasthyabackend.repository.user.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 import java.security.Key;
 import java.util.Date;
 
@@ -21,12 +21,13 @@ public class JWTUtil {
 
     public String generateToken(Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
-        com.star.eswasthyabackend.model.User databaseUser = userRepository.loadUserByUsername(principal.getUsername());
+        com.star.eswasthyabackend.model.user.User databaseUser = userRepository.loadUserByUsername(principal.getUsername());
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + 864000000);
 
         return Jwts.builder()
+                .setSubject(principal.getUsername())
                 .claim("userId", databaseUser.getId())
                 .claim("authority", principal.getAuthorities())
                 .claim("email", principal.getUsername())
