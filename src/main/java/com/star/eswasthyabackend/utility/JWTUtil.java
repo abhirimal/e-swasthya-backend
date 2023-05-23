@@ -31,6 +31,7 @@ public class JWTUtil {
                 .claim("authority", principal.getAuthorities())
                 .claim("email", principal.getUsername())
                 .claim("isVerified", databaseUser.getIsVerified())
+                .claim("isFormFilled", databaseUser.getIsFormFilled())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(key, SignatureAlgorithm.HS256)
