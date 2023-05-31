@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,10 +27,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User userByUsername = userRepository.loadUserByUsername(email);
 
-       List<GrantedAuthority> grantedAuthorities =
-                userByUsername.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
+        String role = userByUsername.getRole();
+       GrantedAuthority authority = new SimpleGrantedAuthority(role);
 
         return new org.springframework.security.core.userdetails.User(
-                        userByUsername.getEmail(), userByUsername.getPassword(), grantedAuthorities);
+                        userByUsername.getEmail(), userByUsername.getPassword(), Collections.singleton(authority));
     }
 }

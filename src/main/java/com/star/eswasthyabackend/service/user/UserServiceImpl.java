@@ -2,10 +2,11 @@ package com.star.eswasthyabackend.service.user;
 
 import com.star.eswasthyabackend.dto.user.UserResetPasswordRequest;
 import com.star.eswasthyabackend.dto.user.UserSignUpRequest;
+import com.star.eswasthyabackend.enums.UserRole;
 import com.star.eswasthyabackend.exception.AppException;
-import com.star.eswasthyabackend.model.Role;
+//import com.star.eswasthyabackend.model.Role;
 import com.star.eswasthyabackend.model.user.User;
-import com.star.eswasthyabackend.repository.RoleRepository;
+//import com.star.eswasthyabackend.repository.RoleRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.security.SecurityConfiguration;
 import com.star.eswasthyabackend.service.EmailSenderService;
@@ -27,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final SecurityConfiguration securityConfiguration;
-    private final RoleRepository roleRepository;
     private final AccountVerificationService accountAccountVerificationService;
     private final EmailSenderService emailSenderService;
 
@@ -53,14 +53,16 @@ public class UserServiceImpl implements UserService {
         LocalTime tokenGeneratedTime = LocalTime.now();
         newUser.setVerifyTokenGenTime(tokenGeneratedTime);
 
-        List<Role> roleList = new ArrayList<>();
-
-        for (Integer roleId : userSignUpRequest.getRolesId()) {
-            Role role = roleRepository.findById(roleId)
-                    .orElseThrow(() -> new AppException("Role doesn't exist.", HttpStatus.BAD_REQUEST));
-            roleList.add(role);
+        //set role
+        if(userSignUpRequest.getRoleId() == 1){
+            newUser.setRole(String.valueOf(UserRole.PATIENT));
         }
-        newUser.setRoles(roleList);
+        else if(userSignUpRequest.getRoleId() == 2){
+            newUser.setRole(String.valueOf(UserRole.ADMIN));
+        }
+        else {
+            throw new AppException("Invalid Role. Please try again", HttpStatus.BAD_REQUEST);
+        }
         userRepository.saveAndFlush(newUser);
         //send verification email
         accountAccountVerificationService.verifyOrResetAccount(userSignUpRequest.getEmail(), newUser.getId(), verificationToken);
@@ -147,7 +149,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String verifyResetPasswordLink(Integer id, String token) {
+    public Integer verifyResetPasswordLink(Integer id, String token) {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(()-> new AppException("This link is not associated with any user.", HttpStatus.BAD_REQUEST));
         String databaseToken = existingUser.getResetPasswordToken();
@@ -166,7 +168,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setResetPasswordToken(null);
         existingUser.setResetPasswordTokenGenTime(null);
         userRepository.save(existingUser);
-        return existingUser.getEmail();
+        return existingUser.getId();
     }
 
     @Override

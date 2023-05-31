@@ -15,5 +15,5 @@ public interface UserService {
 
     void changePassword(UserResetPasswordRequest passwordRequest);
 
-    String verifyResetPasswordLink(Integer id, String token);
+    Integer verifyResetPasswordLink(Integer id, String token);
 }

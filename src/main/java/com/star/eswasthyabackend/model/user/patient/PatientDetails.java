@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Entity
@@ -20,6 +22,7 @@ public class PatientDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    @Column(nullable = false)
     private String citizenshipNo;
 
     private Integer medicalRecordId;
@@ -28,6 +31,7 @@ public class PatientDetails {
 
     private String lastName;
 
+    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits without any special character.")
     private String phoneNumber;
 
     private String email;
@@ -36,7 +40,15 @@ public class PatientDetails {
 
     private String bloodGroup;
 
-    private String address;
+    private String filePath;
+
+    private String province;
+
+    private String district;
+
+    private String ward;
+
+    private String street;
 
     private LocalDate dateOfBirth;
 
