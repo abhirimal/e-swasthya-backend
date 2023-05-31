@@ -35,7 +35,7 @@ public class PatientDetailsController {
     @GetMapping("/view-all")
     public ResponseEntity<?> viewAllPatients(){
         return ResponseEntity.ok(new ApiResponse(true,
-                "Patient list fetched successfully.",
+                "Patients list fetched successfully.",
                 patientDetailsService.getAll()));
     }
 }

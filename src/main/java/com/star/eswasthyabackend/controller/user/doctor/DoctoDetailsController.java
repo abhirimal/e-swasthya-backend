@@ -29,4 +29,11 @@ public class DoctoDetailsController {
                 "Doctor details fetched successfully",
                 doctorDetailsService.findById(id)));
     }
+
+    @GetMapping("/view-all")
+    ResponseEntity<?> listAllDoctos(){
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Doctors list fetched successfully",
+                doctorDetailsService.listAllDoctor()));
+    }
 }

@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -54,6 +55,11 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
     @Override
     public Map<String, Object> findById(Integer id) {
         return doctorDetailsRepository.findDoctorDetailsById(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> listAllDoctor() {
+        return doctorDetailsRepository.listAllDoctor();
     }
 
 
