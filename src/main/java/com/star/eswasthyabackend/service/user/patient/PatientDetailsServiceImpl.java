@@ -33,7 +33,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         }
 
         User existingUser = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(()-> new AppException("Invalid user id.", HttpStatus.BAD_REQUEST));
+                .orElseThrow(()-> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
 
         patientDetails.setFirstName(existingUser.getFirstName());
         patientDetails.setLastName(existingUser.getLastName());
