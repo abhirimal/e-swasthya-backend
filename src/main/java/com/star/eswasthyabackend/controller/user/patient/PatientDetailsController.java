@@ -5,7 +5,6 @@ import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
 import com.star.eswasthyabackend.service.user.patient.PatientDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,22 @@ public class PatientDetailsController {
     public ResponseEntity<?> savePatientDetails(@Valid @ModelAttribute PatientDetailsRequestDto requestDto){
 
         return ResponseEntity.ok(new ApiResponse(true,
-                "User details saved successfully.",
+                "Patient details saved successfully.",
                 patientDetailsService.savePatientDetails(requestDto)));
+    }
+
+    @GetMapping("/view/{id}")
+    public ResponseEntity<?> viewPatientDetail(@PathVariable Integer id){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Patient Details fetched Successfully.",
+                patientDetailsService.getPatientDetails(id)));
+    }
+
+    @GetMapping("/view-all")
+    public ResponseEntity<?> viewAllPatients(){
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Patient List fetched Successfully.",
+                patientDetailsService.getAll()));
     }
 }

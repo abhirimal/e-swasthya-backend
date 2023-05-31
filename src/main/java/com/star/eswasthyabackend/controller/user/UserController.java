@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 
 @RestController
 @CrossOrigin("*")
@@ -39,7 +41,8 @@ public class UserController {
     }
 
     @GetMapping("/verification-resend-email/{email}")
-    public ResponseEntity<?> resendVerificationLink(@PathVariable String email) {
+    public ResponseEntity<?> resendVerificationLink(@Valid @Email(regexp = "[a-zA-Z0-9+_.-]{4,}@[a-zA-Z0-9]+[.][a-z]{2,}([.][a-z]+)?",
+                                                            message = "Please enter a valid email address.") @PathVariable String email) {
         userService.resendVerificationLink(email);
         return ResponseEntity.ok(new ApiResponse(true,
                 "Email has been sent to " + email +
@@ -53,7 +56,7 @@ public class UserController {
         userService.resetPasswordRequest(email);
         return ResponseEntity.ok(new ApiResponse(true,
                 "Email has been sent to " + email +
-                        ". Follow the instruction to activate your account.",
+                        ". Follow the instruction to reset your password.",
                 null)
         );
     }

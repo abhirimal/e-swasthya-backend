@@ -12,8 +12,8 @@ public class UserSignUpRequest {
     private Integer id;
 
     @NotBlank(message = "Email is required.")
-    @Pattern(regexp = "[a-zA-Z0-9+_.-]+@[a-z]+[.][a-z]{3}", message = "Enter a valid email address." +
-            "Example: xyz@gmail.com")
+    @Email(regexp = "[a-zA-Z0-9+_.-]{4,}@[a-zA-Z0-9]+[.][a-z]{2,}([.][a-z]+)?",
+            message = "Please enter a valid email address.")
     private String email;
 
     @NotBlank(message = "First Name is required")
@@ -30,6 +30,7 @@ public class UserSignUpRequest {
     @Pattern(regexp ="^[a-zA-z0-9]{8,}$",message = "Password should be of 8 digits.")
     private String password;
 
-    @NotEmpty
-    private List<Integer> rolesId;
+//    @NotEmpty
+//    private List<Integer> rolesId;
+    private Integer roleId;
 }

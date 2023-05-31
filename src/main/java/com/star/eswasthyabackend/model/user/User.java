@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.model.user;
 
-import com.star.eswasthyabackend.model.Role;
+//import com.star.eswasthyabackend.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,10 +45,12 @@ public class User {
 
     private Boolean isFormFilled;
 
-    @ManyToMany
-    @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private List<Role> roles;
+    private String role;
+
+//    @ManyToMany
+//    @JoinTable(name = "user_role",
+//            joinColumns = {@JoinColumn(name = "user_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+//    private List<Role> roles;
 
 }

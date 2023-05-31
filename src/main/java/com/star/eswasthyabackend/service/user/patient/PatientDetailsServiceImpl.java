@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class PatientDetailsServiceImpl implements PatientDetailsService {
@@ -44,9 +47,25 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         patientDetails.setWeight(requestDto.getWeight());
         patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
         patientDetails.setUser(existingUser);
-        patientDetails.setAddress(null);
+        //location
+        patientDetails.setProvince(requestDto.getProvince());
+        patientDetails.setDistrict(requestDto.getDistrict());
+        patientDetails.setWard(requestDto.getWard());
+        patientDetails.setStreet(requestDto.getStreet());
 
         patientDetailsRepository.saveAndFlush(patientDetails);
         return patientDetails.getId();
     }
+
+    @Override
+    public Map<String, String> getPatientDetails(Integer id) {
+        return patientDetailsRepository.findPatientDetail(id);
+    }
+
+    @Override
+    public List<Map<String, String>> getAll() {
+        return patientDetailsRepository.findAllPatientDetail();
+    }
+
+
 }
