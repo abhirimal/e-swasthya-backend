@@ -4,6 +4,7 @@ import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailsRequestDto;
 import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,14 @@ public class DoctoDetailsController {
     ResponseEntity<?> saveAndUpdate(@RequestBody DoctorDetailsRequestDto requestDto){
 
         return ResponseEntity.ok(new ApiResponse(true,
-                "Doctor detail saved successfully.",
+                "Doctor details saved successfully.",
                 doctorDetailsService.saveDoctorDetails(requestDto)));
+    }
+
+    @GetMapping("/view/{id}")
+    ResponseEntity<?> viewById(@PathVariable Integer id){
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Doctor details fetched successfully",
+                doctorDetailsService.findById(id)));
     }
 }

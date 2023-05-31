@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class DoctorDetailsServiceImpl implements DoctorDetailsService {
@@ -22,10 +24,13 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
 
         DoctorDetails doctorDetails;
         if(requestDto.getDoctorDetailId() != null){
-            doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
+            doctorDetails = doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
                     .orElseThrow(() -> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
         }
-        doctorDetails = new DoctorDetails();
+        else{
+            doctorDetails = new DoctorDetails();
+
+        }
 
         User user = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(() -> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
@@ -44,6 +49,11 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         doctorDetailsRepository.saveAndFlush(doctorDetails);
 
         return doctorDetails.getDoctorDetailId();
+    }
+
+    @Override
+    public Map<String, Object> findById(Integer id) {
+        return doctorDetailsRepository.findDoctorDetailsById(id);
     }
 
 
