@@ -5,7 +5,6 @@ import com.star.eswasthyabackend.dto.appointment.AppointmentRequest;
 import com.star.eswasthyabackend.service.user.appointment.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -60,7 +59,7 @@ public class AppointmentController {
 
         return ResponseEntity.ok(new ApiResponse(
            true,
-           "Appointments fetched successfully.",
+           "Appointment deleted successfully.",
                 appointmentService.deleteByAppointmentById(appointmentId)
         ));
     }
