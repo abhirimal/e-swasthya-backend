@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, Integer> {
 
-    @Query(value = "select doctor_detail_id    as \"doctorDetailId\",\n" +
+    @Query(value = "select doctor_detail_id    as \"doctorId\",\n" +
             "       first_name          as \"firstName\",\n" +
             "       last_name           as \"lastName\",\n" +
             "       email,\n" +
@@ -25,7 +25,7 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "where doctor_detail_id = ?1", nativeQuery = true)
     Map<String, Object> findDoctorDetailsById(Integer id);
 
-    @Query(value = "select doctor_detail_id    as \"doctorDetailId\",\n" +
+    @Query(value = "select doctor_detail_id    as \"doctorId\",\n" +
             "       first_name          as \"firstName\",\n" +
             "       last_name           as \"lastName\",\n" +
             "       email,\n" +
