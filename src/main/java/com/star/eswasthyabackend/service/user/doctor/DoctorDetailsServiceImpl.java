@@ -2,8 +2,8 @@ package com.star.eswasthyabackend.service.user.doctor;
 
 import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailsRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
-import com.star.eswasthyabackend.model.user.User;
-import com.star.eswasthyabackend.model.user.doctor.DoctorDetails;
+import com.star.eswasthyabackend.model.User;
+import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +23,13 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
     @Override
     public Integer saveDoctorDetails(DoctorDetailsRequestDto requestDto) {
 
+        User user = userRepository.findById(requestDto.getUserId())
+                .orElseThrow(() -> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
+
+        if(Boolean.FALSE.equals(user.getIsVerified())){
+            throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
+        }
+
         DoctorDetails doctorDetails;
         if(requestDto.getDoctorDetailId() != null){
             doctorDetails = doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
@@ -32,9 +39,6 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
             doctorDetails = new DoctorDetails();
 
         }
-
-        User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(() -> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
 
         doctorDetails.setFirstName(user.getFirstName());
         doctorDetails.setLastName(user.getLastName());

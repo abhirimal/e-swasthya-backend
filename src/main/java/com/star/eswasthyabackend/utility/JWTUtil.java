@@ -21,7 +21,7 @@ public class JWTUtil {
 
     public String generateToken(Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
-        com.star.eswasthyabackend.model.user.User databaseUser = userRepository.loadUserByUsername(principal.getUsername());
+        com.star.eswasthyabackend.model.User databaseUser = userRepository.loadUserByUsername(principal.getUsername());
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + 864000000);

@@ -1,13 +1,12 @@
-package com.star.eswasthyabackend.model.user.patient;
+package com.star.eswasthyabackend.model.patient;
 
-import com.star.eswasthyabackend.model.user.User;
+import com.star.eswasthyabackend.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
@@ -25,7 +24,7 @@ public class PatientDetails {
     @Column(nullable = false)
     private String citizenshipNo;
 
-    private Integer medicalRecordId;
+    private String medicalRecordNumber;
 
     private String firstName;
 

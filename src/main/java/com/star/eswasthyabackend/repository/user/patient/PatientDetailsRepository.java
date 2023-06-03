@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.repository.user.patient;
 
-import com.star.eswasthyabackend.model.user.patient.PatientDetails;
+import com.star.eswasthyabackend.model.patient.PatientDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.Map;
 public interface PatientDetailsRepository extends JpaRepository<PatientDetails, Integer> {
 
     @Query(value = "Select id,\n" +
-            "       medical_record_id as \"medicalRecordID\",\n" +
+            "       medical_record_number as \"medicalRecordNumber\",\n" +
             "       citizenship_no as \"citizenshipNo\",\n" +
             "       first_name as \"firstName\",\n" +
             "       last_name as \"lastName\",\n" +
@@ -25,7 +25,7 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
     Map<String, String> findPatientDetail(Integer id);
 
     @Query(value = "Select id,\n" +
-            "       medical_record_id as \"medicalRecordID\",\n" +
+            "       medical_record_Number as \"medicalRecordNumber\",\n" +
             "       citizenship_no as \"citizenshipNo\",\n" +
             "       first_name as \"firstName\",\n" +
             "       last_name as \"lastName\",\n" +

@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.model.user.doctor;
+package com.star.eswasthyabackend.model.doctor;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
