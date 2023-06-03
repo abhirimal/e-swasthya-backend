@@ -2,8 +2,8 @@ package com.star.eswasthyabackend.service.user.patient;
 
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
-import com.star.eswasthyabackend.model.user.User;
-import com.star.eswasthyabackend.model.user.patient.PatientDetails;
+import com.star.eswasthyabackend.model.User;
+import com.star.eswasthyabackend.model.patient.PatientDetails;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,13 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     @Override
     public Integer savePatientDetails(PatientDetailsRequestDto requestDto) {
 
+        User existingUser = userRepository.findById(requestDto.getUserId())
+                .orElseThrow(()-> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
+
+        if(Boolean.FALSE.equals(existingUser.getIsVerified())){
+            throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
+        }
+
         PatientDetails patientDetails;
 
         if(requestDto.getId()!=null){
@@ -32,17 +39,13 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
             patientDetails = new PatientDetails();
         }
 
-        User existingUser = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(()-> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
-
         patientDetails.setFirstName(existingUser.getFirstName());
         patientDetails.setLastName(existingUser.getLastName());
         patientDetails.setEmail(existingUser.getEmail());
 
         patientDetails.setPhoneNumber(requestDto.getPhoneNumber());
         patientDetails.setCitizenshipNo(requestDto.getCitizenshipNo());
-        //logic to generate unique health id
-        patientDetails.setMedicalRecordId(null);
+
         patientDetails.setBloodGroup(requestDto.getBloodGroup());
         patientDetails.setWeight(requestDto.getWeight());
         patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
@@ -54,6 +57,11 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         patientDetails.setStreet(requestDto.getStreet());
 
         patientDetailsRepository.saveAndFlush(patientDetails);
+
+        String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getId());
+        patientDetails.setMedicalRecordNumber(medicalRecordNumber);
+        patientDetailsRepository.save(patientDetails);
+
         return patientDetails.getId();
     }
 
@@ -67,5 +75,8 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         return patientDetailsRepository.findAllPatientDetail();
     }
 
-
+    public String generateUniqueMedicalRecordNumber(Integer id){
+        String formattedId = String.format("%04d", id);
+        return "MRN-"+formattedId;
+    }
 }

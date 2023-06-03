@@ -5,7 +5,7 @@ import com.star.eswasthyabackend.dto.user.UserSignUpRequest;
 import com.star.eswasthyabackend.enums.UserRole;
 import com.star.eswasthyabackend.exception.AppException;
 //import com.star.eswasthyabackend.model.Role;
-import com.star.eswasthyabackend.model.user.User;
+import com.star.eswasthyabackend.model.User;
 //import com.star.eswasthyabackend.repository.RoleRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.security.SecurityConfiguration;
@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -58,7 +56,7 @@ public class UserServiceImpl implements UserService {
             newUser.setRole(String.valueOf(UserRole.PATIENT));
         }
         else if(userSignUpRequest.getRoleId() == 2){
-            newUser.setRole(String.valueOf(UserRole.ADMIN));
+            newUser.setRole(String.valueOf(UserRole.DOCTOR));
         }
         else {
             throw new AppException("Invalid Role. Please try again", HttpStatus.BAD_REQUEST);

@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.model.user;
+package com.star.eswasthyabackend.model;
 
 //import com.star.eswasthyabackend.model.Role;
 import lombok.AllArgsConstructor;

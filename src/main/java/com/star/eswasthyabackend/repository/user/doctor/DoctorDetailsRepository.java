@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.repository.user.doctor;
 
-import com.star.eswasthyabackend.model.user.doctor.DoctorDetails;
+import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
