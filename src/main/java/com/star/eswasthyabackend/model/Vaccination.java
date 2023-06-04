@@ -27,9 +27,6 @@ public class Vaccination {
 
     private Integer dosage;
 
-    @ManyToMany
-    @JoinTable(name = "patient_vaccination",
-            joinColumns = {@JoinColumn(name = "patient_id")},
-            inverseJoinColumns = {@JoinColumn(name = "vaccination_id")})
-    private List<PatientDetails> patientDetails;
+    @ManyToOne
+    private PatientDetails patientDetails;
 }

@@ -57,6 +57,4 @@ public class PatientDetails {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "patientDetails")
-    private List<Vaccination> vaccinationList;
 }
