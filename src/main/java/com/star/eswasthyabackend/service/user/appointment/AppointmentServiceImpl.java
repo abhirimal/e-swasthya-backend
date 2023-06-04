@@ -62,12 +62,12 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public List<Map<String, Object>> viewByDoctorid(Integer doctorId) {
+    public List<Map<String, Object>> viewByDoctorId(Integer doctorId) {
         return appointmentRepository.viewByDoctorId(doctorId);
     }
 
     @Override
-    public List<Map<String, Object>> viewByPatiendId(Integer patientId) {
+    public List<Map<String, Object>> viewByPatientdId(Integer patientId) {
         return appointmentRepository.viewByPatientId(patientId);
     }
 

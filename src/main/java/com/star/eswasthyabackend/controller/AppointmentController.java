@@ -40,7 +40,7 @@ public class AppointmentController {
         return ResponseEntity.ok(new ApiResponse(
                 true,
                 "Appointments fetched successfully.",
-                appointmentService.viewByDoctorid(doctorId)
+                appointmentService.viewByDoctorId(doctorId)
         ));
     }
 
@@ -50,7 +50,7 @@ public class AppointmentController {
         return ResponseEntity.ok(new ApiResponse(
                 true,
                 "Appointments feteched successfully",
-                appointmentService.viewByPatiendId(patientId)
+                appointmentService.viewByPatientdId(patientId)
         ));
     }
 

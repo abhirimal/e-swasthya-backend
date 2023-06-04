@@ -10,9 +10,9 @@ public interface AppointmentService {
 
     Map<String, Object> viewById(Integer appointmentId);
 
-    List<Map<String, Object>> viewByDoctorid(Integer doctorId);
+    List<Map<String, Object>> viewByDoctorId(Integer doctorId);
 
-    List<Map<String, Object>> viewByPatiendId(Integer patientId);
+    List<Map<String, Object>> viewByPatientdId(Integer patientId);
 
     Boolean deleteByAppointmentById(Integer appointmentId);
 }
