@@ -2,6 +2,7 @@ package com.star.eswasthyabackend.model.patient;
 
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.Vaccination;
+import com.star.eswasthyabackend.model.location.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,5 +57,10 @@ public class PatientDetails {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
 }

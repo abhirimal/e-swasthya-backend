@@ -4,7 +4,7 @@ import com.star.eswasthyabackend.dto.VaccinationRequest;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Vaccination;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
-import com.star.eswasthyabackend.repository.user.VaccinationRepository;
+import com.star.eswasthyabackend.repository.VaccinationRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
