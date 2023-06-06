@@ -16,6 +16,7 @@ public class LocationServiceImpl implements LocationService{
     private final DistrictRepository districtRepository;
 
     private final MunicipalityRepository municipalityRepository;
+
     @Override
     public List<Map<String, Object>> viewAllProvinceList() {
         return districtRepository.listAllProvince();
@@ -29,6 +30,11 @@ public class LocationServiceImpl implements LocationService{
     @Override
     public List<Map<String, Object>> viewAllMunicipalityByDistrictId(Integer districtId) {
         return municipalityRepository.listMunicipalityByDistrictId(districtId);
+    }
+
+    @Override
+    public List<Map<String, Object>> getLocationInJson() {
+        return districtRepository.getLocationInJson();
     }
 
 

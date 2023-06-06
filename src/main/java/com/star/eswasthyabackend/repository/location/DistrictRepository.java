@@ -21,4 +21,14 @@ public interface DistrictRepository extends JpaRepository<District, Integer> {
             "FROM district\n" +
             "WHERE province_no = ?1")
     List<Map<String, Object>> listDistrictByProvinceNo(Integer provinceId);
+
+    @Query(nativeQuery = true , value = "select d.province_no   as \"provinceNo\",\n" +
+            "       d.province_name as \"provinceName\",\n" +
+            "       d.id            as \"districtId\",\n" +
+            "       d.name          as \"districtName\",\n" +
+            "       m.id            as \"municipalityNo\",\n" +
+            "       m.name          as \"municipalityName\"\n" +
+            "from district d\n" +
+            "         inner join municipality m on d.id = m.district_id;")
+    List<Map<String, Object>> getLocationInJson();
 }

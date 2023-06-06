@@ -19,14 +19,14 @@
 //
 //    @Override
 //    public void run(String... args) throws Exception {
-//        loadSqlScript("districts.sql");
-//        loadSqlScript("municipality");
+////        loadSqlScript("districts.sql");
+//        loadSqlScript("municipality.sql");
 //    }
 //
 //    private void loadSqlScript(String fileName) throws IOException {
 //        ClassPathResource resource = new ClassPathResource(fileName);
 //        byte[] bytes = FileCopyUtils.copyToByteArray(resource.getInputStream());
-//        String sqlScript =  new String(bytes, StandardCharsets.UTF_8);
+//        String sqlScript = new String(bytes, StandardCharsets.UTF_8);
 //        jdbcTemplate.execute(sqlScript);
 //    }
 //}
