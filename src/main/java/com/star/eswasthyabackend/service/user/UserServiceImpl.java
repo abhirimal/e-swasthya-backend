@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
 
         emailSenderService.sendEmail(email,
                 "Please click the link below to reset your password. The link expires in 30 minutes. \n" +
-                        "localhost:8080/api/user/verify-reset-password-link/"+id+"/"+resetToken,
+                        "localhost:3000/verifyresetpasswordlink/"+id+"/"+resetToken,
                 "Reset Your Password");
     }
 

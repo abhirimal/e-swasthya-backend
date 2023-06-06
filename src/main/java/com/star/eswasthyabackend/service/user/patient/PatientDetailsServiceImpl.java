@@ -3,7 +3,13 @@ package com.star.eswasthyabackend.service.user.patient;
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.User;
+import com.star.eswasthyabackend.model.location.District;
+import com.star.eswasthyabackend.model.location.Location;
+import com.star.eswasthyabackend.model.location.Municipality;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
+import com.star.eswasthyabackend.repository.location.DistrictRepository;
+import com.star.eswasthyabackend.repository.location.LocationRepository;
+import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +25,9 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
     private final PatientDetailsRepository patientDetailsRepository;
     private final UserRepository userRepository;
+    private final LocationRepository locationRepository;
+    private final DistrictRepository districtRepository;
+    private final MunicipalityRepository municipalityRepository;
     @Override
     public Integer savePatientDetails(PatientDetailsRequestDto requestDto) {
 
@@ -31,8 +40,8 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
         PatientDetails patientDetails;
 
-        if(requestDto.getId()!=null){
-            patientDetails = patientDetailsRepository.findById(requestDto.getId())
+        if(requestDto.getPatientDetailId()!=null){
+            patientDetails = patientDetailsRepository.findById(requestDto.getPatientDetailId())
                     .orElseThrow(()-> new AppException("Patient not found for given id.", HttpStatus.BAD_REQUEST));
         }
         else{
@@ -51,18 +60,24 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
         patientDetails.setUser(existingUser);
         //location
-        patientDetails.setProvince(requestDto.getProvince());
-        patientDetails.setDistrict(requestDto.getDistrict());
-        patientDetails.setWard(requestDto.getWard());
-        patientDetails.setStreet(requestDto.getStreet());
 
+        Location location = new Location();
+        District district = districtRepository.findById(requestDto.getDistrictId())
+                        .orElseThrow(()-> new AppException("District not found for given district id", HttpStatus.BAD_REQUEST));
+        Municipality municipality = municipalityRepository.findById(requestDto.getMunicipalityId())
+                .orElseThrow(()-> new AppException("Municipality not found for given municipality id.", HttpStatus.BAD_REQUEST));
+        location.setDistrict(district);
+        location.setMunicipality(municipality);
+        location.setWardNo(requestDto.getWardNo());
+        location.setStreetAddress(requestDto.getStreet());
+        patientDetails.setLocation(location);
         patientDetailsRepository.saveAndFlush(patientDetails);
 
-        String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getId());
+        String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getPatientId());
         patientDetails.setMedicalRecordNumber(medicalRecordNumber);
         patientDetailsRepository.save(patientDetails);
 
-        return patientDetails.getId();
+        return patientDetails.getPatientId();
     }
 
     @Override

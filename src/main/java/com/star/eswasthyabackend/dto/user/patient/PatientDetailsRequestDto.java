@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 public class PatientDetailsRequestDto {
 
-    private Integer id;
+    private Integer patientDetailId;
 
     private Integer userId;
 
@@ -33,15 +34,15 @@ public class PatientDetailsRequestDto {
     //used while listening or sending data to front end
     private String imagePath;
 
-    @NotBlank(message = "Province cannot be empty")
-    private String province;
+    @NotNull(message = "District id cannot be null")
+    private Integer districtId;
 
-    @NotBlank(message = "District cannot be empty")
-    private String district;
+    private Integer municipalityId;
 
-    @NotBlank(message = "Ward cannot be empty")
-    private String ward;
+    @NotNull(message = "Ward Number cannot be null")
+    private Integer wardNo;
 
+    @NotBlank(message = "District name cannot be empty")
     private String street;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

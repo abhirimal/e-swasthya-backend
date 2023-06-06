@@ -22,7 +22,7 @@ public class PatientDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private Integer patientId;
 
     @Column(nullable = false)
     private String citizenshipNo;
@@ -43,14 +43,6 @@ public class PatientDetails {
     private String bloodGroup;
 
     private String filePath;
-
-    private String province;
-
-    private String district;
-
-    private String ward;
-
-    private String street;
 
     private LocalDate dateOfBirth;
 

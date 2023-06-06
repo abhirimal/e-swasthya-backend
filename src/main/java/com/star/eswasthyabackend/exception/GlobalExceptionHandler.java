@@ -3,6 +3,7 @@ package com.star.eswasthyabackend.exception;
 import com.star.eswasthyabackend.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,8 +24,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(appException.getHttpStatus()).body(response);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<ApiResponse> handleMethodArgumentNotValid(BindException ex) {
         // Get the BindingResult from the exception
         BindingResult bindingResult = ex.getBindingResult();
 
