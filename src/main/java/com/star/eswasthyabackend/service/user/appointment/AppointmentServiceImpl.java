@@ -5,7 +5,7 @@ import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Appointment;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
-import com.star.eswasthyabackend.repository.user.AppointmentRepository;
+import com.star.eswasthyabackend.repository.AppointmentRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.repository.user;
+package com.star.eswasthyabackend.repository;
 
 import com.star.eswasthyabackend.model.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
