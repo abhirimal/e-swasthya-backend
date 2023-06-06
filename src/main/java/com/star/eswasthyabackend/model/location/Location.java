@@ -19,7 +19,11 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "district_id")
-    private District districtId;
+    private District district;
+
+    @ManyToOne
+    @JoinColumn(name = "municipality_id")
+    private Municipality municipality;
 
     private String streetAddress;
 
