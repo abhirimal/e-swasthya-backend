@@ -28,5 +28,6 @@ public class Vaccination {
     private Integer dosage;
 
     @ManyToOne
+    @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetails;
 }

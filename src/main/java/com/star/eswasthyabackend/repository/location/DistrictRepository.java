@@ -31,4 +31,14 @@ public interface DistrictRepository extends JpaRepository<District, Integer> {
             "from district d\n" +
             "         inner join municipality m on d.id = m.district_id;")
     List<Map<String, Object>> getLocationInJson();
+
+
+    @Query(nativeQuery = true, value = "SELECT count(*) from district")
+    Integer countDistrict();
+
+    @Query(nativeQuery = true, value = "select d.id\n" +
+            "from district d\n" +
+            "         inner join municipality m on d.id = m.district_id\n" +
+            "where m.id = ?1")
+    Integer findDistrictIdByMunicipalityId(Integer municipalityId);
 }

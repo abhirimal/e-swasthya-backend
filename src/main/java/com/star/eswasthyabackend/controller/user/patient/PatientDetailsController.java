@@ -17,7 +17,7 @@ public class PatientDetailsController {
 
     private final PatientDetailsService patientDetailsService;
     @PostMapping("/save")
-    public ResponseEntity<?> savePatientDetails(@Valid @ModelAttribute PatientDetailsRequestDto requestDto){
+    public ResponseEntity<?> savePatientDetails(@Valid @RequestBody PatientDetailsRequestDto requestDto){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patient details saved successfully.",

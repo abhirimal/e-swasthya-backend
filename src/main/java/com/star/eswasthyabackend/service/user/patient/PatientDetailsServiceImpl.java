@@ -31,6 +31,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     @Override
     public Integer savePatientDetails(PatientDetailsRequestDto requestDto) {
 
+
         User existingUser = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(()-> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
 
@@ -57,6 +58,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
         patientDetails.setBloodGroup(requestDto.getBloodGroup());
         patientDetails.setWeight(requestDto.getWeight());
+        patientDetails.setHeight(requestDto.getHeight());
         patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
         patientDetails.setUser(existingUser);
         //location
@@ -68,16 +70,16 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
                 .orElseThrow(()-> new AppException("Municipality not found for given municipality id.", HttpStatus.BAD_REQUEST));
         location.setDistrict(district);
         location.setMunicipality(municipality);
-        location.setWardNo(requestDto.getWardNo());
-        location.setStreetAddress(requestDto.getStreet());
+        location.setStreetAddress(requestDto.getStreetAddress());
+        location = locationRepository.saveAndFlush(location);
         patientDetails.setLocation(location);
         patientDetailsRepository.saveAndFlush(patientDetails);
 
-        String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getPatientId());
+        String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getPatientDetailId());
         patientDetails.setMedicalRecordNumber(medicalRecordNumber);
         patientDetailsRepository.save(patientDetails);
 
-        return patientDetails.getPatientId();
+        return patientDetails.getPatientDetailId();
     }
 
     @Override

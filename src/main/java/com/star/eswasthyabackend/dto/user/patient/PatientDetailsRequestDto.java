@@ -26,10 +26,9 @@ public class PatientDetailsRequestDto {
 
     private String weight;
 
-    private String bloodGroup;
+    private String height;
 
-    // used while saving
-    private MultipartFile imageFile;
+    private String bloodGroup;
 
     //used while listening or sending data to front end
     private String imagePath;
@@ -37,13 +36,11 @@ public class PatientDetailsRequestDto {
     @NotNull(message = "District id cannot be null")
     private Integer districtId;
 
+    @NotNull(message = "Municipality id cannot be null")
     private Integer municipalityId;
 
-    @NotNull(message = "Ward Number cannot be null")
-    private Integer wardNo;
-
-    @NotBlank(message = "District name cannot be empty")
-    private String street;
+    @NotBlank(message = "Street name cannot be empty")
+    private String streetAddress;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;

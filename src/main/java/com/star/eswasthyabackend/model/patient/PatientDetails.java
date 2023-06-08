@@ -22,7 +22,7 @@ public class PatientDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer patientId;
+    private Integer patientDetailId;
 
     @Column(nullable = false)
     private String citizenshipNo;
@@ -42,14 +42,15 @@ public class PatientDetails {
 
     private String bloodGroup;
 
-    private String filePath;
+    private String imagePath;
 
     private LocalDate dateOfBirth;
+
+    private String height;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 
     @ManyToOne
     @JoinColumn(name = "location_id")

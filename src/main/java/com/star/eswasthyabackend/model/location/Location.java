@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Location {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @ManyToOne

@@ -24,16 +24,18 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
             "from patient_details where patient_id = ?1", nativeQuery = true)
     Map<String, String> findPatientDetail(Integer id);
 
-    @Query(value = "Select patient_id as \"patientId\",\n" +
+    @Query(value = "Select patient_detail_id     as \"patientId\",\n" +
             "       medical_record_number as \"medicalRecordNumber\",\n" +
-            "       citizenship_no as \"citizenshipNo\",\n" +
-            "       first_name as \"firstName\",\n" +
-            "       last_name as \"lastName\",\n" +
+            "       citizenship_no        as \"citizenshipNo\",\n" +
+            "       first_name            as \"firstName\",\n" +
+            "       last_name             as \"lastName\",\n" +
             "       email,\n" +
-            "       phone_number as \"phoneNumber\",\n" +
-            "       blood_group as \"bloodGroup\",\n" +
-            "       date_of_birth as \"dateOfBirth\",\n" +
-            "       weight\n" +
+            "       phone_number          as \"phoneNumber\",\n" +
+            "       blood_group           as \"bloodGroup\",\n" +
+            "       date_of_birth         as \"dateOfBirth\",\n" +
+            "       weight,\n" +
+            "       height,\n" +
+            "       image_path            as \"imagePath\"\n" +
             "from patient_details", nativeQuery = true)
     List<Map<String, String>> findAllPatientDetail();
 }
