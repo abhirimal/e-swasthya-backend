@@ -40,4 +40,11 @@ public class LocationController {
                 locationService.viewAllMunicipalityByDistrictId(districtId)));
     }
 
+    @GetMapping("get-location-in-json")
+    public ResponseEntity<?> getLocationInJsonFormat(){
+
+        return ResponseEntity.ok(new ApiResponse(true, "All location has been fetched successfully.",
+                locationService.getLocationInJson()));
+    }
+
 }

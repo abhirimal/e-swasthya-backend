@@ -15,4 +15,7 @@ public interface MunicipalityRepository extends JpaRepository<Municipality, Inte
             "FROM municipality\n" +
             "WHERE district_id = ?1")
     List<Map<String, Object>> listMunicipalityByDistrictId(Integer districtId);
+
+    @Query(nativeQuery = true, value = "SELECT count(*) from municipality")
+    Integer countMunicipality();
 }

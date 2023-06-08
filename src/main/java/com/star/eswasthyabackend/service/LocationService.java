@@ -9,4 +9,6 @@ public interface LocationService {
     List<Map<String, Object>> viewAllDistrictByProvince(Integer provinceId);
 
     List<Map<String, Object>> viewAllMunicipalityByDistrictId(Integer districtId);
+
+    List<Map<String, Object>> getLocationInJson();
 }

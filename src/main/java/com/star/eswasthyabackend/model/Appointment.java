@@ -27,11 +27,11 @@ public class Appointment {
     private String reasonForVisit;
 
     @OneToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetails;
 
     @OneToOne
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_detail_id")
     private DoctorDetails doctorDetails;
 
     private LocalDate appointmentDate;
