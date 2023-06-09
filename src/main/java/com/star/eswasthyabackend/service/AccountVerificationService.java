@@ -12,7 +12,7 @@ public class AccountVerificationService {
 
         emailSenderService.sendEmail(email,
                 "Please click the link below to verify your account. The link expires in 30 minutes. \n" +
-                        "localhost:8080/api/user/verify-account/"+userId+"/"+token,
+                        "localhost:3000/VerifyAccountLink"+userId+"/"+token,
                 "Verify Your Account");
     }
 }
