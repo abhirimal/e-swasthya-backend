@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.service.user.vaccination;
+package com.star.eswasthyabackend.service.vaccination;
 
 import com.star.eswasthyabackend.dto.VaccinationRequest;
 

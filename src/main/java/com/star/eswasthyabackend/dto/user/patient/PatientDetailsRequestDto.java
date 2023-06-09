@@ -28,13 +28,12 @@ public class PatientDetailsRequestDto {
 
     private String height;
 
+    private String gender;
+
     private String bloodGroup;
 
     //used while listening or sending data to front end
     private String imagePath;
-
-    @NotNull(message = "District id cannot be null")
-    private Integer districtId;
 
     @NotNull(message = "Municipality id cannot be null")
     private Integer municipalityId;
