@@ -47,6 +47,14 @@ public class User {
 
     private String role;
 
+    public User(String admin, String password, String email, Boolean isVerified, Boolean isFormFilled) {
+        this.firstName = admin;
+        this.password = password;
+        this.email = email;
+        this.isVerified = isVerified;
+        this. isFormFilled = isFormFilled;
+    }
+
 //    @ManyToMany
 //    @JoinTable(name = "user_role",
 //            joinColumns = {@JoinColumn(name = "user_id")},
