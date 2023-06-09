@@ -46,7 +46,11 @@ public class PatientDetails {
 
     private LocalDate dateOfBirth;
 
+    private Integer age;
+
     private String height;
+
+    private String gender;
 
     @OneToOne
     @JoinColumn(name = "user_id")

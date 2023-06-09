@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -52,19 +54,23 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         patientDetails.setFirstName(existingUser.getFirstName());
         patientDetails.setLastName(existingUser.getLastName());
         patientDetails.setEmail(existingUser.getEmail());
-
         patientDetails.setPhoneNumber(requestDto.getPhoneNumber());
         patientDetails.setCitizenshipNo(requestDto.getCitizenshipNo());
-
         patientDetails.setBloodGroup(requestDto.getBloodGroup());
         patientDetails.setWeight(requestDto.getWeight());
         patientDetails.setHeight(requestDto.getHeight());
+        patientDetails.setGender(requestDto.getGender());
         patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
-        patientDetails.setUser(existingUser);
-        //location
 
+        LocalDate dateOfBirth  = requestDto.getDateOfBirth();
+        Integer age = Math.toIntExact(ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now()));
+        patientDetails.setAge(age);
+        patientDetails.setUser(existingUser);
+
+        //location
         Location location = new Location();
-        District district = districtRepository.findById(requestDto.getDistrictId())
+        Integer districtId = districtRepository.findDistrictIdByMunicipalityId(requestDto.getMunicipalityId());
+        District district = districtRepository.findById(districtId)
                         .orElseThrow(()-> new AppException("District not found for given district id", HttpStatus.BAD_REQUEST));
         Municipality municipality = municipalityRepository.findById(requestDto.getMunicipalityId())
                 .orElseThrow(()-> new AppException("Municipality not found for given municipality id.", HttpStatus.BAD_REQUEST));

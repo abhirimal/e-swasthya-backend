@@ -2,13 +2,9 @@ package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.VaccinationRequest;
-import com.star.eswasthyabackend.service.user.vaccination.VaccinationService;
+import com.star.eswasthyabackend.service.vaccination.VaccinationService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.security.SecurityConfig;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
