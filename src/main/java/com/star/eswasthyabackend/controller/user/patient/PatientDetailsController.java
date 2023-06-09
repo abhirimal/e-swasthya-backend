@@ -16,8 +16,9 @@ import javax.validation.Valid;
 public class PatientDetailsController {
 
     private final PatientDetailsService patientDetailsService;
+
     @PostMapping("/save")
-    public ResponseEntity<?> savePatientDetails(@Valid @RequestBody PatientDetailsRequestDto requestDto){
+    public ResponseEntity<?> savePatientDetails(@Valid @RequestBody PatientDetailsRequestDto requestDto) {
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patient details saved successfully.",
@@ -25,7 +26,7 @@ public class PatientDetailsController {
     }
 
     @GetMapping("/view/{id}")
-    public ResponseEntity<?> viewPatientDetail(@PathVariable Integer id){
+    public ResponseEntity<?> viewPatientDetail(@PathVariable Integer id) {
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patient details fetched successfully.",
@@ -33,7 +34,7 @@ public class PatientDetailsController {
     }
 
     @GetMapping("/view-all")
-    public ResponseEntity<?> viewAllPatients(){
+    public ResponseEntity<?> viewAllPatients() {
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patients list fetched successfully.",
                 patientDetailsService.getAll()));

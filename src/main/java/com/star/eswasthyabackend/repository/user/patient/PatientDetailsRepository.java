@@ -38,4 +38,9 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
             "       image_path            as \"imagePath\"\n" +
             "from patient_details", nativeQuery = true)
     List<Map<String, String>> findAllPatientDetail();
+
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) AS row_count\n" +
+            "FROM patient_details\n" +
+            "where user_id = ?1")
+    Integer checkIfDataExists(Integer id);
 }

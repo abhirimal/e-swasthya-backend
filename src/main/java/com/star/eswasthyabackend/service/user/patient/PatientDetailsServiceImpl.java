@@ -41,6 +41,12 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
             throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
         }
 
+        //check if patient details is already filled
+        Integer count = patientDetailsRepository.checkIfDataExists(requestDto.getUserId());
+        if(count >=1){
+            throw new AppException("Patient data already saved.",HttpStatus.BAD_REQUEST );
+        }
+
         PatientDetails patientDetails;
 
         if(requestDto.getPatientDetailId()!=null){
