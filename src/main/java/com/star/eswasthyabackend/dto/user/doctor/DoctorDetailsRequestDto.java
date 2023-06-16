@@ -29,5 +29,7 @@ public class DoctorDetailsRequestDto {
 
     private String associatedHospital;
 
-    private String location;
+    private String streetAddress;
+
+    private Integer municipalityId;
 }

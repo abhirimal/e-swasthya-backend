@@ -16,7 +16,7 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
             "       dosage,\n" +
             "       vaccine_name       as \"vaccineName\",\n" +
             "       vaccination_date   as \"vaccinationDate\",\n" +
-            "       patient_details_id as \"patientId\"\n" +
+            "       patient_detail_id as \"patientId\"\n" +
             "from vaccination\n" +
             "where id = ?1", nativeQuery = true)
     Map<String, Object> findByVaccinationId(Integer vaccinationId);
@@ -25,7 +25,7 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
             "       dosage,\n" +
             "       vaccine_name       as \"vaccineName\",\n" +
             "       vaccination_date   as \"vaccinationDate\",\n" +
-            "       patient_details_id as \"patientId\"\n" +
+            "       patient_detail_id as \"patientId\"\n" +
             "from vaccination\n", nativeQuery = true)
     List<Map<String, Object>> findAllVaccinationReport();
 
@@ -33,8 +33,8 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
             "       dosage,\n" +
             "       vaccine_name       as \"vaccineName\",\n" +
             "       vaccination_date   as \"vaccinationDate\",\n" +
-            "       patient_details_id as \"patientId\"\n" +
+            "       patient_detail_id as \"patientId\"\n" +
             "from vaccination\n" +
-            "where patient_details_id = ?1", nativeQuery = true)
+            "where patient_detail_id = ?1", nativeQuery = true)
     List<Map<String, Object>> findByPatientId(Integer patientId);
 }

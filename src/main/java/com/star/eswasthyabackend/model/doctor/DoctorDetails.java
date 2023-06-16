@@ -1,6 +1,7 @@
 package com.star.eswasthyabackend.model.doctor;
 
 import com.star.eswasthyabackend.model.User;
+import com.star.eswasthyabackend.model.location.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,7 +40,9 @@ public class DoctorDetails {
 
     private String associatedHospital;
 
-    private String location;
+    @OneToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     @OneToOne
     @JoinColumn(name = "user_id")

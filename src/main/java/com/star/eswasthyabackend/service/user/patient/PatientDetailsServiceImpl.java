@@ -96,9 +96,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         existingUser.setIsFormFilled(true);
         userRepository.save(existingUser);
 
-        String token = jwtUtil.generateNewToken();
-
-        return token;
+        return jwtUtil.generateNewToken();
     }
 
     @Override
@@ -108,7 +106,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
     @Override
     public List<Map<String, String>> getAll() {
-        return patientDetailsRepository.findAllPatientDetail();
+        return patientDetailsRepository.listAllPatient();
     }
 
     public String generateUniqueMedicalRecordNumber(Integer id){
