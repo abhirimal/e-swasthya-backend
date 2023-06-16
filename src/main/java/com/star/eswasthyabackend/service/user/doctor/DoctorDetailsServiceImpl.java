@@ -4,6 +4,12 @@ import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailsRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
+import com.star.eswasthyabackend.model.location.District;
+import com.star.eswasthyabackend.model.location.Location;
+import com.star.eswasthyabackend.model.location.Municipality;
+import com.star.eswasthyabackend.repository.location.DistrictRepository;
+import com.star.eswasthyabackend.repository.location.LocationRepository;
+import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.utility.JWTUtil;
@@ -20,6 +26,9 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
 
     private final DoctorDetailsRepository doctorDetailsRepository;
     private final UserRepository userRepository;
+    private final LocationRepository locationRepository;
+    private final DistrictRepository districtRepository;
+    private final MunicipalityRepository municipalityRepository;
     private final JWTUtil jwtUtil;
 
     @Override
@@ -57,16 +66,27 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         doctorDetails.setEducation(requestDto.getEducation());
         doctorDetails.setGender(requestDto.getGender());
         doctorDetails.setAssociatedHospital(requestDto.getAssociatedHospital());
-        doctorDetails.setLocation(requestDto.getLocation());
+
+        //location
+        Location location = new Location();
+        Integer districtId = districtRepository.findDistrictIdByMunicipalityId(requestDto.getMunicipalityId());
+        District district = districtRepository.findById(districtId)
+                .orElseThrow(()-> new AppException("District not found for given district id", HttpStatus.BAD_REQUEST));
+        Municipality municipality = municipalityRepository.findById(requestDto.getMunicipalityId())
+                .orElseThrow(()-> new AppException("Municipality not found for given municipality id.", HttpStatus.BAD_REQUEST));
+        location.setDistrict(district);
+        location.setMunicipality(municipality);
+        location.setStreetAddress(requestDto.getStreetAddress());
+        location = locationRepository.saveAndFlush(location);
+        doctorDetails.setLocation(location);
+
         doctorDetails.setUser(user);
         doctorDetailsRepository.saveAndFlush(doctorDetails);
 
         user.setIsFormFilled(true);
         userRepository.save(user);
 
-        String token = jwtUtil.generateNewToken();
-
-        return token;
+        return jwtUtil.generateNewToken();
     }
 
     @Override
@@ -78,6 +98,5 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
     public List<Map<String, Object>> listAllDoctor() {
         return doctorDetailsRepository.listAllDoctor();
     }
-
 
 }
