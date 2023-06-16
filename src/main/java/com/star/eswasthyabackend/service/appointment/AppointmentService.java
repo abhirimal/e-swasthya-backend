@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.service.user.appointment;
+package com.star.eswasthyabackend.service.appointment;
 
 import com.star.eswasthyabackend.dto.appointment.AppointmentRequest;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface AppointmentService {
-    Integer saveAndUpdate(AppointmentRequest appointmentRequest);
+    String saveAndUpdate(AppointmentRequest appointmentRequest);
 
     Map<String, Object> viewById(Integer appointmentId);
 
