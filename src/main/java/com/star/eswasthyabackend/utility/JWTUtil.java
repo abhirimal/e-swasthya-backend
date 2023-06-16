@@ -5,11 +5,15 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -31,6 +35,28 @@ public class JWTUtil {
                 .claim("userId", databaseUser.getId())
                 .claim("authority", principal.getAuthorities())
                 .claim("email", principal.getUsername())
+                .claim("isVerified", databaseUser.getIsVerified())
+                .claim("isFormFilled", databaseUser.getIsFormFilled())
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String generateNewToken() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        com.star.eswasthyabackend.model.User databaseUser = userRepository.
+                loadUserByUsername(userDetails.getUsername());
+        Key key = Keys.hmacShaKeyFor(secret.getBytes());
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + 864000000);
+        Map<String, Object> authority = Collections.singletonMap("authority", databaseUser.getRole());
+
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .claim("userId", databaseUser.getId())
+                .claim("authority", authority)
+                .claim("email", databaseUser.getEmail())
                 .claim("isVerified", databaseUser.getIsVerified())
                 .claim("isFormFilled", databaseUser.getIsFormFilled())
                 .setIssuedAt(now)

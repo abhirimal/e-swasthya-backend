@@ -6,6 +6,7 @@ import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
+import com.star.eswasthyabackend.utility.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,10 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
 
     private final DoctorDetailsRepository doctorDetailsRepository;
     private final UserRepository userRepository;
+    private final JWTUtil jwtUtil;
 
     @Override
-    public Integer saveDoctorDetails(DoctorDetailsRequestDto requestDto) {
+    public String saveDoctorDetails(DoctorDetailsRequestDto requestDto) {
 
         User user = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(() -> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
@@ -60,8 +62,11 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         doctorDetailsRepository.saveAndFlush(doctorDetails);
 
         user.setIsFormFilled(true);
+        userRepository.save(user);
 
-        return doctorDetails.getDoctorDetailId();
+        String token = jwtUtil.generateNewToken();
+
+        return token;
     }
 
     @Override

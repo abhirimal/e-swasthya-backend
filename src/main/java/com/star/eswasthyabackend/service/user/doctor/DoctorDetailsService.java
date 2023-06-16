@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DoctorDetailsService {
-    Integer saveDoctorDetails(DoctorDetailsRequestDto requestDto);
+    String saveDoctorDetails(DoctorDetailsRequestDto requestDto);
 
     Map<String, Object> findById(Integer id);
 
