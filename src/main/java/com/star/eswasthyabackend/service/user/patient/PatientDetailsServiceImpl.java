@@ -12,6 +12,7 @@ import com.star.eswasthyabackend.repository.location.LocationRepository;
 import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
+import com.star.eswasthyabackend.utility.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,9 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     private final LocationRepository locationRepository;
     private final DistrictRepository districtRepository;
     private final MunicipalityRepository municipalityRepository;
+    private final JWTUtil jwtUtil;
     @Override
-    public Integer savePatientDetails(PatientDetailsRequestDto requestDto) {
+    public String savePatientDetails(PatientDetailsRequestDto requestDto) {
 
 
         User existingUser = userRepository.findById(requestDto.getUserId())
@@ -89,11 +91,14 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
         String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getPatientDetailId());
         patientDetails.setMedicalRecordNumber(medicalRecordNumber);
-        patientDetailsRepository.save(patientDetails);
+        patientDetailsRepository.saveAndFlush(patientDetails);
 
         existingUser.setIsFormFilled(true);
+        userRepository.save(existingUser);
 
-        return patientDetails.getPatientDetailId();
+        String token = jwtUtil.generateNewToken();
+
+        return token;
     }
 
     @Override
