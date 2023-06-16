@@ -91,6 +91,8 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         patientDetails.setMedicalRecordNumber(medicalRecordNumber);
         patientDetailsRepository.save(patientDetails);
 
+        existingUser.setIsFormFilled(true);
+
         return patientDetails.getPatientDetailId();
     }
 
