@@ -2,7 +2,7 @@ package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.appointment.AppointmentRequest;
-import com.star.eswasthyabackend.service.user.appointment.AppointmentService;
+import com.star.eswasthyabackend.service.appointment.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

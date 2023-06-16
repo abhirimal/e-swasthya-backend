@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.service.user.appointment;
+package com.star.eswasthyabackend.service.appointment;
 
 import com.star.eswasthyabackend.dto.appointment.AppointmentRequest;
 import com.star.eswasthyabackend.exception.AppException;
@@ -8,6 +8,8 @@ import com.star.eswasthyabackend.model.patient.PatientDetails;
 import com.star.eswasthyabackend.repository.AppointmentRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
+import com.star.eswasthyabackend.service.sms.SmsService;
+import com.star.eswasthyabackend.service.sms.SociairSmsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,9 +26,10 @@ public class AppointmentServiceImpl implements AppointmentService{
     private final PatientDetailsRepository patientDetailsRepository;
 
     private final DoctorDetailsRepository doctorDetailsRepository;
+    private final SmsService smsService;
 
     @Override
-    public Integer saveAndUpdate(AppointmentRequest appointmentRequest) {
+    public String saveAndUpdate(AppointmentRequest appointmentRequest) {
 
         PatientDetails patient = patientDetailsRepository.findById(appointmentRequest.getPatientDetailId())
                 .orElseThrow(()-> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
@@ -53,7 +56,14 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setReasonForVisit(appointmentRequest.getReasonForVisit());
         appointment.setIsActive(true);
         appointmentRepository.saveAndFlush(appointment);
-        return appointment.getId();
+
+        //send sms
+        String message = "Dear "+patient.getFirstName() +", Your appointment has been approved and it is scheduled for" +
+                " Date: "+appointmentRequest.getAppointmentDate()+ " Time: " + appointmentRequest.getAppointmentTime() +
+                "pm with Dr. "+ doctor.getFirstName()+" "+doctor.getLastName() + " at "+appointment.getHospitalName();
+        smsService.sendSms(patient.getPhoneNumber(), message);
+
+        return message;
     }
 
     @Override
@@ -80,4 +90,5 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointmentRepository.save(appointment);
         return true;
     }
+
 }
