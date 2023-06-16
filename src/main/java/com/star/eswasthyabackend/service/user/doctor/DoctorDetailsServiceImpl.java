@@ -30,6 +30,11 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
             throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
         }
 
+        Integer count = doctorDetailsRepository.checkIfDataExists(requestDto.getUserId());
+        if(count >= 1){
+            throw new AppException("Doctor data already saved", HttpStatus.BAD_REQUEST);
+        }
+
         DoctorDetails doctorDetails;
         if(requestDto.getDoctorDetailId() != null){
             doctorDetails = doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
@@ -51,7 +56,10 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         doctorDetails.setGender(requestDto.getGender());
         doctorDetails.setAssociatedHospital(requestDto.getAssociatedHospital());
         doctorDetails.setLocation(requestDto.getLocation());
+        doctorDetails.setUser(user);
         doctorDetailsRepository.saveAndFlush(doctorDetails);
+
+        user.setIsFormFilled(true);
 
         return doctorDetails.getDoctorDetailId();
     }

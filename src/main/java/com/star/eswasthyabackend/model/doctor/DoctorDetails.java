@@ -1,14 +1,12 @@
 package com.star.eswasthyabackend.model.doctor;
 
+import com.star.eswasthyabackend.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -42,4 +40,8 @@ public class DoctorDetails {
     private String associatedHospital;
 
     private String location;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

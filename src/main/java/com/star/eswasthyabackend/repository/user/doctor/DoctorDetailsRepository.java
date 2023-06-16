@@ -39,4 +39,10 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "       location\n" +
             "from doctor_details", nativeQuery = true)
     List<Map<String, Object>> listAllDoctor();
+
+    @Query(nativeQuery = true, value = "SELECT COUNT(*) AS row_count\n" +
+            "FROM doctor_details\n" +
+            "where user_id = ?1")
+    Integer checkIfDataExists(Integer id);
+
 }
