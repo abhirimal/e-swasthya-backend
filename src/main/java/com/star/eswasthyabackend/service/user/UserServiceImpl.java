@@ -170,7 +170,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveCustomAdmin(User user) {
+    public void saveCustomUser(User user) {
         user.setPassword(securityConfiguration.getPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }

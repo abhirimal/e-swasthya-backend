@@ -18,5 +18,5 @@ public interface UserService {
 
     Integer verifyResetPasswordLink(Integer id, String token);
 
-    void saveCustomAdmin(User user);
+    void saveCustomUser(User user);
 }
