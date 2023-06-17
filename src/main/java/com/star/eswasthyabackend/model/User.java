@@ -1,6 +1,5 @@
 package com.star.eswasthyabackend.model;
 
-//import com.star.eswasthyabackend.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +18,12 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Users_SEQ_GEN")
+    @SequenceGenerator(name = "Users_SEQ_GEN", sequenceName = "Users_SEQ", allocationSize = 1)
+    @Column( name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
     private String lastName;
@@ -47,12 +49,15 @@ public class User {
 
     private String role;
 
-    public User(String admin, String password, String email, Boolean isVerified, Boolean isFormFilled) {
-        this.firstName = admin;
+    public User(Integer id, String firstName, String lastName, String password, String email, Boolean isVerified, Boolean isFormFilled, String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.email = email;
         this.isVerified = isVerified;
         this. isFormFilled = isFormFilled;
+        this.role = role;
     }
 
 //    @ManyToMany

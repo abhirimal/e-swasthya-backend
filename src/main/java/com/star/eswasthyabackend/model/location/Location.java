@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Location_SEQ_GEN")
+    @SequenceGenerator(name = "Location_SEQ_GEN", sequenceName = "Location_SEQ", initialValue = 100, allocationSize = 1)
     private Integer id;
 
     @ManyToOne

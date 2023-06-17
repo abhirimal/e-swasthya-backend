@@ -170,6 +170,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveCustomAdmin(User user) {
+        user.setPassword(securityConfiguration.getPasswordEncoder().encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
+    @Override
     public void changePassword(UserResetPasswordRequest passwordRequest) {
 
         User existingUser = userRepository.findById(passwordRequest.getId())

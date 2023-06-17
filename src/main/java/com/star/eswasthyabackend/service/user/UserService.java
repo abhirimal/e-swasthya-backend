@@ -2,6 +2,7 @@ package com.star.eswasthyabackend.service.user;
 
 import com.star.eswasthyabackend.dto.user.UserResetPasswordRequest;
 import com.star.eswasthyabackend.dto.user.UserSignUpRequest;
+import com.star.eswasthyabackend.model.User;
 
 public interface UserService {
 
@@ -16,4 +17,6 @@ public interface UserService {
     void changePassword(UserResetPasswordRequest passwordRequest);
 
     Integer verifyResetPasswordLink(Integer id, String token);
+
+    void saveCustomAdmin(User user);
 }

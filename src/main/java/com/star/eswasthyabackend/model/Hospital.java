@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Hospital {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     private String hospitalName;

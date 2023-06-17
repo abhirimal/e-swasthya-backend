@@ -2,11 +2,13 @@ package com.star.eswasthyabackend.service.user.doctor;
 
 import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailsRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
+import com.star.eswasthyabackend.model.Hospital;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.location.District;
 import com.star.eswasthyabackend.model.location.Location;
 import com.star.eswasthyabackend.model.location.Municipality;
+import com.star.eswasthyabackend.repository.HospitalRepository;
 import com.star.eswasthyabackend.repository.location.DistrictRepository;
 import com.star.eswasthyabackend.repository.location.LocationRepository;
 import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
@@ -17,8 +19,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +34,7 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
     private final LocationRepository locationRepository;
     private final DistrictRepository districtRepository;
     private final MunicipalityRepository municipalityRepository;
+    private final HospitalRepository hospitalRepository;
     private final JWTUtil jwtUtil;
 
     @Override
@@ -39,6 +45,10 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
 
         if(Boolean.FALSE.equals(user.getIsVerified())){
             throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
+        }
+
+        if(!Objects.equals(user.getRole(), "DOCTOR")){
+            throw new AppException("Invalid request. Please try again.", HttpStatus.BAD_REQUEST);
         }
 
         Integer count = doctorDetailsRepository.checkIfDataExists(requestDto.getUserId());
@@ -65,8 +75,6 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         doctorDetails.setExperience(requestDto.getExperience());
         doctorDetails.setEducation(requestDto.getEducation());
         doctorDetails.setGender(requestDto.getGender());
-        doctorDetails.setAssociatedHospital(requestDto.getAssociatedHospital());
-
         //location
         Location location = new Location();
         Integer districtId = districtRepository.findDistrictIdByMunicipalityId(requestDto.getMunicipalityId());
@@ -79,6 +87,9 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         location.setStreetAddress(requestDto.getStreetAddress());
         location = locationRepository.saveAndFlush(location);
         doctorDetails.setLocation(location);
+
+        List<Hospital> hospitalList = hospitalRepository.findAllById(requestDto.getAssociatedHospitalIdList());
+        doctorDetails.setAssociatedHospitalList(hospitalList);
 
         doctorDetails.setUser(user);
         doctorDetailsRepository.saveAndFlush(doctorDetails);
