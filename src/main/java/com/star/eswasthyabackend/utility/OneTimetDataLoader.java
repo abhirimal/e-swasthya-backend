@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.utility;
 
+import com.star.eswasthyabackend.repository.HospitalRepository;
 import com.star.eswasthyabackend.repository.location.DistrictRepository;
 import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -12,16 +13,18 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Component
-public class DistrictDataLoader implements CommandLineRunner {
+public class OneTimetDataLoader implements CommandLineRunner {
     private final JdbcTemplate jdbcTemplate;
 
     private final DistrictRepository districtRepository;
     private final MunicipalityRepository municipalityRepository;
+    private final HospitalRepository hospitalRepository;
 
-    public DistrictDataLoader(JdbcTemplate jdbcTemplate, DistrictRepository districtRepository, MunicipalityRepository municipalityRepository) {
+    public OneTimetDataLoader(JdbcTemplate jdbcTemplate, DistrictRepository districtRepository, MunicipalityRepository municipalityRepository, HospitalRepository hospitalRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.districtRepository = districtRepository;
         this.municipalityRepository = municipalityRepository;
+        this.hospitalRepository = hospitalRepository;
     }
 
     @Override
@@ -36,6 +39,11 @@ public class DistrictDataLoader implements CommandLineRunner {
         Integer countMunicipality = municipalityRepository.countMunicipality();
         if(countMunicipality == 0){
             loadSqlScript("municipality.sql");
+        }
+
+        Integer countHospital = hospitalRepository.countHospital();
+        if(countHospital == 0){
+            loadSqlScript("hospitals.sql");
         }
     }
 
