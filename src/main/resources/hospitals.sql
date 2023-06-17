@@ -16,7 +16,7 @@ INSERT INTO hospital (id, hospital_name, location_id)
 VALUES
     (1, 'Bir Hospital', 1),
     (2, 'Kanti Children Hospital', 2),
-    (3, 'Patan mental Hospital', 3),
+    (3, 'Patan Mental Hospital', 3),
     (4, 'Sukraraj Tropical and Infectious Diseases Hospital', 4),
     (5, 'Civil Hospital', 5),
     (6, 'Shree Birendra Hospital', 6),
