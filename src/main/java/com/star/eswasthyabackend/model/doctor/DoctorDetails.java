@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.model.doctor;
 
+import com.star.eswasthyabackend.model.Hospital;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.location.Location;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,7 +40,11 @@ public class DoctorDetails {
 
     private String gender;
 
-    private String associatedHospital;
+    @ManyToMany
+    @JoinTable(name = "doctor_hospital",
+            joinColumns = { @JoinColumn(name = "doctor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "hospital_id")})
+    private List<Hospital> associatedHospitalList;
 
     @OneToOne
     @JoinColumn(name = "location_id")

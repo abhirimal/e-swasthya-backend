@@ -18,9 +18,11 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "       experience,\n" +
             "       specialization,\n" +
             "       education,\n" +
-            "       associated_hospital as \"associatedHospital\",\n" +
-            "       gender\n"+
+            "       gender,\n" +
+            "h.hospital_name\n" +
             "from doctor_details\n" +
+            "inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
+            "inner join hospital h on h.id = dh.hospital_id\n" +
             "where doctor_detail_id = ?1", nativeQuery = true)
     Map<String, Object> findDoctorDetailsById(Integer id);
 
@@ -33,9 +35,11 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "       experience,\n" +
             "       specialization,\n" +
             "       education,\n" +
-            "       associated_hospital as \"associatedHospital\",\n" +
-            "       gender\n" +
-            "from doctor_details", nativeQuery = true)
+            "       gender,\n" +
+            "h.hospital_name\n" +
+            "from doctor_details\n" +
+            "inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
+            "inner join hospital h on h.id = dh.hospital_id", nativeQuery = true)
     List<Map<String, Object>> listAllDoctor();
 
     @Query(nativeQuery = true, value = "SELECT COUNT(*) AS row_count\n" +

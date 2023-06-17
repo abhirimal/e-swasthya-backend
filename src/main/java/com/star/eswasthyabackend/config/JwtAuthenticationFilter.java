@@ -1,7 +1,9 @@
 package com.star.eswasthyabackend.config;
 
+import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.security.CustomUserDetailsService;
 import com.star.eswasthyabackend.utility.JWTUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,19 +41,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
 
+            if(!jwtUtil.validateToken(jwtToken)){
+                throw new AppException("Invalid authorization token", HttpStatus.UNAUTHORIZED);
+            }
+
             try {
-
                 email = this.jwtUtil.getUsernameFromToken(jwtToken);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
 
             UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(email);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,
+                        null, userDetails.getAuthorities());
 
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
