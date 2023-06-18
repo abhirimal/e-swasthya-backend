@@ -72,6 +72,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         patientDetails.setHeight(requestDto.getHeight());
         patientDetails.setGender(requestDto.getGender());
         patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
+        patientDetails.setImagePath(requestDto.getImagePath());
 
         LocalDate dateOfBirth  = requestDto.getDateOfBirth();
         Integer age = Math.toIntExact(ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now()));

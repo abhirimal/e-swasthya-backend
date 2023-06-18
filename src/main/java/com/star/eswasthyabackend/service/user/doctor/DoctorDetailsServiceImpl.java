@@ -76,6 +76,7 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         doctorDetails.setExperience(requestDto.getExperience());
         doctorDetails.setEducation(requestDto.getEducation());
         doctorDetails.setGender(requestDto.getGender());
+        doctorDetails.setImagePath(requestDto.getImagePath());
         //location
         Location location = new Location();
         Integer districtId = districtRepository.findDistrictIdByMunicipalityId(requestDto.getMunicipalityId());

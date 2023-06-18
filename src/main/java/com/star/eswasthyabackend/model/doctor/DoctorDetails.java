@@ -30,6 +30,8 @@ public class DoctorDetails {
 
     private String phoneNumber;
 
+    private String imagePath;
+
     private String nmcLicenseNo;
 
     private String education;

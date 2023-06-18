@@ -29,15 +29,17 @@ public class DoctorDetailsRequestDto {
 
     private String gender;
 
+    private String imagePath;
+
     private List<Integer> associatedHospitalIdList;
 
     private String streetAddress;
 
     private Integer municipalityId;
 
-    public DoctorDetailsRequestDto(Integer userId, String nmcLicenseNo, String phoneNumber, String education,
-                                   String specialization, String experience, String gender,
-                                   List<Integer> associatedHospitalIdList, String streetAddress, Integer municipalityId){
+    public DoctorDetailsRequestDto(Integer userId, String nmcLicenseNo, String phoneNumber, String education, String specialization,
+                                   String experience, String gender, List<Integer> associatedHospitalIdList,
+                                   String streetAddress, Integer municipalityId, String imagePath){
         this.userId = userId;
         this.nmcLicenseNo = nmcLicenseNo;
         this.phoneNumber = phoneNumber;
@@ -48,5 +50,6 @@ public class DoctorDetailsRequestDto {
         this.associatedHospitalIdList = associatedHospitalIdList;
         this.streetAddress = streetAddress;
         this.municipalityId = municipalityId;
+        this.imagePath = imagePath;
     }
 }
