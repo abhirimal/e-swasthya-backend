@@ -34,4 +34,19 @@ public class DoctorDetailsRequestDto {
     private String streetAddress;
 
     private Integer municipalityId;
+
+    public DoctorDetailsRequestDto(Integer userId, String nmcLicenseNo, String phoneNumber, String education,
+                                   String specialization, String experience, String gender,
+                                   List<Integer> associatedHospitalIdList, String streetAddress, Integer municipalityId){
+        this.userId = userId;
+        this.nmcLicenseNo = nmcLicenseNo;
+        this.phoneNumber = phoneNumber;
+        this.education = education;
+        this.specialization = specialization;
+        this.experience = experience;
+        this.gender = gender;
+        this.associatedHospitalIdList = associatedHospitalIdList;
+        this.streetAddress = streetAddress;
+        this.municipalityId = municipalityId;
+    }
 }

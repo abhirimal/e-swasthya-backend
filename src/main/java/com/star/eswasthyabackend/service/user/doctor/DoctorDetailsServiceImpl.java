@@ -17,6 +17,7 @@ import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.utility.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -97,7 +98,12 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         user.setIsFormFilled(true);
         userRepository.save(user);
 
-        return jwtUtil.generateNewToken();
+        if(SecurityContextHolder.getContext().getAuthentication()==null){
+            return null;
+        }
+        else {
+            return jwtUtil.generateNewToken();
+        }
     }
 
     @Override

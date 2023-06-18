@@ -3,7 +3,6 @@ package com.star.eswasthyabackend.dto.user.patient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -44,4 +43,20 @@ public class PatientDetailsRequestDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
+    public PatientDetailsRequestDto(Integer userId, String citizenshipNo, String phoneNumber, String weight, String height,
+                                    String gender, String bloodGroup, String imagePath, Integer municipalityId,
+                                    String streetAddress, String dateOfBirth){
+        this.userId = userId;
+        this.citizenshipNo = citizenshipNo;
+        this.phoneNumber = phoneNumber;
+        this.weight = weight;
+        this.height = height;
+        this.gender = gender;
+        this.bloodGroup = bloodGroup;
+        this.imagePath = imagePath;
+        this.municipalityId = municipalityId;
+        this.streetAddress = streetAddress;
+        this.dateOfBirth = LocalDate.parse(dateOfBirth);
     }
+
+}
