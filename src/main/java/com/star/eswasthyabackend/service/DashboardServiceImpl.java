@@ -5,6 +5,7 @@ import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsService;
+import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class DashboardServiceImpl implements DashboardService{
     private final UserRepository userRepository;
     private final PatientDetailsRepository patientDetailsRepository;
     private final DoctorDetailsRepository doctorDetailsRepository;
+    private final DoctorDetailsService doctorDetailsService;
     private final VaccinationRepository vaccinationRepository;
 
     @Override
@@ -35,7 +37,7 @@ public class DashboardServiceImpl implements DashboardService{
     public Map<String, Object> getDoctorDashboard(Integer doctorDetailId) {
 
         Map<String, Object> doctorDashboardData = new HashMap<>();
-        doctorDashboardData.put("doctoDetail", doctorDetailsRepository.findDoctorDetailsById(doctorDetailId));
+        doctorDashboardData.put("doctoDetail", doctorDetailsService.findById(doctorDetailId));
         doctorDashboardData.put("appointmentList", null);
         return doctorDashboardData;
     }
