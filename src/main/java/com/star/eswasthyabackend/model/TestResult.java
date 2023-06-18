@@ -42,6 +42,6 @@ public class TestResult {
 
     @OneToOne
     @JoinColumn(name = "doctor_detail_id")
-    private DoctorDetails recommendedDoctorDetailId;
+    private DoctorDetails recommendedDoctorDetail;
 
 }

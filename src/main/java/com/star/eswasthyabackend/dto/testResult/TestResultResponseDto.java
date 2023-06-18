@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.dto.testResult;
 
-import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailResponseDto;
+import com.star.eswasthyabackend.model.TestResult;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +22,20 @@ public class TestResultResponseDto {
 
     private LocalDate testDate;
 
-    private Integer patientDetailId;
-
     private String imagePath;
 
-    private DoctorDetailResponseDto recommendedDoctorDetail;
+    private TestResultDoctorDetailResponseDto doctorDetail;
+
+    private TestResultPatientDetailResponseDto patientDetail;
+
+    public TestResultResponseDto(TestResult testResult){
+        this.id = testResult.getId();
+        this.testName = testResult.getTestName();
+        this.result = testResult.getResult();
+        this.description = testResult.getDescription();
+        this.testDate = testResult.getTestDate();
+        this.imagePath = testResult.getImagePath();
+        this.doctorDetail = new TestResultDoctorDetailResponseDto(testResult.getRecommendedDoctorDetail());
+        this.patientDetail = new TestResultPatientDetailResponseDto(testResult.getPatientDetail());
+    }
 }
