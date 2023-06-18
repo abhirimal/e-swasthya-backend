@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.service.user.doctor;
 
+import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailResponseDto;
 import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailsRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Hospital;
@@ -108,8 +109,12 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
     }
 
     @Override
-    public Map<String, Object> findById(Integer id) {
-        return doctorDetailsRepository.findDoctorDetailsById(id);
+    public DoctorDetailResponseDto findById(Integer id) {
+
+        DoctorDetails doctorDetails = doctorDetailsRepository.findById(id)
+                .orElseThrow(()-> new AppException("Doctor doesn't exist for given id.",HttpStatus.BAD_REQUEST ));
+
+        return new DoctorDetailResponseDto(doctorDetails);
     }
 
     @Override

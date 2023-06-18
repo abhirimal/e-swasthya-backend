@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create  #automatically update database schema
+      ddl-auto: update  #automatically update database schema
     show-sql: true  #Display sql queries in logs
 
 server:
