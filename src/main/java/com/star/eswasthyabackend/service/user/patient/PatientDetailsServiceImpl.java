@@ -15,8 +15,11 @@ import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepositor
 import com.star.eswasthyabackend.utility.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -96,7 +99,12 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
         existingUser.setIsFormFilled(true);
         userRepository.save(existingUser);
 
-        return jwtUtil.generateNewToken();
+        if(SecurityContextHolder.getContext().getAuthentication()==null){
+            return null;
+        }
+        else {
+            return jwtUtil.generateNewToken();
+        }
     }
 
     @Override
@@ -112,69 +120,5 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     public String generateUniqueMedicalRecordNumber(Integer id){
         String formattedId = String.format("%04d", id);
         return "MRN-"+formattedId;
-    }
-
-    public void saveCustomData(PatientDetailsRequestDto requestDto){
-
-        User existingUser = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(()-> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
-
-        if(Boolean.FALSE.equals(existingUser.getIsVerified())){
-            throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
-        }
-
-        //check if patient details is already filled
-        Integer count = patientDetailsRepository.checkIfDataExists(requestDto.getUserId());
-        if(count >=1){
-            throw new AppException("Patient data already saved.",HttpStatus.BAD_REQUEST );
-        }
-
-        PatientDetails patientDetails;
-
-        if(requestDto.getPatientDetailId()!=null){
-            patientDetails = patientDetailsRepository.findById(requestDto.getPatientDetailId())
-                    .orElseThrow(()-> new AppException("Patient not found for given id.", HttpStatus.BAD_REQUEST));
-        }
-        else{
-            patientDetails = new PatientDetails();
-        }
-
-        patientDetails.setFirstName(existingUser.getFirstName());
-        patientDetails.setLastName(existingUser.getLastName());
-        patientDetails.setEmail(existingUser.getEmail());
-        patientDetails.setPhoneNumber(requestDto.getPhoneNumber());
-        patientDetails.setCitizenshipNo(requestDto.getCitizenshipNo());
-        patientDetails.setBloodGroup(requestDto.getBloodGroup());
-        patientDetails.setWeight(requestDto.getWeight());
-        patientDetails.setHeight(requestDto.getHeight());
-        patientDetails.setGender(requestDto.getGender());
-        patientDetails.setDateOfBirth(requestDto.getDateOfBirth());
-        patientDetails.setImagePath(requestDto.getImagePath());
-
-        LocalDate dateOfBirth  = requestDto.getDateOfBirth();
-        Integer age = Math.toIntExact(ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now()));
-        patientDetails.setAge(age);
-        patientDetails.setUser(existingUser);
-
-        //location
-        Location location = new Location();
-        Integer districtId = districtRepository.findDistrictIdByMunicipalityId(requestDto.getMunicipalityId());
-        District district = districtRepository.findById(districtId)
-                .orElseThrow(()-> new AppException("District not found for given district id", HttpStatus.BAD_REQUEST));
-        Municipality municipality = municipalityRepository.findById(requestDto.getMunicipalityId())
-                .orElseThrow(()-> new AppException("Municipality not found for given municipality id.", HttpStatus.BAD_REQUEST));
-        location.setDistrict(district);
-        location.setMunicipality(municipality);
-        location.setStreetAddress(requestDto.getStreetAddress());
-        location = locationRepository.saveAndFlush(location);
-        patientDetails.setLocation(location);
-        patientDetailsRepository.saveAndFlush(patientDetails);
-
-        String medicalRecordNumber = generateUniqueMedicalRecordNumber(patientDetails.getPatientDetailId());
-        patientDetails.setMedicalRecordNumber(medicalRecordNumber);
-        patientDetailsRepository.saveAndFlush(patientDetails);
-
-        existingUser.setIsFormFilled(true);
-        userRepository.save(existingUser);
     }
 }
