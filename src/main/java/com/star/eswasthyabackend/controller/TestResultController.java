@@ -22,11 +22,19 @@ public class TestResultController {
                 testResultService.saveTestResult(requestDto)));
     }
 
-    @GetMapping("/view-by-id/{testResultId}")
+    @GetMapping("/view/{testResultId}")
     public ResponseEntity<?> viewTestResultById(@PathVariable Integer testResultId){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Test result data fetched successfully.",
                 testResultService.findById(testResultId)));
+    }
+
+    @GetMapping("/view-all/{patientId}")
+    public ResponseEntity<?> listAllAppointmentsByPatientId(@PathVariable Integer patientId){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "List of test results fetched successfully.",
+                testResultService.findAllByPatientId(patientId)));
     }
 }

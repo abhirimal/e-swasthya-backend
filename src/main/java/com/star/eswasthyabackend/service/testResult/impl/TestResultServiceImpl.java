@@ -1,6 +1,7 @@
 package com.star.eswasthyabackend.service.testResult.impl;
 
 import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultResponseDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.TestResult;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -45,14 +47,23 @@ public class TestResultServiceImpl implements TestResultService {
                 .orElseThrow(()-> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
 
         testResult.setPatientDetail(patientDetail);
-        testResult.setRecommendedDoctorDetailId(doctorDetails);
+        testResult.setRecommendedDoctorDetail(doctorDetails);
         testResultRepository.saveAndFlush(testResult);
         return testResult.getId();
     }
 
     @Override
-    public Map<String, Object> findById(Integer testResultId) {
+    public TestResultResponseDto findById(Integer testResultId) {
 
-        return null;
+        TestResult testResult = testResultRepository.findById(testResultId)
+                .orElseThrow(()-> new AppException("Test not found for given id.", HttpStatus.BAD_REQUEST));
+        return new TestResultResponseDto(testResult);
     }
+
+    @Override
+    public List<Map<String, Object>> findAllByPatientId(Integer patientId) {
+
+        return testResultRepository.findAllByPatientId(patientId);
+    }
+
 }
