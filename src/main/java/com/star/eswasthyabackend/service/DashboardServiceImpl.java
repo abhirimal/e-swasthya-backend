@@ -37,7 +37,7 @@ public class DashboardServiceImpl implements DashboardService{
     public Map<String, Object> getDoctorDashboard(Integer doctorDetailId) {
 
         Map<String, Object> doctorDashboardData = new HashMap<>();
-        doctorDashboardData.put("doctoDetail", doctorDetailsService.findById(doctorDetailId));
+        doctorDashboardData.put("doctorDetail", doctorDetailsService.findById(doctorDetailId));
         doctorDashboardData.put("appointmentList", null);
         return doctorDashboardData;
     }

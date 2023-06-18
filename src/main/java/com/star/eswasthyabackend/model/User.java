@@ -19,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Users_SEQ_GEN")
-    @SequenceGenerator(name = "Users_SEQ_GEN", sequenceName = "Users_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "Users_SEQ_GEN", sequenceName = "Users_SEQ",allocationSize = 1)
     @Column( name = "id", nullable = false)
     private Integer id;
 

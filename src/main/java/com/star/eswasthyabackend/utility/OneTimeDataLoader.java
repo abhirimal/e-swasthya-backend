@@ -57,7 +57,8 @@ public class OneTimeDataLoader implements CommandLineRunner {
         Integer countUser = userRepository.countUser();
         if(countUser == 0){
             //generate admin
-            userService.saveCustomUser(new User(1, "admin",null, "12345678", "admin.eswasthya@yopmail.com", true, true, "ADMIN"));
+            userService.saveCustomUser(new User(1, "admin",null, "12345678",
+                    "admin.eswasthya@yopmail.com", true, true, "ADMIN"));
 
             //generate patients
             userService.saveCustomUser(new User(2, "Abhiyan","Rimal", "12345678",
@@ -124,45 +125,45 @@ public class OneTimeDataLoader implements CommandLineRunner {
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(6, "48-921-892","9872102918","60 kg",
                     "5.11 ft", "Male", "A-","xyz.jpeg", 3, "Dobilla", "2000-08-28"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(7, "32-812-521", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "B-", "xyz.jpeg", 90, "Biratnagar", "1989-12-01"));
+                    "5.8 ft", "Male", "B-", "xyz.jpeg", 90, "Thapa Gaun", "1989-12-01"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(8, "42-981-315", "9872102918", "73 kg",
-                    "6.2 ft", "Male", "O+", "xyz.jpeg", 450, "Tinkune", "1991-07-10"));
+                    "6.2 ft", "Male", "O+", "xyz.jpeg", 450, "Shiva Mandir", "1991-07-10"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(9, "67-102-572", "9872102918", "67 kg",
-                    "5.7 ft", "Female", "AB-", "xyz.jpeg", 55, "Budhanilkantha", "1996-03-15"));
+                    "5.7 ft", "Female", "AB-", "xyz.jpeg", 55, "Thuli Gaun", "1996-03-15"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(10, "19-425-918", "9872102918", "75 kg",
-                    "6.0 ft", "Female", "A+", "xyz.jpeg", 320, "Maharajgunj", "1999-09-30"));
+                    "6.0 ft", "Female", "A+", "xyz.jpeg", 320, "Town", "1999-09-30"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(11, "56-819-632", "9872102918", "64 kg",
-                    "5.6 ft", "Male", "O-", "xyz.jpeg", 12, "Baneshwor", "2001-11-21"));
+                    "5.6 ft", "Male", "O-", "xyz.jpeg", 12, "Pakaudi", "2001-11-21"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(12, "78-912-120", "9872102918", "70 kg",
-                    "5.9 ft", "Female", "B+", "xyz.jpeg", 180, "Jhapa", "1987-08-07"));
+                    "5.9 ft", "Female", "B+", "xyz.jpeg", 180, "Batulchowr", "1987-08-07"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(13, "32-109-712", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "AB+", "xyz.jpeg", 42, "Dharan", "1990-02-11"));
+                    "5.8 ft", "Male", "AB+", "xyz.jpeg", 42, "Lamachowr", "1990-02-11"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(14, "19-721-320", "9872102918", "73 kg",
-                    "6.1 ft", "Female", "A-", "xyz.jpeg", 520, "Patan", "1994-06-24"));
+                    "6.1 ft", "Female", "A-", "xyz.jpeg", 520, "Shrijana Nagar", "1994-06-24"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(15, "89-126-923", "9872102918", "66 kg",
-                    "5.7 ft", "Male", "O+", "xyz.jpeg", 310, "Birgunj", "1997-01-10"));
+                    "5.7 ft", "Male", "O+", "xyz.jpeg", 310, "Pipal Bot", "1997-01-10"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(16, "67-312-810", "9872102918", "72 kg",
-                    "6.0 ft", "Female", "B-", "xyz.jpeg", 75, "Butwal", "2002-04-13"));
+                    "6.0 ft", "Female", "B-", "xyz.jpeg", 75, "Dallu", "2002-04-13"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(17, "21-817-402", "9872102918", "69 kg",
-                    "5.9 ft", "Male", "AB+", "xyz.jpeg", 120, "Dhangadi", "1988-10-19"));
+                    "5.9 ft", "Male", "AB+", "xyz.jpeg", 120, "Dhaneswor", "1988-10-19"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(18, "48-921-310", "9872102918", "60 kg",
-                    "5.11 ft", "Female", "O-", "xyz.jpeg", 23, "Surkhet", "1993-02-28"));
+                    "5.11 ft", "Female", "O-", "xyz.jpeg", 23, "Diyalo Tole", "1993-02-28"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(19, "73-812-730", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "A+", "xyz.jpeg", 87, "Janakpur", "1995-07-04"));
+                    "5.8 ft", "Male", "A+", "xyz.jpeg", 87, "Gangate", "1995-07-04"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(20, "37-210-931", "9872102918", "73 kg",
-                    "6.2 ft", "Female", "B+", "xyz.jpeg", 600, "Hetauda", "1998-11-12"));
+                    "6.2 ft", "Female", "B+", "xyz.jpeg", 600, "Pakuwa", "1998-11-12"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(21, "54-321-814", "9872102918", "67 kg",
-                    "5.7 ft", "Male", "AB-", "xyz.jpeg", 150, "Itahari", "1986-04-15"));
+                    "5.7 ft", "Male", "AB-", "xyz.jpeg", 150, "Silmi", "1986-04-15"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(22, "89-430-917", "9872102918", "75 kg",
-                    "6.0 ft", "Female", "O+", "xyz.jpeg", 250, "Ghorahi", "1992-09-30"));
+                    "6.0 ft", "Female", "O+", "xyz.jpeg", 250, "Chautari", "1992-09-30"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(23, "27-920-624", "9872102918", "64 kg",
-                    "5.6 ft", "Male", "A-", "xyz.jpeg", 8, "Nepalgunj", "1996-03-03"));
+                    "5.6 ft", "Male", "A-", "xyz.jpeg", 8, "Dhampus Chowk", "1996-03-03"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(24, "67-918-001", "9872102918", "70 kg",
-                    "5.9 ft", "Female", "B+", "xyz.jpeg", 100, "Birtamod", "1985-08-27"));
+                    "5.9 ft", "Female", "B+", "xyz.jpeg", 100, "Bhatkeko Pool", "1985-08-27"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(25, "32-125-821", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "AB+", "xyz.jpeg", 35, "Lalitpur", "1991-02-10"));
+                    "5.8 ft", "Male", "AB+", "xyz.jpeg", 35, "Naya Bazar", "1991-02-10"));
             patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(26, "71-912-320", "9872102918", "73 kg",
-                    "6.1 ft", "Female", "A-", "xyz.jpeg", 480, "Pokhara", "1994-06-02"));
+                    "6.1 ft", "Female", "A-", "xyz.jpeg", 480, "Kalimati", "1994-06-02"));
 
 
             //generate doctors
@@ -224,99 +225,99 @@ public class OneTimeDataLoader implements CommandLineRunner {
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(28, "6923",
                     "9812309764", "MD", "Dermatologist", "8 years",
-                    "Male", Arrays.asList(4, 7), "Kathmandu", 152, "xyz.jpeg"));
+                    "Male", Arrays.asList(4, 7), "Gaida Chowk", 152, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(29, "4321",
                     "9845678901", "MS", "Gastroenterologist", "12 years",
-                    "Female", Arrays.asList(2, 3, 6), "Pokhara", 326, "xyz.jpeg"));
+                    "Female", Arrays.asList(2, 3, 6), "Rampur", 326, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(30, "9823",
                     "9867543210", "MBBS", "Neurologist", "15 years",
-                    "Male", Arrays.asList(1, 3, 9), "Biratnagar", 499, "xyz.jpeg"));
+                    "Male", Arrays.asList(1, 3, 9), "Chagal", 499, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(31, "7410",
                     "9856784321", "MD", "Obstetrician/Gynecologist", "10 years",
-                    "Female", Arrays.asList(5, 8), "Lalitpur", 245, "xyz.jpeg"));
+                    "Female", Arrays.asList(5, 8), "Parbati Chowk", 245, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(32, "2678",
                     "9810765432", "MS", "Orthopedic Surgeon", "6 years",
-                    "Male", Arrays.asList(1, 4), "Bhaktapur", 89, "xyz.jpeg"));
+                    "Male", Arrays.asList(1, 4), "Gokarna", 89, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(33, "5901",
                     "9841098765", "MBBS", "Pediatrician", "3 years",
-                    "Female", Arrays.asList(2, 7, 9), "Bharatpur", 138, "xyz.jpeg"));
+                    "Female", Arrays.asList(2, 7, 9), "Purano Bazar", 138, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(34, "1324",
-                    "9812345670", "MD", "Psychiatrist", "18 years",
-                    "Male", Arrays.asList(3, 5), "Hetauda", 287, "xyz.jpeg"));
+                    "9812345670", "MD", "Naya buspark", "18 years",
+                    "Male", Arrays.asList(3, 5), "Balkumari", 287, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(35, "4680",
                     "9865432109", "MS", "Radiologist", "9 years",
-                    "Female", Arrays.asList(1, 6, 8), "Birgunj", 212, "xyz.jpeg"));
+                    "Female", Arrays.asList(1, 6, 8), "Sano Bharyang", 212, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(36, "8157",
                     "9810987654", "MBBS", "Urologist", "14 years",
-                    "Male", Arrays.asList(4, 9), "Janakpur", 68, "xyz.jpeg"));
+                    "Male", Arrays.asList(4, 9), "Soltimode", 68, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(37, "5790",
                     "9847654321", "MD", "Cardiologist", "7 years",
-                    "Female", Arrays.asList(2, 3, 5), "Butwal", 183, "xyz.jpeg"));
+                    "Female", Arrays.asList(2, 3, 5), "Purano Buspark", 183, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(38, "6784",
                     "9812309876", "MS", "Dermatologist", "11 years",
-                    "Male", Arrays.asList(1, 6, 7), "Dharan", 410, "xyz.jpeg"));
+                    "Male", Arrays.asList(1, 6, 7), "Naya Galli", 410, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(39, "4203",
                     "9845678902", "MBBS", "Gastroenterologist", "16 years",
-                    "Female", Arrays.asList(3, 4), "Banepa", 74, "xyz.jpeg"));
+                    "Female", Arrays.asList(3, 4), "Hanuman Chowk", 74, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(40, "8752",
                     "9867543219", "MD", "Neurologist", "13 years",
-                    "Male", Arrays.asList(2, 5, 9), "Damak", 625, "xyz.jpeg"));
+                    "Male", Arrays.asList(2, 5, 9), "Naadi Pur", 625, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(41, "1468",
                     "9856784327", "MS", "Obstetrician/Gynecologist", "8 years",
-                    "Female", Arrays.asList(1, 3, 7), "Itahari", 368, "xyz.jpeg"));
+                    "Female", Arrays.asList(1, 3, 7), "Bagar", 368, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(42, "6512",
                     "9810765438", "MBBS", "Orthopedic Surgeon", "5 years",
-                    "Male", Arrays.asList(4, 6), "Dhankuta", 162, "xyz.jpeg"));
+                    "Male", Arrays.asList(4, 6), "Tudikhel", 162, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(43, "2109",
                     "9841098766", "MD", "Pediatrician", "10 years",
-                    "Female", Arrays.asList(1, 2, 9), "Dhangadhi", 550, "xyz.jpeg"));
+                    "Female", Arrays.asList(1, 2, 9), "Gadesh mandir", 550, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(44, "4873",
                     "9812345671", "MS", "Psychiatrist", "19 years",
-                    "Male", Arrays.asList(3, 4), "Birtamod", 715, "xyz.jpeg"));
+                    "Male", Arrays.asList(3, 4), "Chauni Gate", 715, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(45, "7635",
                     "9865432108", "MBBS", "Radiologist", "7 years",
-                    "Female", Arrays.asList(2, 5, 8), "Tulsipur", 397, "xyz.jpeg"));
+                    "Female", Arrays.asList(2, 5, 8), "Jalapa Chowk", 397, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(46, "9034",
                     "9810987652", "MD", "Urologist", "18 years",
-                    "Male", Arrays.asList(1, 6), "Gulariya", 645, "xyz.jpeg"));
+                    "Male", Arrays.asList(1, 6), "Manamaiju", 645, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(47, "3076",
                     "9847654320", "MS", "Cardiologist", "10 years",
-                    "Female", Arrays.asList(3, 7), "Rajbiraj", 589, "xyz.jpeg"));
+                    "Female", Arrays.asList(3, 7), "Naag Pokhari", 589, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(48, "8342",
                     "9812309875", "MBBS", "Dermatologist", "14 years",
-                    "Male", Arrays.asList(2, 4, 9), "Gorkha", 194, "xyz.jpeg"));
+                    "Male", Arrays.asList(2, 4, 9), "Bhalu danda", 194, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(49, "2938",
                     "9845678903", "MD", "Gastroenterologist", "11 years",
-                    "Female", Arrays.asList(1, 5), "Lamjung", 128, "xyz.jpeg"));
+                    "Female", Arrays.asList(1, 5), "Janak chowk", 128, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(50, "7361",
                     "9867543218", "MS", "Neurologist", "17 years",
-                    "Male", Arrays.asList(3, 6, 8), "Birendranagar", 675, "xyz.jpeg"));
+                    "Male", Arrays.asList(3, 6, 8), "Sanepa", 675, "xyz.jpeg"));
 
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(51, "9152",
                     "9856784325", "MBBS", "Obstetrician/Gynecologist", "9 years",
-                    "Female", Arrays.asList(1, 2, 7), "Charikot", 97, "xyz.jpeg"));
+                    "Female", Arrays.asList(1, 2, 7), "Purano chautari", 97, "xyz.jpeg"));
         }
     }
 
