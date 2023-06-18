@@ -10,6 +10,7 @@ import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,6 +33,8 @@ public class TestResult {
     private String description;
 
     private LocalDate testDate;
+
+    private String imagePath;
 
     @OneToOne
     @JoinColumn(name = "patient_detail_id")

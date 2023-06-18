@@ -1,18 +1,32 @@
 package com.star.eswasthyabackend.dto;
 
-import com.star.eswasthyabackend.model.doctor.DoctorDetails;
-import com.star.eswasthyabackend.model.patient.PatientDetails;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
-public class TestResultDto {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TestResultRequestDto {
 
     private Integer id;
+
     private String testName;
+
     private String result;
+
     private String description;
+
     private LocalDate testDate;
+
     private Integer patientDetailId;
+
     private Integer recommendedDoctorDetailId;
+
+    private String imagePath;
 }
