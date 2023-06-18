@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.service.testResult.impl;
 
-import com.star.eswasthyabackend.dto.TestResultRequestDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.TestResult;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +48,11 @@ public class TestResultServiceImpl implements TestResultService {
         testResult.setRecommendedDoctorDetailId(doctorDetails);
         testResultRepository.saveAndFlush(testResult);
         return testResult.getId();
+    }
+
+    @Override
+    public Map<String, Object> findById(Integer testResultId) {
+
+        return null;
     }
 }

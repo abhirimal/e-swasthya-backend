@@ -1,14 +1,11 @@
 package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
-import com.star.eswasthyabackend.dto.TestResultRequestDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
 import com.star.eswasthyabackend.service.testResult.TestResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,5 +20,13 @@ public class TestResultController {
         return ResponseEntity.ok(new ApiResponse(true,
                 "Test Result Saved Successfully",
                 testResultService.saveTestResult(requestDto)));
+    }
+
+    @GetMapping("/view-by-id/{testResultId}")
+    public ResponseEntity<?> viewTestResultById(@PathVariable Integer testResultId){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Test result data fetched successfully.",
+                testResultService.findById(testResultId)));
     }
 }

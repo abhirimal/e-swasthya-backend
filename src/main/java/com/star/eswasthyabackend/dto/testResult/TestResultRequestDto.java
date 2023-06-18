@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.dto;
+package com.star.eswasthyabackend.dto.testResult;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
