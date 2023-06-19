@@ -26,17 +26,17 @@ public class Prescription {
 
     private Double dosageInUnit;
 
-    private String frequency;
+    private String frequencyPerDay;
 
     private String additionalNote;
-
-    private LocalDate prescribedDate;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
     private Integer durationInDays;
+
+    private Boolean isActive;
 
     @OneToOne
     @JoinColumn(name = "patient_detail_id")
