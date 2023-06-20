@@ -22,11 +22,14 @@ public class TestResultDoctorDetailResponseDto {
 
     private String specialization;
 
+    private String nmcLicenseNo;
+
     public TestResultDoctorDetailResponseDto(DoctorDetails recommendedDoctorDetail) {
         doctorDetailId = recommendedDoctorDetail.getDoctorDetailId();
         firstName = recommendedDoctorDetail.getFirstName();
         lastName = recommendedDoctorDetail.getLastName();
         email = recommendedDoctorDetail.getEmail();
         specialization = recommendedDoctorDetail.getSpecialization();
+        nmcLicenseNo = recommendedDoctorDetail.getNmcLicenseNo();
     }
 }
