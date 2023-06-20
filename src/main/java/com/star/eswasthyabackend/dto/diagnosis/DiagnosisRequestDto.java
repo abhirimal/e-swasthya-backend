@@ -9,7 +9,9 @@ public class DiagnosisRequestDto {
 
     private Integer id;
 
-    private String description;
+    private String diseaseName;
+
+    private String diagnosisDescription;
 
     private Integer patientDetailId;
 

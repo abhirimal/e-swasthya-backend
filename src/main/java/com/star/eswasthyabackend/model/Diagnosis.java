@@ -22,14 +22,16 @@ public class Diagnosis {
     @SequenceGenerator(name = "Diagnosis_SEQ_GEN", sequenceName = "Diagnosis_SEQ", allocationSize = 1)
     private Integer id;
 
-    private String description;
+    private String diseaseName;
+
+    private String diagnosisDescription;
 
     @OneToOne
     @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetail;
 
     @OneToOne
-    @JoinColumn(name = "doctor_detail")
+    @JoinColumn(name = "doctor_detail_id")
     private DoctorDetails doctorDetail;
 
     @OneToMany(mappedBy = "diagnosis")

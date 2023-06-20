@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class DiagnosisServiceImpl implements DiagnosisService {
@@ -31,7 +33,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         else {
             diagnosis = new Diagnosis();
         }
-        diagnosis.setDescription(requestDto.getDescription());
+        diagnosis.setDiagnosisDescription(requestDto.getDiagnosisDescription());
+        diagnosis.setDiseaseName(requestDto.getDiseaseName());
 
         PatientDetails patientDetail = patientDetailsRepository.findById(requestDto.getPatientDetailId())
                 .orElseThrow(()-> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
@@ -43,5 +46,10 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         diagnosisRepository.saveAndFlush(diagnosis);
 
         return diagnosis.getId();
+    }
+
+    @Override
+    public Map<String, Object> getDiagnosisById(Integer id) {
+        return diagnosisRepository.getByDiagnosisId(id);
     }
 }
