@@ -5,10 +5,9 @@ import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
 import com.star.eswasthyabackend.service.prescription.PrescriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,4 +24,14 @@ public class PrescriptionController {
                 prescriptionService.savePrescription(requestDto)
         ));
     }
+
+    @GetMapping("/view/{id}")
+    public ResponseEntity<?> viewPrescriptionById(@PathVariable Integer id){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Prescription data fetched successfully",
+                prescriptionService.viewPrescriptionById(id)
+        ));
+    }
+
 }

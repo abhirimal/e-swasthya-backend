@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +56,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescriptionRepository.saveAndFlush(prescription);
 
         return prescription.getId();
+    }
+
+    @Override
+    public Map<String, Object> viewPrescriptionById(Integer id) {
+        return prescriptionRepository.viewById(id);
     }
 
 
