@@ -34,5 +34,13 @@ public class DiagnosisController {
                 diagnosisService.getDiagnosisById(id)));
     }
 
+    @GetMapping("/list-by-patient/{id}")
+    public ResponseEntity<?> listALlByPatientId(@PathVariable Integer id){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Diagnosis list fetched successfully", diagnosisService.listAllByPatientId(id)
+        ));
+    }
+
 
 }
