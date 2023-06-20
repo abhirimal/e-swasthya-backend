@@ -47,4 +47,8 @@ public class TestResult {
     @JoinColumn(name = "doctor_detail_id")
     private DoctorDetails recommendedDoctorDetail;
 
+    @ManyToOne
+    @JoinColumn(name = "diagnosis_id")
+    private Diagnosis diagnosis;
+
 }
