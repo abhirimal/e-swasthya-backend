@@ -36,6 +36,7 @@ public class TestResultServiceImpl implements TestResultService {
             testResult = new TestResult();
         }
         testResult.setTestName(requestDto.getTestName());
+        testResult.setTestType(requestDto.getTestType());
         testResult.setResult(requestDto.getResult());
         testResult.setDescription(requestDto.getDescription());
         testResult.setTestDate(requestDto.getTestDate());

@@ -16,6 +16,8 @@ public class TestResultResponseDto {
 
     private String testName;
 
+    private String testType;
+
     private String result;
 
     private String description;
@@ -31,6 +33,7 @@ public class TestResultResponseDto {
     public TestResultResponseDto(TestResult testResult){
         this.id = testResult.getId();
         this.testName = testResult.getTestName();
+        this.testType = testResult.getTestType();
         this.result = testResult.getResult();
         this.description = testResult.getDescription();
         this.testDate = testResult.getTestDate();

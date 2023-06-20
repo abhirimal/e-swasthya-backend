@@ -18,6 +18,8 @@ public class TestResultRequestDto {
 
     private String testName;
 
+    private String testType;
+
     private String result;
 
     private String description;

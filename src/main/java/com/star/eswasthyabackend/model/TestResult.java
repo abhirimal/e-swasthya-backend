@@ -28,6 +28,9 @@ public class TestResult {
     private String testName;
 
     @Column(nullable = false)
+    private String testType;
+
+    @Column(nullable = false)
     private String result;
 
     private String description;
