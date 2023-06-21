@@ -2,6 +2,7 @@ package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.appointment.AppointmentRequest;
+import com.star.eswasthyabackend.dto.appointment.UpdateAppointmentApprovalDto;
 import com.star.eswasthyabackend.service.appointment.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,21 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveAndUpdate(@RequestBody AppointmentRequest appointmentRequest){
+    public ResponseEntity<?> save(@RequestBody AppointmentRequest appointmentRequest){
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
                 "Appointment have been saved successfully.",
-                appointmentService.saveAndUpdate(appointmentRequest)
+                appointmentService.save(appointmentRequest)
         ));
+    }
+
+    @GetMapping("/verify-appointment-otp")
+    public ResponseEntity<?> verifyAppointmentByOtp(@RequestParam Integer appointmentId, @RequestParam String otp){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Otp verified successfully.",
+                appointmentService.verifyAppointmentByOtp(appointmentId, otp)));
     }
 
     @GetMapping("/view/{appointmentId}")
@@ -39,7 +48,7 @@ public class AppointmentController {
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
-                "Appointments fetched successfully.",
+                "Appointment fetched successfully.",
                 appointmentService.viewByDoctorId(doctorId)
         ));
     }
@@ -49,8 +58,8 @@ public class AppointmentController {
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
-                "Appointments feteched successfully",
-                appointmentService.viewByPatientdId(patientId)
+                "Appointment fetched successfully",
+                appointmentService.viewByPatientId(patientId)
         ));
     }
 
@@ -61,6 +70,16 @@ public class AppointmentController {
            true,
            "Appointment deleted successfully.",
                 appointmentService.deleteByAppointmentById(appointmentId)
+        ));
+    }
+
+    @PatchMapping("/update-appointment-approval")
+    public ResponseEntity<?> updateAppointmentApproval(@RequestBody UpdateAppointmentApprovalDto approvalDto){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Appointment approved successfully.",
+                appointmentService.updateAppointmentApproval(approvalDto)
         ));
     }
 

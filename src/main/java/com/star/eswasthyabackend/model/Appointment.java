@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -26,6 +27,20 @@ public class Appointment {
 
     private String reasonForVisit;
 
+    private LocalDate appointmentDate;
+
+    private LocalTime appointmentTime;
+
+    private Boolean isActive;
+
+    private Boolean isApproved;
+
+    private Boolean isVerifiedBySms;
+
+    private String otpCode;
+
+    private LocalTime otpGenTime;
+
     @OneToOne
     @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetails;
@@ -33,10 +48,4 @@ public class Appointment {
     @OneToOne
     @JoinColumn(name = "doctor_detail_id")
     private DoctorDetails doctorDetails;
-
-    private LocalDate appointmentDate;
-
-    private LocalTime appointmentTime;
-
-    private Boolean isActive;
 }
