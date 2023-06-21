@@ -37,6 +37,8 @@ public class Appointment {
 
     private Boolean isVerifiedBySms;
 
+    private Boolean isDeleted;
+
     private String otpCode;
 
     private LocalTime otpGenTime;

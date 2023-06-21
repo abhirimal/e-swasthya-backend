@@ -78,7 +78,7 @@ public class AppointmentController {
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
-                "Appointment approved successfully.",
+                "Appointment updated successfully.",
                 appointmentService.updateAppointmentApproval(approvalDto)
         ));
     }

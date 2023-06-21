@@ -65,6 +65,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setIsApproved(false);
         appointment.setIsActive(false);
         appointment.setIsVerifiedBySms(false);
+        appointment.setIsDeleted(false);
 
         //send sms
         String otp = RandomString.make(6);
@@ -97,7 +98,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(()-> new AppException("Appointment not found for given id.", HttpStatus.BAD_REQUEST));
-        appointment.setIsActive(false);
+        appointment.setIsDeleted(true);
         appointmentRepository.save(appointment);
         return true;
     }
@@ -113,7 +114,8 @@ public class AppointmentServiceImpl implements AppointmentService{
         }
 
         appointment.setIsApproved(approvalDto.getIsApproved());
-        appointment.setIsActive(true);
+        appointment.setOtpCode(null);
+        appointment.setOtpGenTime(null);
         appointmentRepository.save(appointment);
         return true;
     }

@@ -19,12 +19,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "       pd.medical_record_number                    as \"medicalRecordNumber\",\n" +
             "       ap.appointment_date                         as \"appointmentDate\",\n" +
             "       ap.appointment_time                         as \"appointmentTime\",\n" +
-            "       ap.hospital_name                            as \"hospitalName\"\n" +
+            "       ap.hospital_name                            as \"hospitalName\",\n" +
+            "       ap.is_active                                as \"isActive\",\n" +
+            "       ap.is_approved                              as \"isApproved\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
             "         inner join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
             "where ap.is_active = true\n" +
-            "  and ap.isVerifiedBySms = true\n" +
             "  and ap.id = ?1")
     Map<String, Object> viewById(Integer appointmentId);
 
@@ -36,12 +37,14 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "       pd.medical_record_number                    as \"medicalRecordNumber\",\n" +
             "       ap.appointment_date                         as \"appointmentDate\",\n" +
             "       ap.appointment_time                         as \"appointmentTime\",\n" +
-            "       ap.hospital_name                            as \"hospitalName\"\n" +
+            "       ap.hospital_name                            as \"hospitalName\",\n" +
+            "       ap.is_active                                as \"isActive\",\n" +
+            "       ap.is_approved                              as \"isApproved\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
-            "         inner join patient_details pd on pd.id = ap.patient_detail_id\n" +
-            "where ap.is_active = true\n" +
-            "  and ap.isVerifiedBySms = true\n" +
+            "         inner join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
+            "where ap.is_verified_by_sms = true \n" +
+            "and ap.is_active = true +\n" +
             "  and ap.doctor_detail_id = ?1")
     List<Map<String, Object>> viewByDoctorId(Integer doctorId);
 
@@ -54,10 +57,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "       ap.appointment_date                         as \"appointmentDate\",\n" +
             "       ap.appointment_time                         as \"appointmentTime\",\n" +
             "       ap.hospital_name                            as \"hospitalName\"\n" +
+            "       ap.is_active                                as \"isActive\",\n" +
+            "       ap.is_approved                              as \"isApproved\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
             "         inner join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
-            "where ap.is_active is true\n" +
-            "  and pd.patient_detail_id = ?1")
+            "where pd.patient_detail_id = ?1")
     List<Map<String, Object>> viewByPatientId(Integer patientId);
 }
