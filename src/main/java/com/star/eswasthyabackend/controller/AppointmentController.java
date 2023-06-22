@@ -25,6 +25,16 @@ public class AppointmentController {
         ));
     }
 
+    @PostMapping("/resend-otp")
+    public ResponseEntity<?> resendOTP(@RequestBody UpdateAppointmentApprovalDto approvalDto){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Sms otp sent successfully",
+                appointmentService.resendOTP(approvalDto)
+        ));
+    }
+
     @GetMapping("/verify-appointment-otp")
     public ResponseEntity<?> verifyAppointmentByOtp(@RequestParam Integer appointmentId, @RequestParam String otp){
 
@@ -43,23 +53,23 @@ public class AppointmentController {
         ));
     }
 
-    @GetMapping("/view-by-doctor/{doctorId}")
-    public ResponseEntity<?> viewByDoctorId(@PathVariable Integer doctorId){
+    @GetMapping("/view-by-doctor")
+    public ResponseEntity<?> viewByDoctorId(@RequestParam Integer doctorId, @RequestParam String status){
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
                 "Appointment fetched successfully.",
-                appointmentService.viewByDoctorId(doctorId)
+                appointmentService.viewByDoctorId(doctorId, status)
         ));
     }
 
-    @GetMapping("/view-by-patient/{patientId}")
-    public ResponseEntity<?> viewByPatientId(@PathVariable Integer patientId){
+    @GetMapping("/view-by-patient")
+    public ResponseEntity<?> viewByPatientId(@RequestParam Integer patientId, @RequestParam String status){
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
                 "Appointment fetched successfully",
-                appointmentService.viewByPatientId(patientId)
+                appointmentService.viewByPatientId(patientId, status)
         ));
     }
 
