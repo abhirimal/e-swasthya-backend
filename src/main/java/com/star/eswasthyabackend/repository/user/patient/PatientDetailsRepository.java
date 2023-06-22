@@ -24,6 +24,7 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
             "                height                as \"height\",\n" +
             "                gender                as \"gender\",\n" +
             "                weight                as \"weight\",\n" +
+            "                image_path            as \"imagePath\",\n" +
             "                m.name                as \"municipalityName\",\n" +
             "                d.name                as \"districtName\",\n" +
             "                d.province_name       as \"provinceName\",\n" +

@@ -1,6 +1,7 @@
 package com.star.eswasthyabackend.controller.user.doctor;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
+import com.star.eswasthyabackend.dto.JwtResponse;
 import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailsRequestDto;
 import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,8 @@ public class DoctoDetailsController {
 
     @PostMapping("/save")
     ResponseEntity<?> saveAndUpdate(@RequestBody DoctorDetailsRequestDto requestDto){
-
-        return ResponseEntity.ok(new ApiResponse(true,
-                "Doctor details saved successfully.",
-                doctorDetailsService.saveDoctorDetails(requestDto)));
+        String jwt = doctorDetailsService.saveDoctorDetails(requestDto);
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
     @GetMapping("/view/{id}")
