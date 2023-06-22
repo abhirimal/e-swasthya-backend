@@ -10,4 +10,6 @@ public interface PatientDetailsService {
     Map<String, String> getPatientDetails(Integer id);
 
     List<Map<String, String>> getAll();
+
+    Map<String, Object> getPatientDetailsByUserId(Integer id);
 }

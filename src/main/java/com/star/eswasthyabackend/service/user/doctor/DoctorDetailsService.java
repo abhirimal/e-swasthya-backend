@@ -12,4 +12,6 @@ public interface DoctorDetailsService {
     DoctorDetailResponseDto findById(Integer id);
 
     List<Map<String, Object>> listAllDoctor();
+
+    Map<String, Object> findDoctorByUserId(Integer id);
 }

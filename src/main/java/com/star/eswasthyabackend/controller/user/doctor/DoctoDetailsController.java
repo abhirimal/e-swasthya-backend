@@ -30,6 +30,13 @@ public class DoctoDetailsController {
                 doctorDetailsService.findById(id)));
     }
 
+    @GetMapping("/view-by-user-id/{id}")
+    ResponseEntity<?> viewDoctorByUserId(@PathVariable Integer id){
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Doctor details fetched successfully",
+                doctorDetailsService.findDoctorByUserId(id)));
+    }
+
     @GetMapping("/view-all")
     ResponseEntity<?> listAllDoctos(){
         return ResponseEntity.ok(new ApiResponse(true,
