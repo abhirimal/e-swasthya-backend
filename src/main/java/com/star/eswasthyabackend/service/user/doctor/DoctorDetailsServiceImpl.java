@@ -113,7 +113,6 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
 
         DoctorDetails doctorDetails = doctorDetailsRepository.findById(id)
                 .orElseThrow(()-> new AppException("Doctor doesn't exist for given id.",HttpStatus.BAD_REQUEST ));
-
         return new DoctorDetailResponseDto(doctorDetails);
     }
 
