@@ -14,8 +14,6 @@ public class AppointmentRequest {
 
     private Integer id;
 
-    private String hospitalName;
-
     private String reasonForVisit;
 
     private Integer patientDetailId;
@@ -25,4 +23,6 @@ public class AppointmentRequest {
     private LocalDate appointmentDate;
 
     private LocalTime appointmentTime;
+
+    private Integer hospitalId;
 }

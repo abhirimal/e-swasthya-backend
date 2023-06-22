@@ -5,7 +5,6 @@ import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsService;
-import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
