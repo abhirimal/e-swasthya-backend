@@ -109,13 +109,18 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     }
 
     @Override
-    public Map<String, String> getPatientDetails(Integer id) {
+    public Map<String, String>  getPatientDetails(Integer id) {
         return patientDetailsRepository.findPatientDetail(id);
     }
 
     @Override
     public List<Map<String, String>> getAll() {
         return patientDetailsRepository.listAllPatient();
+    }
+
+    @Override
+    public Map<String, Object> getPatientDetailsByUserId(Integer id) {
+        return patientDetailsRepository.getPatientDetailByUserId(id);
     }
 
     public String generateUniqueMedicalRecordNumber(Integer id){

@@ -11,9 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -50,7 +48,11 @@ public class JWTUtil {
         Key key = Keys.hmacShaKeyFor(secret.getBytes());
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + 864000000);
-        Map<String, Object> authority = Collections.singletonMap("authority", databaseUser.getRole());
+
+        List<Map<String, Object>> authority = new ArrayList<>();
+        Map<String, Object> authorityMap = new HashMap<>();
+        authorityMap.put("authority", databaseUser.getRole());
+        authority.add(authorityMap);
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())

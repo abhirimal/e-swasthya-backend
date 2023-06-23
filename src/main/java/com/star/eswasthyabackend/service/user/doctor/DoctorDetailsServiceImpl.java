@@ -121,4 +121,9 @@ public class DoctorDetailsServiceImpl implements DoctorDetailsService {
         return doctorDetailsRepository.listAllDoctor();
     }
 
+    @Override
+    public Map<String, Object> findDoctorByUserId(Integer id) {
+        return doctorDetailsRepository.findDoctorByUserId(id);
+    }
+
 }

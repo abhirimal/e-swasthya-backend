@@ -32,6 +32,14 @@ public class PatientDetailsController {
                 patientDetailsService.getPatientDetails(id)));
     }
 
+    @GetMapping("/view-by-user-id/{id}")
+    public ResponseEntity<?> viewPatientDetailByUserId(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Patient details fetched successfully.",
+                patientDetailsService.getPatientDetailsByUserId(id)));
+    }
+
     @GetMapping("/view-all")
     public ResponseEntity<?> viewAllPatients() {
         return ResponseEntity.ok(new ApiResponse(true,

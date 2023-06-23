@@ -19,6 +19,7 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "       specialization,\n" +
             "       education,\n" +
             "       gender,\n" +
+            "       image_path as \"imagePath\",\n" +
             "       string_agg(h.hospital_name, ',') as \"hospitalNames\"\n" +
             "from doctor_details\n" +
             "         inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
@@ -37,6 +38,7 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "       specialization,\n" +
             "       education,\n" +
             "       gender,\n" +
+            "       image_path as \"imagePath\",\n" +
             "       string_agg(h.hospital_name, ',') as \"hospitalNames\"\n" +
             "from doctor_details\n" +
             "         inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
@@ -53,4 +55,22 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "FROM doctor_details")
     Integer countTotalDoctors();
 
+    @Query(nativeQuery = true, value = "select doctor_detail_id                 as \"doctorId\",\n" +
+            "       first_name                       as \"firstName\",\n" +
+            "       last_name                        as \"lastName\",\n" +
+            "       email,\n" +
+            "       nmc_license_no                   as \"nmcLicenseNumber\",\n" +
+            "       phone_number                     as \"phoneNumber\",\n" +
+            "       experience,\n" +
+            "       specialization,\n" +
+            "       education,\n" +
+            "       gender,\n" +
+            "       image_path                       as \"imagePath\",\n" +
+            "       string_agg(h.hospital_name, ',') as \"hospitalNames\"\n" +
+            "from doctor_details\n" +
+            "         inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
+            "         inner join hospital h on h.id = dh.hospital_id\n" +
+            "where user_id = ?1\n" +
+            "group by doctor_detail_id")
+    Map<String, Object> findDoctorByUserId(Integer id);
 }
