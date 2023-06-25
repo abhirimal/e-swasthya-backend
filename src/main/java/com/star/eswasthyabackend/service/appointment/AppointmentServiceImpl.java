@@ -2,6 +2,7 @@ package com.star.eswasthyabackend.service.appointment;
 
 import com.star.eswasthyabackend.dto.appointment.AppointmentRequest;
 import com.star.eswasthyabackend.dto.appointment.UpdateAppointmentApprovalDto;
+import com.star.eswasthyabackend.dto.temp.IdSmsDto;
 import com.star.eswasthyabackend.enums.AppointmentStatus;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Appointment;
@@ -37,7 +38,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     @Transactional
-    public String save(AppointmentRequest appointmentRequest) {
+    public IdSmsDto save(AppointmentRequest appointmentRequest) {
 
         PatientDetails patient = patientDetailsRepository.findById(appointmentRequest.getPatientDetailId())
                 .orElseThrow(()-> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
@@ -77,7 +78,11 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setOtpCode(String.valueOf(otp));
         appointment.setOtpGenTime(LocalTime.now());
         appointmentRepository.saveAndFlush(appointment);
-        return message;
+
+        IdSmsDto idSmsDto = new IdSmsDto();
+        idSmsDto.setOtp(message);
+        idSmsDto.setId(appointment.getId());
+        return idSmsDto;
     }
 
     @Override
@@ -146,7 +151,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public String resendOTP(UpdateAppointmentApprovalDto approvalDto) {
+    public IdSmsDto resendOTP(UpdateAppointmentApprovalDto approvalDto) {
 
         Appointment appointment = appointmentRepository.findById(approvalDto.getAppointmentId())
                 .orElseThrow(()-> new AppException("Appointment not found for given id.", HttpStatus.BAD_REQUEST));
@@ -171,6 +176,10 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setOtpCode(String.valueOf(otp));
         appointment.setOtpGenTime(LocalTime.now());
         appointmentRepository.saveAndFlush(appointment);
-        return message;
+
+        IdSmsDto idSmsDto = new IdSmsDto();
+        idSmsDto.setOtp(message);
+        idSmsDto.setId(appointment.getId());
+        return idSmsDto;
     }
 }
