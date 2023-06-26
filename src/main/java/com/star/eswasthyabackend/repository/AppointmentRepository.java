@@ -21,6 +21,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "       ap.appointment_date                         as \"appointmentDate\",\n" +
             "       ap.appointment_time                         as \"appointmentTime\",\n" +
             "       h.hospital_name                             as \"hospitalName\",\n" +
+            "       ap.reason_for_visit                         as \"reasonForVist\", \n" +
             "       ap.status                                   as \"status\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
@@ -40,6 +41,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "       ap.appointment_date                         as \"appointmentDate\",\n" +
             "       ap.appointment_time                         as \"appointmentTime\",\n" +
             "       h.hospital_name                             as \"hospitalName\",\n" +
+            "       ap.reason_for_visit                         as \"reasonForVist\", \n" +
             "       ap.status                                   as \"status\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
@@ -47,7 +49,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "         inner join hospital h on h.id = ap.hospital_id\n" +
             "where ap.doctor_detail_id = ?1\n" +
             "  and case\n" +
-            "          when ?2 = 'ALL' then (status != 'CREATED' and status != 'DELETED')\n" +
+            "          when ?2 = 'ALL' then status != 'DELETED'\n" +
             "          else status = ?2 end")
     List<Map<String, Object>> viewByDoctorIdAndStatus(Integer doctorId, String status);
 
@@ -61,6 +63,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "       ap.appointment_date                         as \"appointmentDate\",\n" +
             "       ap.appointment_time                         as \"appointmentTime\",\n" +
             "       h.hospital_name                             as \"hospitalName\",\n" +
+            "       ap.reason_for_visit                         as \"reasonForVist\", \n" +
             "       ap.status                                   as \"status\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
@@ -68,7 +71,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "         inner join hospital h on h.id = ap.hospital_id\n" +
             "where ap.patient_detail_id = ?1\n" +
             "  and case\n" +
-            "          when ?2 = 'ALL' then (status != 'CREATED' and status != 'DELETED')\n" +
+            "          when ?2 = 'ALL' then status != 'DELETED'\n" +
             "          else status = ?2 end")
     List<Map<String, Object>> viewByPatientIdAndStatus(Integer patientId, String status);
 }

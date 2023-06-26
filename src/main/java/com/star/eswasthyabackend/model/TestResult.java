@@ -50,5 +50,4 @@ public class TestResult {
     @ManyToOne
     @JoinColumn(name = "diagnosis_id")
     private Diagnosis diagnosis;
-
 }
