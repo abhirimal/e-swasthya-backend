@@ -2,13 +2,14 @@ package com.star.eswasthyabackend.service;
 
 import com.star.eswasthyabackend.exception.AppException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EmailSenderService {
     private final JavaMailSender javaMailSender;
 

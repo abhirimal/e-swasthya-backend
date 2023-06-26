@@ -17,6 +17,13 @@ public class DiagnosisController {
 
     private final DiagnosisService diagnosisService;
 
+    @PostMapping("/save-diagnosis-test-result-prescription")
+    public ResponseEntity<?> saveDiagnosisTestResultAndPrescription(){
+
+        return null;
+    }
+
+
     @PostMapping("/save")
     public ResponseEntity<?> saveDiagnosis(@RequestBody DiagnosisRequestDto requestDto){
 
