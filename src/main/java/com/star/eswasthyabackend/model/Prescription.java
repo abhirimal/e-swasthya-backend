@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.model;
 
+import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,10 @@ public class Prescription {
 
     private Boolean isActive;
 
+    @ManyToOne
+    @JoinColumn(name = "diagnosis_id")
+    private Diagnosis diagnosis;
+
     @OneToOne
     @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetail;
@@ -45,4 +50,18 @@ public class Prescription {
     @OneToOne
     @JoinColumn(name = "doctor_detail_id")
     private DoctorDetails doctorDetail;
+
+    public Prescription(PrescriptionRequestDto newPrescription, Diagnosis diagnosis, DoctorDetails doctorDetail, PatientDetails patientDetail) {
+        medicineName = newPrescription.getMedicineName();
+        dosageInUnit = newPrescription.getDosageInUnit();
+        frequencyPerDay = newPrescription.getFrequencyPerDay();
+        additionalNote = newPrescription.getAdditionalNote();
+        startDate = newPrescription.getStartDate();
+        endDate = newPrescription.getStartDate().plusDays(newPrescription.getDurationInDays());
+        durationInDays = newPrescription.getDurationInDays();
+        isActive = LocalDate.now().isBefore(endDate);
+        this.patientDetail = patientDetail;
+        this.doctorDetail = doctorDetail;
+        this.diagnosis = diagnosis;
+    }
 }
