@@ -38,6 +38,8 @@ public class Appointment {
 
     private LocalTime otpGenTime;
 
+    private Boolean isDiagnosisFilled;
+
     @OneToOne
     @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetails;

@@ -88,6 +88,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         diagnosis.setPatientDetail(patientDetail);
         diagnosis.setDoctorDetail(doctorDetail);
         diagnosis.setAppointment(appointment);
+        appointment.setIsDiagnosisFilled(true);
         diagnosisRepository.saveAndFlush(diagnosis);
 
         //save test result
