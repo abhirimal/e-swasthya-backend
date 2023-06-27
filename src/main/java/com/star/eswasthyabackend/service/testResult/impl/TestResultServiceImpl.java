@@ -67,4 +67,9 @@ public class TestResultServiceImpl implements TestResultService {
         return testResultRepository.findAllByPatientId(patientId);
     }
 
+    @Override
+    public List<Map<String, Object>> findAllByDoctorId(Integer doctorId) {
+        return testResultRepository.findAllByDoctorId(doctorId);
+    }
+
 }

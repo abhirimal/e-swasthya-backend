@@ -12,4 +12,6 @@ public interface TestResultService {
     TestResultResponseDto findById(Integer testResultId);
 
     List<Map<String, Object>> findAllByPatientId(Integer patientId);
+
+    List<Map<String, Object>> findAllByDoctorId(Integer doctorId);
 }
