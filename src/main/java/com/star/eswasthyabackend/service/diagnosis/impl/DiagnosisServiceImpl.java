@@ -3,11 +3,13 @@ package com.star.eswasthyabackend.service.diagnosis.impl;
 import com.star.eswasthyabackend.dto.diagnosis.DiagnosisRequestDto;
 import com.star.eswasthyabackend.dto.diagnosis.DiagnosisTestResultPrescriptionRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
+import com.star.eswasthyabackend.model.Appointment;
 import com.star.eswasthyabackend.model.Diagnosis;
 import com.star.eswasthyabackend.model.Prescription;
 import com.star.eswasthyabackend.model.TestResult;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
+import com.star.eswasthyabackend.repository.AppointmentRepository;
 import com.star.eswasthyabackend.repository.DiagnosisRepository;
 import com.star.eswasthyabackend.repository.PrescriptionRepository;
 import com.star.eswasthyabackend.repository.TestResultRepository;
@@ -33,6 +35,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     private final PatientDetailsRepository patientDetailsRepository;
     private final TestResultRepository testResultRepository;
     private final PrescriptionRepository prescriptionRepository;
+    private final AppointmentRepository appointmentRepository;
     @Override
     public Integer saveDiagnosis(DiagnosisRequestDto requestDto) {
 
@@ -73,15 +76,18 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     public Integer saveDiagnosisTestResultAndPrescription(DiagnosisTestResultPrescriptionRequestDto requestDto) {
 
         PatientDetails patientDetail = patientDetailsRepository.findById(requestDto.getDiagnosis().getPatientDetailId())
-                .orElseThrow(() -> new RuntimeException("Patient doesn't exist for given id"));
+                .orElseThrow(() -> new AppException("Patient doesn't exist for given id", HttpStatus.BAD_REQUEST));
         DoctorDetails doctorDetail = doctorDetailsRepository.findById(requestDto.getDiagnosis().getDoctorDetailId())
                 .orElseThrow(() -> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
+        Appointment appointment = appointmentRepository.findById(requestDto.getDiagnosis().getAppointmentId())
+                .orElseThrow(() -> new AppException("Appointment not found for given id", HttpStatus.BAD_REQUEST));
 
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setDiseaseName(requestDto.getDiagnosis().getDiseaseName());
         diagnosis.setDiagnosisDescription(requestDto.getDiagnosis().getDiagnosisDescription());
         diagnosis.setPatientDetail(patientDetail);
         diagnosis.setDoctorDetail(doctorDetail);
+        diagnosis.setAppointment(appointment);
         diagnosisRepository.saveAndFlush(diagnosis);
 
         //save test result
