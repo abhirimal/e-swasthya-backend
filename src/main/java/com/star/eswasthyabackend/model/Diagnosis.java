@@ -27,6 +27,10 @@ public class Diagnosis {
     private String diagnosisDescription;
 
     @OneToOne
+    @JoinColumn(name = "appointment_id")
+    private Appointment appointment;
+
+    @OneToOne
     @JoinColumn(name = "patient_detail_id")
     private PatientDetails patientDetail;
 
