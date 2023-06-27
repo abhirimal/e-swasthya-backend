@@ -2,6 +2,7 @@ package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.diagnosis.DiagnosisRequestDto;
+import com.star.eswasthyabackend.dto.diagnosis.DiagnosisTestResultPrescriptionRequestDto;
 import com.star.eswasthyabackend.service.diagnosis.DiagnosisService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,12 @@ public class DiagnosisController {
     private final DiagnosisService diagnosisService;
 
     @PostMapping("/save-diagnosis-test-result-prescription")
-    public ResponseEntity<?> saveDiagnosisTestResultAndPrescription(){
+    public ResponseEntity<?> saveDiagnosisTestResultAndPrescription(@RequestBody DiagnosisTestResultPrescriptionRequestDto requestDto){
 
-        return null;
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Data saved successfully",
+                diagnosisService.saveDiagnosisTestResultAndPrescription(requestDto)
+        ));
     }
 
 
@@ -49,5 +53,11 @@ public class DiagnosisController {
         ));
     }
 
+    @GetMapping("/list-by-doctor/{id}")
+    public ResponseEntity<?> listALlByDoctorId(@PathVariable Integer id){
 
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Diagnosis list fetched successfully", diagnosisService.listAllByDoctorId(id)
+        ));
+    }
 }

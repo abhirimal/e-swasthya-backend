@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.model;
 
+import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import lombok.AllArgsConstructor;
@@ -50,4 +51,16 @@ public class TestResult {
     @ManyToOne
     @JoinColumn(name = "diagnosis_id")
     private Diagnosis diagnosis;
+
+    public TestResult(TestResultRequestDto newTestResult, Diagnosis diagnosis,DoctorDetails doctorDetail, PatientDetails patientDetail) {
+        testName = newTestResult.getTestName();
+        testType = newTestResult.getTestType();
+        result = newTestResult.getResult();
+        description = newTestResult.getDescription();
+        testDate = newTestResult.getTestDate();
+        imagePath = newTestResult.getImagePath();
+        this.patientDetail = patientDetail;
+        this.recommendedDoctorDetail = doctorDetail;
+        this.diagnosis = diagnosis;
+    }
 }

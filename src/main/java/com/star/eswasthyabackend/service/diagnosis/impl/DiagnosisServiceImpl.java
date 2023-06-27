@@ -1,11 +1,16 @@
 package com.star.eswasthyabackend.service.diagnosis.impl;
 
 import com.star.eswasthyabackend.dto.diagnosis.DiagnosisRequestDto;
+import com.star.eswasthyabackend.dto.diagnosis.DiagnosisTestResultPrescriptionRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Diagnosis;
+import com.star.eswasthyabackend.model.Prescription;
+import com.star.eswasthyabackend.model.TestResult;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import com.star.eswasthyabackend.repository.DiagnosisRepository;
+import com.star.eswasthyabackend.repository.PrescriptionRepository;
+import com.star.eswasthyabackend.repository.TestResultRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import com.star.eswasthyabackend.service.diagnosis.DiagnosisService;
@@ -13,8 +18,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +31,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     private final DiagnosisRepository diagnosisRepository;
     private final DoctorDetailsRepository doctorDetailsRepository;
     private final PatientDetailsRepository patientDetailsRepository;
+    private final TestResultRepository testResultRepository;
+    private final PrescriptionRepository prescriptionRepository;
     @Override
     public Integer saveDiagnosis(DiagnosisRequestDto requestDto) {
 
@@ -57,5 +67,48 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Override
     public List<Map<String, Object>> listAllByPatientId(Integer id) {
         return diagnosisRepository.getAllByPatientId(id);
+    }
+
+    @Override
+    public Integer saveDiagnosisTestResultAndPrescription(DiagnosisTestResultPrescriptionRequestDto requestDto) {
+
+        PatientDetails patientDetail = patientDetailsRepository.findById(requestDto.getDiagnosis().getPatientDetailId())
+                .orElseThrow(() -> new RuntimeException("Patient doesn't exist for given id"));
+        DoctorDetails doctorDetail = doctorDetailsRepository.findById(requestDto.getDiagnosis().getDoctorDetailId())
+                .orElseThrow(() -> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
+
+        Diagnosis diagnosis = new Diagnosis();
+        diagnosis.setDiseaseName(requestDto.getDiagnosis().getDiseaseName());
+        diagnosis.setDiagnosisDescription(requestDto.getDiagnosis().getDiagnosisDescription());
+        diagnosis.setPatientDetail(patientDetail);
+        diagnosis.setDoctorDetail(doctorDetail);
+        diagnosisRepository.saveAndFlush(diagnosis);
+
+        //save test result
+        if (requestDto.getTestResultList() != null) {
+            List<TestResult> testResultList;
+
+            testResultList = requestDto.getTestResultList().stream().map(
+                    newTestResult -> new TestResult(newTestResult, diagnosis, doctorDetail, patientDetail)
+            ).collect(Collectors.toList());
+            testResultRepository.saveAll(testResultList);
+        }
+
+        //save prescription
+        if(requestDto.getPrescriptionList()!=null){
+            List<Prescription> prescriptionList;
+
+            prescriptionList = requestDto.getPrescriptionList().stream().map(
+                    newPrescription -> new Prescription(newPrescription, diagnosis, doctorDetail, patientDetail)
+            ).collect(Collectors.toList());
+            prescriptionRepository.saveAll(prescriptionList);
+        }
+
+        return diagnosis.getId();
+    }
+
+    @Override
+    public List<Map<String, Object>> listAllByDoctorId(Integer id) {
+        return diagnosisRepository.listAllByDoctorId(id);
     }
 }
