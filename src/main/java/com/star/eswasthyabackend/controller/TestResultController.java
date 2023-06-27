@@ -3,6 +3,7 @@ package com.star.eswasthyabackend.controller;
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
 import com.star.eswasthyabackend.service.testResult.TestResultService;
+import com.sun.mail.iap.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,19 @@ public class TestResultController {
                 testResultService.findById(testResultId)));
     }
 
-    @GetMapping("/view-all/{patientId}")
-    public ResponseEntity<?> listAllAppointmentsByPatientId(@PathVariable Integer patientId){
+    @GetMapping("/list-by-patient/{patientId}")
+    public ResponseEntity<?> listAllTestResultByPatientId(@PathVariable Integer patientId){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "List of test results fetched successfully.",
                 testResultService.findAllByPatientId(patientId)));
+    }
+
+    @GetMapping("/list-by-doctor/{doctorId}")
+    public ResponseEntity<?> listAllTestResultByDoctorId(@PathVariable Integer doctorId){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "List of test results fetched successfully.",
+                testResultService.findAllByDoctorId(doctorId)));
     }
 }
