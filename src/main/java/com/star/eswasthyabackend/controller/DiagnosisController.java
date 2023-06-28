@@ -37,6 +37,15 @@ public class DiagnosisController {
         ));
     }
 
+    @GetMapping("/get-diagnosis-test-prescription/{appointmentId}")
+    public ResponseEntity<?> viewDiagnosisByAppointmentId(@PathVariable Integer appointmentId){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "All data fetched successfully.",
+                diagnosisService.viewDiagnosisByAppointmentId(appointmentId)
+        ));
+    }
+
     @GetMapping("/view/{id}")
     public ResponseEntity<?> viewByDiagnosisById(@PathVariable Integer id){
 

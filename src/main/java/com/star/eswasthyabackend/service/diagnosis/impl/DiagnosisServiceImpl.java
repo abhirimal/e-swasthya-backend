@@ -1,7 +1,12 @@
 package com.star.eswasthyabackend.service.diagnosis.impl;
 
 import com.star.eswasthyabackend.dto.diagnosis.DiagnosisRequestDto;
+import com.star.eswasthyabackend.dto.diagnosis.DiagnosisResponseDto;
 import com.star.eswasthyabackend.dto.diagnosis.DiagnosisTestResultPrescriptionRequestDto;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionResponseDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultDoctorDetailResponseDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultPatientDetailResponseDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultResponseDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Appointment;
 import com.star.eswasthyabackend.model.Diagnosis;
@@ -20,10 +25,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,24 +40,24 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     private final TestResultRepository testResultRepository;
     private final PrescriptionRepository prescriptionRepository;
     private final AppointmentRepository appointmentRepository;
+
     @Override
     public Integer saveDiagnosis(DiagnosisRequestDto requestDto) {
 
         Diagnosis diagnosis;
-        if(requestDto.getId()!=null){
+        if (requestDto.getId() != null) {
             diagnosis = diagnosisRepository.findById(requestDto.getId())
-                    .orElseThrow(()-> new AppException("Diagnosis not found for given id.", HttpStatus.BAD_REQUEST));
-        }
-        else {
+                    .orElseThrow(() -> new AppException("Diagnosis not found for given id.", HttpStatus.BAD_REQUEST));
+        } else {
             diagnosis = new Diagnosis();
         }
         diagnosis.setDiagnosisDescription(requestDto.getDiagnosisDescription());
         diagnosis.setDiseaseName(requestDto.getDiseaseName());
 
         PatientDetails patientDetail = patientDetailsRepository.findById(requestDto.getPatientDetailId())
-                .orElseThrow(()-> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
         DoctorDetails doctorDetail = doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
-                .orElseThrow(()-> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
 
         diagnosis.setPatientDetail(patientDetail);
         diagnosis.setDoctorDetail(doctorDetail);
@@ -102,7 +106,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         }
 
         //save prescription
-        if(requestDto.getPrescriptionList()!=null){
+        if (requestDto.getPrescriptionList() != null) {
             List<Prescription> prescriptionList;
 
             prescriptionList = requestDto.getPrescriptionList().stream().map(
@@ -117,5 +121,37 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Override
     public List<Map<String, Object>> listAllByDoctorId(Integer id) {
         return diagnosisRepository.listAllByDoctorId(id);
+    }
+
+    @Override
+    public DiagnosisResponseDto viewDiagnosisByAppointmentId(Integer appointmentId) {
+        Diagnosis diagnosis = diagnosisRepository.findByAppointmentId(appointmentId)
+                .orElseThrow(() -> new AppException("Diagnosis not found for given appointment Id", HttpStatus.BAD_REQUEST));
+        DiagnosisResponseDto diagnosisResponseDto = new DiagnosisResponseDto();
+
+        diagnosisResponseDto.setId(diagnosis.getId());
+        diagnosisResponseDto.setDescription(diagnosis.getDiagnosisDescription());
+        diagnosisResponseDto.setDoctorDetail(new TestResultDoctorDetailResponseDto(diagnosis.getDoctorDetail()));
+        diagnosisResponseDto.setPatientDetail(new TestResultPatientDetailResponseDto(diagnosis.getPatientDetail()));
+
+        List<Prescription> prescriptionList = prescriptionRepository.findByAppointmentId(appointmentId);
+        if (prescriptionList != null) {
+            List<PrescriptionResponseDto> prescriptionResponseDtoList = prescriptionList
+                    .stream().map(
+                            PrescriptionResponseDto::new
+                    ).collect(Collectors.toList());
+            diagnosisResponseDto.setPrescriptionList(prescriptionResponseDtoList);
+        }
+
+        List<TestResult> testResultList = testResultRepository.findByAppointmentId(appointmentId);
+        if (testResultList != null) {
+            List<TestResultResponseDto> testResultResponseDtoList = testResultList.stream()
+                    .map(testResult ->
+                            new TestResultResponseDto(testResult, testResult.getId())
+                    ).collect(Collectors.toList());
+            diagnosisResponseDto.setTestResultList(testResultResponseDtoList);
+        }
+
+        return diagnosisResponseDto;
     }
 }

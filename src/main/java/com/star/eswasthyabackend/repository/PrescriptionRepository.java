@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, Integer> {
@@ -23,4 +25,10 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
             "from prescription p\n" +
             "where p.id = ?1")
     Map<String, Object> viewById(Integer id);
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from prescription p\n" +
+            "         inner join diagnosis d on p.diagnosis_id = d.id\n" +
+            "where d.appointment_id = ?1")
+    List<Prescription> findByAppointmentId(Integer appointmentId);
 }

@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.model;
 
-import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionRequestDto;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import lombok.AllArgsConstructor;

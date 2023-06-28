@@ -38,6 +38,9 @@ public class Diagnosis {
     @JoinColumn(name = "doctor_detail_id")
     private DoctorDetails doctorDetail;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "diagnosis1")
+    private List<TestResult> testResultList;
+
     @OneToMany(mappedBy = "diagnosis")
-    private List<TestResult> testResult;
+    private List<Prescription> prescriptionList;
 }
