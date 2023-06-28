@@ -21,6 +21,8 @@ public class DiagnosisResponseDto {
 
     private String description;
 
+    private String disease;
+
     private LocalDate date;
 
     private List<TestResultResponseDto> testResultList;

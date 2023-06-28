@@ -136,6 +136,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         diagnosisResponseDto.setId(diagnosis.getId());
         diagnosisResponseDto.setDescription(diagnosis.getDiagnosisDescription());
         diagnosisResponseDto.setDate(diagnosis.getDate());
+        diagnosisResponseDto.setDisease(diagnosisResponseDto.getDisease());
         diagnosisResponseDto.setDoctorDetail(new TestResultDoctorDetailResponseDto(diagnosis.getDoctorDetail()));
         diagnosisResponseDto.setPatientDetail(new TestResultPatientDetailResponseDto(diagnosis.getPatientDetail()));
 
