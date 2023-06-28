@@ -10,6 +10,7 @@ import com.star.eswasthyabackend.model.TestResult;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -19,6 +20,8 @@ public class DiagnosisResponseDto {
     private Integer id;
 
     private String description;
+
+    private LocalDate date;
 
     private List<TestResultResponseDto> testResultList;
 

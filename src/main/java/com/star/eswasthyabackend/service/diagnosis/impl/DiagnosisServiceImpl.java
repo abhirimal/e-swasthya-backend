@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -53,6 +54,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         }
         diagnosis.setDiagnosisDescription(requestDto.getDiagnosisDescription());
         diagnosis.setDiseaseName(requestDto.getDiseaseName());
+        diagnosis.setDate(LocalDate.now());
 
         PatientDetails patientDetail = patientDetailsRepository.findById(requestDto.getPatientDetailId())
                 .orElseThrow(() -> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
@@ -92,7 +94,9 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         diagnosis.setPatientDetail(patientDetail);
         diagnosis.setDoctorDetail(doctorDetail);
         diagnosis.setAppointment(appointment);
+        diagnosis.setDate(LocalDate.now());
         appointment.setIsDiagnosisFilled(true);
+        appointmentRepository.save(appointment);
         diagnosisRepository.saveAndFlush(diagnosis);
 
         //save test result
@@ -131,6 +135,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
         diagnosisResponseDto.setId(diagnosis.getId());
         diagnosisResponseDto.setDescription(diagnosis.getDiagnosisDescription());
+        diagnosisResponseDto.setDate(diagnosis.getDate());
         diagnosisResponseDto.setDoctorDetail(new TestResultDoctorDetailResponseDto(diagnosis.getDoctorDetail()));
         diagnosisResponseDto.setPatientDetail(new TestResultPatientDetailResponseDto(diagnosis.getPatientDetail()));
 

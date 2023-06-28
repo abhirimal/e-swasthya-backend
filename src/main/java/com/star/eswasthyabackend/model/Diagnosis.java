@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -25,6 +27,8 @@ public class Diagnosis {
     private String diseaseName;
 
     private String diagnosisDescription;
+
+    private LocalDate date;
 
     @OneToOne
     @JoinColumn(name = "appointment_id")
