@@ -28,7 +28,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "         inner join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
             "         inner join hospital h on h.id = ap.hospital_id\n" +
             "where status != 'DELETED'\n" +
-            "  and ap.id = ?1")
+            "  and ap.id = ?1\n" +
+            "order by ap.appointment_date desc\n")
     Map<String, Object> viewById(Integer appointmentId);
 
     @Query(nativeQuery = true, value = "select ap.id                                       as \"appointmentId\",\n" +
@@ -50,7 +51,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "where ap.doctor_detail_id = ?1\n" +
             "  and case\n" +
             "          when ?2 = 'ALL' then status != 'DELETED'\n" +
-            "          else status = ?2 end")
+            "          else status = ?2 end\n" +
+            "order by ap.appointment_date desc\n")
     List<Map<String, Object>> viewByDoctorIdAndStatus(Integer doctorId, String status);
 
     @Query(nativeQuery = true, value = "select ap.id                                       as \"appointmentId\",\n" +
@@ -72,6 +74,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "where ap.patient_detail_id = ?1\n" +
             "  and case\n" +
             "          when ?2 = 'ALL' then status != 'DELETED'\n" +
-            "          else status = ?2 end")
+            "          else status = ?2 end\n" +
+            "order by ap.appointment_date desc\n")
     List<Map<String, Object>> viewByPatientIdAndStatus(Integer patientId, String status);
 }

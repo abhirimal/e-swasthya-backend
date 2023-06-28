@@ -66,6 +66,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setAppointmentTime(appointmentRequest.getAppointmentTime());
         appointment.setAppointmentDate(appointmentRequest.getAppointmentDate());
         appointment.setHospital(hospital);
+        appointment.setIsDiagnosisFilled(false);
         appointment.setStatus(AppointmentStatus.CREATED);
 
         //send sms
