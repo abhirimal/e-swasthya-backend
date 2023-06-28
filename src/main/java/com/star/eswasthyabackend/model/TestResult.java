@@ -7,11 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
@@ -50,9 +48,9 @@ public class TestResult {
 
     @ManyToOne
     @JoinColumn(name = "diagnosis_id")
-    private Diagnosis diagnosis;
+    private Diagnosis diagnosis1;
 
-    public TestResult(TestResultRequestDto newTestResult, Diagnosis diagnosis,DoctorDetails doctorDetail, PatientDetails patientDetail) {
+    public TestResult(TestResultRequestDto newTestResult, Diagnosis diagnosis1, DoctorDetails doctorDetail, PatientDetails patientDetail) {
         testName = newTestResult.getTestName();
         testType = newTestResult.getTestType();
         result = newTestResult.getResult();
@@ -61,6 +59,6 @@ public class TestResult {
         imagePath = newTestResult.getImagePath();
         this.patientDetail = patientDetail;
         this.recommendedDoctorDetail = doctorDetail;
-        this.diagnosis = diagnosis;
+        this.diagnosis1 = diagnosis1;
     }
 }

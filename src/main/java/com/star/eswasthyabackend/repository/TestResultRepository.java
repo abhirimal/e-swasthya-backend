@@ -38,4 +38,10 @@ public interface TestResultRepository extends JpaRepository<TestResult, Integer>
             "         inner join patient_details pd on pd.patient_detail_id = tr.patient_detail_id\n" +
             "where dd.doctor_detail_id = ?1")
     List<Map<String, Object>> findAllByDoctorId(Integer doctorId);
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from test_result tr\n" +
+            "         inner join diagnosis d on tr.diagnosis_id = d.id\n" +
+            "where d.appointment_id = ?1")
+    List<TestResult> findByAppointmentId(Integer appointmentId);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
@@ -52,4 +53,9 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
             "         inner join doctor_details dd on dd.doctor_detail_id = d.doctor_detail_id\n" +
             "where dd.doctor_detail_id = ?1")
     List<Map<String, Object>> listAllByDoctorId(Integer id);
+
+    @Query(nativeQuery = true, value = "select * from appointment a\n" +
+            "inner join diagnosis d on a.id = d.appointment_id\n" +
+            "where appointment_id = ?1")
+    Optional<Diagnosis> findByAppointmentId(Integer appointmentId);
 }

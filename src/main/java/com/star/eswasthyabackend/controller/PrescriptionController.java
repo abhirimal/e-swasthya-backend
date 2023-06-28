@@ -1,13 +1,11 @@
 package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
-import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionRequestDto;
 import com.star.eswasthyabackend.service.prescription.PrescriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @RequiredArgsConstructor

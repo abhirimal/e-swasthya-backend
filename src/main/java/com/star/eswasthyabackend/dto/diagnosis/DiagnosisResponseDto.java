@@ -1,8 +1,11 @@
 package com.star.eswasthyabackend.dto.diagnosis;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionResponseDto;
 import com.star.eswasthyabackend.dto.testResult.TestResultDoctorDetailResponseDto;
 import com.star.eswasthyabackend.dto.testResult.TestResultPatientDetailResponseDto;
-import com.star.eswasthyabackend.dto.user.doctor.DoctorDetailResponseDto;
+import com.star.eswasthyabackend.dto.testResult.TestResultResponseDto;
+import com.star.eswasthyabackend.model.Prescription;
 import com.star.eswasthyabackend.model.TestResult;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +20,12 @@ public class DiagnosisResponseDto {
 
     private String description;
 
-    private List<TestResult> testResultList;
+    private List<TestResultResponseDto> testResultList;
+
+    private List<PrescriptionResponseDto> prescriptionList;
 
     private TestResultDoctorDetailResponseDto doctorDetail;
 
     private TestResultPatientDetailResponseDto patientDetail;
+
 }

@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.service.prescription;
 
-import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionRequestDto;
 
 import java.util.Map;
 

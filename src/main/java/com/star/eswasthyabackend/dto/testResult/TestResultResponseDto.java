@@ -30,7 +30,7 @@ public class TestResultResponseDto {
 
     private TestResultPatientDetailResponseDto patientDetail;
 
-    public TestResultResponseDto(TestResult testResult){
+    public TestResultResponseDto(TestResult testResult) {
         this.id = testResult.getId();
         this.testName = testResult.getTestName();
         this.testType = testResult.getTestType();
@@ -40,5 +40,15 @@ public class TestResultResponseDto {
         this.imagePath = testResult.getImagePath();
         this.doctorDetail = new TestResultDoctorDetailResponseDto(testResult.getRecommendedDoctorDetail());
         this.patientDetail = new TestResultPatientDetailResponseDto(testResult.getPatientDetail());
+    }
+
+    public TestResultResponseDto(TestResult testResult, Integer id) {
+        this.id = id;
+        this.testName = testResult.getTestName();
+        this.testType = testResult.getTestType();
+        this.result = testResult.getResult();
+        this.description = testResult.getDescription();
+        this.testDate = testResult.getTestDate();
+        this.imagePath = testResult.getImagePath();
     }
 }

@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.dto.diagnosis;
 
-import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionRequestDto;
 import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
 import lombok.Getter;
 import lombok.Setter;

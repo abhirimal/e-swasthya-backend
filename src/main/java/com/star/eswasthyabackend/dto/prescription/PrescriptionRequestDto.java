@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.dto.medication;
+package com.star.eswasthyabackend.dto.prescription;
 
 import lombok.Getter;
 import lombok.Setter;

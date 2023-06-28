@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.service.prescription.impl;
 
-import com.star.eswasthyabackend.dto.medication.PrescriptionRequestDto;
+import com.star.eswasthyabackend.dto.prescription.PrescriptionRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Prescription;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
