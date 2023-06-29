@@ -32,6 +32,8 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
             "       d.doctor_detail_id                          as \"doctorDetailId\",\n" +
             "       d.patient_detail_id                         as \"patientDetailId\",\n" +
             "       concat_ws(' ', dd.first_name, dd.last_name) as \"doctorFullName\",\n" +
+            "       dd.image_path                               as \"imagePath\",\n" +
+            "       dd.education                                as \"education\",\n" +
             "       dd.nmc_license_no                           as \"doctorNmcLicenseNo\",\n" +
             "       dd.specialization                           as \"doctorSpecialization\",\n" +
             "       string_agg(p.medicine_name, ',')            as \"medicineName\",\n" +
@@ -52,6 +54,8 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
             "         d.patient_detail_id,\n" +
             "         dd.first_name,\n" +
             "         dd.last_name,\n" +
+            "         dd.image_path,\n" +
+            "         dd.education,\n" +
             "         dd.nmc_license_no,\n" +
             "         dd.specialization,\n" +
             "         h.hospital_name,\n" +
