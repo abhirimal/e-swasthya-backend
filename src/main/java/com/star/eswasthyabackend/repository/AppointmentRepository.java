@@ -80,4 +80,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "          else status = ?2 end\n" +
             "order by ap.appointment_date desc\n")
     List<Map<String, Object>> viewByPatientIdAndStatus(Integer patientId, String status);
+
+    @Query(nativeQuery = true, value = "select h.hospital_name as \"hospitalName\"\n" +
+            "from appointment a\n" +
+            "         inner join hospital h on a.hospital_id = h.id\n" +
+            "where a.id = ?1")
+    String findHospitalByAppointmentId(Integer appointmentId);
 }

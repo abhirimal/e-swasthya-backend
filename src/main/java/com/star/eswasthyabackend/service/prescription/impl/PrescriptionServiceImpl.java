@@ -49,7 +49,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         LocalDate endDate = requestDto.getStartDate().plusDays(requestDto.getDurationInDays());
         prescription.setEndDate(endDate);
 
-        prescription.setIsActive(LocalDate.now().isBefore(endDate));
+        prescription.setIsActive(LocalDate.now().isBefore(endDate) && LocalDate.now()
+                .isAfter(requestDto.getStartDate()));
 
         prescription.setPatientDetail(patientDetails);
         prescription.setDoctorDetail(doctorDetails);

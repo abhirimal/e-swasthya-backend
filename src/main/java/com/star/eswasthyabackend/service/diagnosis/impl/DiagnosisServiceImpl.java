@@ -133,10 +133,13 @@ public class DiagnosisServiceImpl implements DiagnosisService {
                 .orElseThrow(() -> new AppException("Diagnosis not found for given appointment Id", HttpStatus.BAD_REQUEST));
         DiagnosisResponseDto diagnosisResponseDto = new DiagnosisResponseDto();
 
+        String hospitalName = appointmentRepository.findHospitalByAppointmentId(appointmentId);
+
         diagnosisResponseDto.setId(diagnosis.getId());
         diagnosisResponseDto.setDescription(diagnosis.getDiagnosisDescription());
         diagnosisResponseDto.setDate(diagnosis.getDate());
-        diagnosisResponseDto.setDisease(diagnosisResponseDto.getDisease());
+        diagnosisResponseDto.setDisease(diagnosis.getDiseaseName());
+        diagnosisResponseDto.setHospitalName(hospitalName);
         diagnosisResponseDto.setDoctorDetail(new TestResultDoctorDetailResponseDto(diagnosis.getDoctorDetail()));
         diagnosisResponseDto.setPatientDetail(new TestResultPatientDetailResponseDto(diagnosis.getPatientDetail()));
 

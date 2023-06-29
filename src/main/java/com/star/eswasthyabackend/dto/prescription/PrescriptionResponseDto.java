@@ -27,6 +27,8 @@ public class PrescriptionResponseDto {
 
     private Integer durationInDays;
 
+    private Boolean isActive;
+
     public PrescriptionResponseDto(Prescription newPrescription) {
         id = newPrescription.getId();
         medicineName = newPrescription.getMedicineName();
@@ -36,5 +38,6 @@ public class PrescriptionResponseDto {
         startDate = newPrescription.getStartDate();
         endDate = newPrescription.getEndDate();
         durationInDays = newPrescription.getDurationInDays();
+        isActive = newPrescription.getIsActive();
     }
 }

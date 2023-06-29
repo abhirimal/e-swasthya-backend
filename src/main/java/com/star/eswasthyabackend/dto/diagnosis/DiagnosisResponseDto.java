@@ -25,6 +25,8 @@ public class DiagnosisResponseDto {
 
     private LocalDate date;
 
+    private String hospitalName;
+
     private List<TestResultResponseDto> testResultList;
 
     private List<PrescriptionResponseDto> prescriptionList;
