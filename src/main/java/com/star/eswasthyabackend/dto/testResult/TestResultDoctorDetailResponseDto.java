@@ -24,6 +24,10 @@ public class TestResultDoctorDetailResponseDto {
 
     private String nmcLicenseNo;
 
+    private String imagePath;
+
+    private String education;
+
     public TestResultDoctorDetailResponseDto(DoctorDetails recommendedDoctorDetail) {
         doctorDetailId = recommendedDoctorDetail.getDoctorDetailId();
         firstName = recommendedDoctorDetail.getFirstName();
@@ -31,5 +35,7 @@ public class TestResultDoctorDetailResponseDto {
         email = recommendedDoctorDetail.getEmail();
         specialization = recommendedDoctorDetail.getSpecialization();
         nmcLicenseNo = recommendedDoctorDetail.getNmcLicenseNo();
+        imagePath = recommendedDoctorDetail.getImagePath();
+        education = recommendedDoctorDetail.getEducation();
     }
 }

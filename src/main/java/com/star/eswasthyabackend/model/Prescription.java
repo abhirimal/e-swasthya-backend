@@ -59,7 +59,8 @@ public class Prescription {
         startDate = newPrescription.getStartDate();
         endDate = newPrescription.getStartDate().plusDays(newPrescription.getDurationInDays());
         durationInDays = newPrescription.getDurationInDays();
-        isActive = LocalDate.now().isBefore(endDate);
+        isActive = (LocalDate.now().isBefore(endDate) && LocalDate.now()
+                .isAfter(newPrescription.getStartDate()));
         this.patientDetail = patientDetail;
         this.doctorDetail = doctorDetail;
         this.diagnosis = diagnosis;
