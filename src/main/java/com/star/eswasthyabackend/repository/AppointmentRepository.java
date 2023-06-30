@@ -90,7 +90,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Query(nativeQuery = true, value = "with cte as (select extract(month from appointment_date) as month,\n" +
             "                    count(id)                            as \"appointmentCount\"\n" +
             "             from appointment\n" +
-            "             where extract(year from appointment_date) = extract(year from current_date)\n" +
+            "                      inner join doctor_details dd on dd.doctor_detail_id = appointment.doctor_detail_id\n" +
+            "             where dd.doctor_detail_id = ?1\n" +
+            "               and extract(year from appointment_date) = extract(year from current_date)\n" +
             "             group by month)\n" +
             "select case\n" +
             "           when cte.month = 1\n" +
@@ -120,5 +122,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "           as month,\n" +
             "       cte.\"appointmentCount\"\n" +
             "from cte")
-    List<Map<String, Object>> listAppointmentCount();
+    List<Map<String, Object>> listAppointmentCount(Integer doctorDetailId);
 }

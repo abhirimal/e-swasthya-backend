@@ -24,5 +24,5 @@ public interface AppointmentService {
 
     IdSmsDto resendOTP(UpdateAppointmentApprovalDto approvalDto);
 
-    List<Map<String, Object>> getAppointmentCount();
+    List<Map<String, Object>> getAppointmentCount(Integer doctorDetailId);
 }

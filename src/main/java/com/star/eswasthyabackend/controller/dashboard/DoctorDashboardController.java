@@ -4,9 +4,7 @@ import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.service.appointment.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,10 +14,10 @@ public class DoctorDashboardController {
     private final AppointmentService appointmentService;
 
     @GetMapping("/get-appointment-count")
-    public ResponseEntity<?> getAppointmentCountPerMonth(){
+    public ResponseEntity<?> getAppointmentCountPerMonth(@RequestParam("doctorDetailId") Integer doctorDetailId){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Appointments count list fetched successfully.",
-                appointmentService.getAppointmentCount()));
+                appointmentService.getAppointmentCount(doctorDetailId)));
     }
 }

@@ -186,8 +186,8 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public List<Map<String, Object>> getAppointmentCount() {
+    public List<Map<String, Object>> getAppointmentCount(Integer doctorDetailId) {
 
-        return appointmentRepository.listAppointmentCount();
+        return appointmentRepository.listAppointmentCount(doctorDetailId);
     }
 }
