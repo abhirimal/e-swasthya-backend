@@ -31,4 +31,15 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
             "         inner join diagnosis d on p.diagnosis_id = d.id\n" +
             "where d.appointment_id = ?1")
     List<Prescription> findByAppointmentId(Integer appointmentId);
+
+    @Query(nativeQuery = true,
+    value = "SELECT d.name                              as \"districtName\",\n" +
+            "       COALESCE(COUNT(p.medicine_name), 0) as \"medicineCount\"\n" +
+            "FROM district d\n" +
+            "         LEFT JOIN location l ON d.id = l.district_id\n" +
+            "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
+            "         LEFT JOIN prescription p ON pd.patient_detail_id = p.patient_detail_id\n" +
+            "    AND p.medicine_name ILIKE CONCAT('%', ?1, '%')\n" +
+            "GROUP BY d.name")
+    List<Map<String, Object>> findMedicineCount(String medicineName);
 }

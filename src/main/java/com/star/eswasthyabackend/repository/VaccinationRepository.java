@@ -37,4 +37,16 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
             "from vaccination\n" +
             "where patient_detail_id = ?1", nativeQuery = true)
     List<Map<String, Object>> findByPatientId(Integer patientId);
+
+    @Query(nativeQuery = true,
+        value = "select d.name                         as \"districtName\",\n" +
+            "       coalesce(count(v.vaccine_name), 0) as \"vaccinationCount\"\n" +
+            "from district d\n" +
+            "         left join location l on d.id = l.district_id\n" +
+            "         left join patient_details pd on l.id = pd.location_id\n" +
+            "         left join vaccination v on pd.patient_detail_id = v.patient_detail_id\n" +
+            "where v.vaccine_name ilike concat('%', ?1, '%')\n" +
+            "   or v.vaccine_name is null\n" +
+            "group by d.name")
+    List<Map<String, Object>> findVaccinationCount(String vaccineName);
 }

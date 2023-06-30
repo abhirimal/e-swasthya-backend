@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.controller;
+package com.star.eswasthyabackend.controller.dashboard;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.service.DashboardService;
@@ -37,6 +37,8 @@ public class DashboardController {
                 "Dashboard data retrieved successfully",
                 dashboardService.getPatientDashboard(patientDetailId)));
     }
+
+
 
 
 }

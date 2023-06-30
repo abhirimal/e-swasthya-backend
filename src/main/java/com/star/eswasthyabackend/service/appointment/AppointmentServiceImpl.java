@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.*;
 
 @Service
@@ -182,5 +183,11 @@ public class AppointmentServiceImpl implements AppointmentService{
         idSmsDto.setOtp(message);
         idSmsDto.setId(appointment.getId());
         return idSmsDto;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAppointmentCount(Integer doctorDetailId) {
+
+        return appointmentRepository.listAppointmentCount(doctorDetailId);
     }
 }

@@ -90,6 +90,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setDiseaseName(requestDto.getDiagnosis().getDiseaseName());
+        diagnosis.setDiseaseType(requestDto.getDiagnosis().getDiseaseType());
         diagnosis.setDiagnosisDescription(requestDto.getDiagnosis().getDiagnosisDescription());
         diagnosis.setPatientDetail(patientDetail);
         diagnosis.setDoctorDetail(doctorDetail);
@@ -138,7 +139,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         diagnosisResponseDto.setId(diagnosis.getId());
         diagnosisResponseDto.setDescription(diagnosis.getDiagnosisDescription());
         diagnosisResponseDto.setDate(diagnosis.getDate());
-        diagnosisResponseDto.setDisease(diagnosis.getDiseaseName());
+        diagnosisResponseDto.setDiseaseName(diagnosis.getDiseaseName());
+        diagnosisResponseDto.setDiseaseType(diagnosis.getDiseaseType());
         diagnosisResponseDto.setHospitalName(hospitalName);
         diagnosisResponseDto.setDoctorDetail(new TestResultDoctorDetailResponseDto(diagnosis.getDoctorDetail()));
         diagnosisResponseDto.setPatientDetail(new TestResultPatientDetailResponseDto(diagnosis.getPatientDetail()));
