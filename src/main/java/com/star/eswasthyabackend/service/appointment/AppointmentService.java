@@ -23,4 +23,6 @@ public interface AppointmentService {
     Boolean verifyAppointmentByOtp(Integer appointmentId, String otp);
 
     IdSmsDto resendOTP(UpdateAppointmentApprovalDto approvalDto);
+
+    List<Map<String, Object>> getAppointmentCount();
 }

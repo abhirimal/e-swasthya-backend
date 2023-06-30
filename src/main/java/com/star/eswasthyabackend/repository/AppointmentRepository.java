@@ -86,4 +86,39 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "         inner join hospital h on a.hospital_id = h.id\n" +
             "where a.id = ?1")
     String findHospitalByAppointmentId(Integer appointmentId);
+
+    @Query(nativeQuery = true, value = "with cte as (select extract(month from appointment_date) as month,\n" +
+            "                    count(id)                            as \"appointmentCount\"\n" +
+            "             from appointment\n" +
+            "             where extract(year from appointment_date) = extract(year from current_date)\n" +
+            "             group by month)\n" +
+            "select case\n" +
+            "           when cte.month = 1\n" +
+            "               then 'January'\n" +
+            "           when cte.month = 2\n" +
+            "               then 'February'\n" +
+            "           when cte.month = 3\n" +
+            "               then 'March'\n" +
+            "           when cte.month = 4\n" +
+            "               then 'April'\n" +
+            "           when cte.month = 5\n" +
+            "               then 'May'\n" +
+            "           when cte.month = 6\n" +
+            "               then 'June'\n" +
+            "           when cte.month = 7\n" +
+            "               then 'July'\n" +
+            "           when cte.month = 8\n" +
+            "               then 'August'\n" +
+            "           when cte.month = 9\n" +
+            "               then 'September'\n" +
+            "           when cte.month = 10\n" +
+            "               then 'October'\n" +
+            "           when cte.month = 11\n" +
+            "               then 'November'\n" +
+            "           when cte.month = 12\n" +
+            "               then 'December' end\n" +
+            "           as month,\n" +
+            "       cte.\"appointmentCount\"\n" +
+            "from cte")
+    List<Map<String, Object>> listAppointmentCount();
 }
