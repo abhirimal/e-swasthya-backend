@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/allergy")
+@RequestMapping("/api/allergic-medicine")
 public class AllergicMedicineController {
 
     private final AllergicMedicineService allergicMedicineService;

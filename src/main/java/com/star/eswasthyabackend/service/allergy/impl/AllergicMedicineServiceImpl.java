@@ -29,7 +29,7 @@ public class AllergicMedicineServiceImpl implements AllergicMedicineService {
         allergicMedicineRequestDto.getAllergicMedicineList().forEach(
                 allergyRequest -> {
                     AllergicMedicine allergicMedicine;
-                    if(allergyRequest!=null){
+                    if(allergyRequest.getId()!=null){
                         allergicMedicine = allergicMedicineRepository.findById(allergyRequest.getId())
                                 .orElseThrow(()-> new AppException("Allergic Medicine not found for given id.", HttpStatus.BAD_REQUEST));
                     }
