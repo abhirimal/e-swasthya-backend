@@ -1,6 +1,7 @@
 package com.star.eswasthyabackend.service.user.patient;
 
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
+import com.star.eswasthyabackend.dto.user.patient.UpdateHeightWeightRequestPojo;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.location.District;
@@ -16,10 +17,8 @@ import com.star.eswasthyabackend.utility.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -121,6 +120,16 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     @Override
     public Map<String, Object> getPatientDetailsByUserId(Integer id) {
         return patientDetailsRepository.getPatientDetailByUserId(id);
+    }
+
+    @Override
+    public Boolean updateHeightAndWeight(UpdateHeightWeightRequestPojo requestPojo) {
+        PatientDetails patientDetails = patientDetailsRepository.findById(requestPojo.getPatientId())
+                .orElseThrow(()-> new AppException("Patient not found for given id.", HttpStatus.BAD_REQUEST));
+        patientDetails.setWeight(requestPojo.getWeight());
+        patientDetails.setHeight(requestPojo.getHeight());
+        patientDetailsRepository.save(patientDetails);
+        return true;
     }
 
     public String generateUniqueMedicalRecordNumber(Integer id){

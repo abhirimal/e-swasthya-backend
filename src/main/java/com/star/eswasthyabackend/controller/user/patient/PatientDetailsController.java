@@ -3,6 +3,7 @@ package com.star.eswasthyabackend.controller.user.patient;
 import com.star.eswasthyabackend.dto.ApiResponse;
 import com.star.eswasthyabackend.dto.JwtResponse;
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
+import com.star.eswasthyabackend.dto.user.patient.UpdateHeightWeightRequestPojo;
 import com.star.eswasthyabackend.service.user.patient.PatientDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,14 @@ public class PatientDetailsController {
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patients list fetched successfully.",
                 patientDetailsService.getAll()));
+    }
+
+    @PostMapping("update-height-weight")
+    public ResponseEntity<?> updateHeightWeight(@RequestBody UpdateHeightWeightRequestPojo requestPojo){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Patient height and weight updated successfully.",
+                patientDetailsService.updateHeightAndWeight(requestPojo)
+        ));
     }
 }
