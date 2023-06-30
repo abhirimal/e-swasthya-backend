@@ -13,6 +13,8 @@ public class DiagnosisRequestDto {
 
     private String diseaseName;
 
+    private String diseaseType;
+
     private String diagnosisDescription;
 
     private Integer patientDetailId;

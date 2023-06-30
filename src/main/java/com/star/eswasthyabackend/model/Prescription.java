@@ -25,10 +25,13 @@ public class Prescription {
 
     private String medicineName;
 
+    private String medicineType;
+
     private Double dosageInUnit;
 
     private String frequencyPerDay;
 
+    @Column(columnDefinition = "TEXT")
     private String additionalNote;
 
     private LocalDate startDate;
@@ -64,5 +67,6 @@ public class Prescription {
         this.patientDetail = patientDetail;
         this.doctorDetail = doctorDetail;
         this.diagnosis = diagnosis;
+        this.medicineType = newPrescription.getMedicineType();
     }
 }

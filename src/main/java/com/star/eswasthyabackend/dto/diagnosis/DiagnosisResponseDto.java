@@ -21,7 +21,9 @@ public class DiagnosisResponseDto {
 
     private String description;
 
-    private String disease;
+    private String diseaseName;
+
+    private String diseaseType;
 
     private LocalDate date;
 

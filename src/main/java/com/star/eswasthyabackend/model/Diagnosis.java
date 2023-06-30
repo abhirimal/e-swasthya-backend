@@ -26,6 +26,9 @@ public class Diagnosis {
 
     private String diseaseName;
 
+    private String diseaseType;
+
+    @Column(columnDefinition = "TEXT")
     private String diagnosisDescription;
 
     private LocalDate date;

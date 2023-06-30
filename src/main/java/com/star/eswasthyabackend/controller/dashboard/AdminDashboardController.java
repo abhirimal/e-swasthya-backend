@@ -32,4 +32,21 @@ public class AdminDashboardController {
                 adminDashboardService.getDiseaseCount(diseaseName)
         ));
     }
+
+    @GetMapping("/get-medicine-count")
+    public ResponseEntity<?> getMedicineCount(@RequestParam("medicineName") String medicineName){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Medicine count per district fetched successfully",
+                adminDashboardService.getMedicineCount(medicineName)));
+    }
+
+    @GetMapping("/get-vaccination-count")
+    public ResponseEntity<?> getVaccinationCount(@RequestParam("vaccineName") String vaccineName){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Vaccination per district count is fetched successfully.",
+                adminDashboardService.getVaccinationCount(vaccineName)
+        ));
+    }
 }

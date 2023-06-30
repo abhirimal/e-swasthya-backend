@@ -83,14 +83,23 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
     Optional<Diagnosis> findByAppointmentId(Integer appointmentId);
 
     @Query(nativeQuery = true,
-            value = "SELECT d.id                                as \"districtId\",\n" +
-            "       d.name                                     AS \"districtName\",\n" +
-            "       COALESCE(count(diagnosis.disease_name), 0) AS \"diseaseCount\"\n" +
-            "FROM district d\n" +
-            "         LEFT JOIN location l ON l.district_id = d.id\n" +
-            "         LEFT JOIN patient_details pd ON pd.location_id = l.id\n" +
-            "         LEFT JOIN diagnosis ON diagnosis.patient_detail_id = pd.patient_detail_id AND diagnosis.disease_name = ?1\n" +
-            "GROUP BY d.id, d.name\n" +
-            "order by d.id")
+            value = "select d.name as \"districtName\", coalesce(count(diagnosis.disease_name), 0) as \"diseaseCount\"\n" +
+                    "from diagnosis\n" +
+                    "         left join patient_details pd on diagnosis.patient_detail_id = pd.patient_detail_id\n" +
+                    "         left join location l on l.id = pd.location_id\n" +
+                    "         left join district d on d.id = l.district_id\n" +
+                    "where disease_name = ?1\n" +
+                    "group by d.name;\n" +
+                    "\n" +
+                    "SELECT d.id                                       as \"districtId\",\n" +
+                    "       d.name                                     AS \"districtName\",\n" +
+                    "       COALESCE(count(diagnosis.disease_name), 0) AS \"diseaseCount\"\n" +
+                    "FROM district d\n" +
+                    "         LEFT JOIN location l ON l.district_id = d.id\n" +
+                    "         LEFT JOIN patient_details pd ON pd.location_id = l.id\n" +
+                    "         LEFT JOIN diagnosis ON diagnosis.patient_detail_id = pd.patient_detail_id\n" +
+                    "    AND diagnosis.disease_name ilike concat('%', ?1, '%')\n" +
+                    "GROUP BY d.id, d.name\n" +
+                    "order by d.id")
     List<Map<String, Object>> getDiseaseCountByDistrict(String diseaseName);
 }

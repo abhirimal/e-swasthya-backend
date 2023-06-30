@@ -13,6 +13,8 @@ public class PrescriptionRequestDto {
 
     private String medicineName;
 
+    private String medicineType;
+
     private Double dosageInUnit;
 
     private String frequencyPerDay;
