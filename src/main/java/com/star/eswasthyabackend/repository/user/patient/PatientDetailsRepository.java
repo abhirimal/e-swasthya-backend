@@ -88,10 +88,10 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
             "                l.street_address                           as \"address\",\n" +
             "                string_agg(am.allergic_medicine_name, ',') as \"allergicMedicineName\"\n" +
             "from patient_details pd\n" +
-            "         inner join location l on pd.location_id = l.id\n" +
-            "         inner join district d on d.id = l.district_id\n" +
-            "         inner join municipality m on l.municipality_id = m.id\n" +
-            "         inner join allergic_medicine am on pd.patient_detail_id = am.patient_detail_id\n" +
+            "         left join location l on pd.location_id = l.id\n" +
+            "         left join district d on d.id = l.district_id\n" +
+            "         left join municipality m on l.municipality_id = m.id\n" +
+            "         left join allergic_medicine am on pd.patient_detail_id = am.patient_detail_id\n" +
             "where user_id = ?1\n" +
             "group by pd.patient_detail_id,\n" +
             "         medical_record_number,\n" +
