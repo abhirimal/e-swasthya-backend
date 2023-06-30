@@ -48,7 +48,7 @@ public class PatientDetailsController {
                 patientDetailsService.getAll()));
     }
 
-    @PostMapping("update-height-weight")
+    @PatchMapping("update-height-weight")
     public ResponseEntity<?> updateHeightWeight(@RequestBody UpdateHeightWeightRequestPojo requestPojo){
 
         return ResponseEntity.ok(new ApiResponse(true,
