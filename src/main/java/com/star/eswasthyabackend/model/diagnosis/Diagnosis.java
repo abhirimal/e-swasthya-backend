@@ -1,5 +1,8 @@
-package com.star.eswasthyabackend.model;
+package com.star.eswasthyabackend.model.diagnosis;
 
+import com.star.eswasthyabackend.model.Appointment;
+import com.star.eswasthyabackend.model.Prescription;
+import com.star.eswasthyabackend.model.TestResult;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import lombok.AllArgsConstructor;

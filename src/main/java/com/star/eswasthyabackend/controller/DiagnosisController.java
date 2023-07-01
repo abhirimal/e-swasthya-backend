@@ -27,7 +27,6 @@ public class DiagnosisController {
         ));
     }
 
-
     @PostMapping("/save")
     public ResponseEntity<?> saveDiagnosis(@RequestBody DiagnosisRequestDto requestDto){
 
@@ -67,6 +66,36 @@ public class DiagnosisController {
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Diagnosis list fetched successfully", diagnosisService.listAllByDoctorId(id)
+        ));
+    }
+
+    @GetMapping("/list-disease-and-type")
+    public ResponseEntity<?> listAllDisease(){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Disease list fetched successfully.",
+                diagnosisService.listAllDiseaseAndType()
+        ));
+    }
+
+    @GetMapping("/list-disease-type")
+    public ResponseEntity<?> listDiseaseType(){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Disease type list fetched successfully",
+                diagnosisService.listDiseaseType()
+        ));
+    }
+
+    @GetMapping("/list-disease-name-by-type")
+    public ResponseEntity<?> listDiseaseNameByType(@RequestParam(name = "diseaseType") String diseaseType){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Disease name list fetched successfully.",
+                diagnosisService.listDiseaseNameByType(diseaseType)
         ));
     }
 }
