@@ -6,6 +6,7 @@ import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.repository.HospitalRepository;
 import com.star.eswasthyabackend.repository.location.DistrictRepository;
 import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
+import com.star.eswasthyabackend.repository.prescription.MedicineRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.vaccination.VaccinationRepository;
 import com.star.eswasthyabackend.repository.vaccination.VaccineRepository;
@@ -36,6 +37,7 @@ public class OneTimeDataLoader implements CommandLineRunner {
     private final DoctorDetailsService doctorDetailsService;
     private final UserRepository userRepository;
     private final VaccineRepository vaccineRepository;
+    private final MedicineRepository medicineRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -59,6 +61,11 @@ public class OneTimeDataLoader implements CommandLineRunner {
         Integer countVaccine = vaccineRepository.countVaccine();
         if(countVaccine == 0){
             loadSqlScript("vaccine.sql");
+        }
+
+        Integer countMedicine = medicineRepository.countMedicine();
+        if(countMedicine == 0){
+            loadSqlScript("medicine.sql");
         }
 
         //generate users
