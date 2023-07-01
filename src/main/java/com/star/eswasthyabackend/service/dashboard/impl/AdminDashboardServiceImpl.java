@@ -1,7 +1,7 @@
 package com.star.eswasthyabackend.service.dashboard.impl;
 
 import com.star.eswasthyabackend.repository.DiagnosisRepository;
-import com.star.eswasthyabackend.repository.PrescriptionRepository;
+import com.star.eswasthyabackend.repository.prescription.PrescriptionRepository;
 import com.star.eswasthyabackend.repository.vaccination.VaccinationRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;

@@ -16,7 +16,7 @@ import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import com.star.eswasthyabackend.repository.AppointmentRepository;
 import com.star.eswasthyabackend.repository.DiagnosisRepository;
-import com.star.eswasthyabackend.repository.PrescriptionRepository;
+import com.star.eswasthyabackend.repository.prescription.PrescriptionRepository;
 import com.star.eswasthyabackend.repository.TestResultRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

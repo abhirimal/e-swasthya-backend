@@ -15,7 +15,7 @@ public class PrescriptionController {
     private final PrescriptionService prescriptionService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> savePrescription(@RequestBody PrescriptionRequestDto requestDto){
+    public ResponseEntity<?> savePrescription(@RequestBody PrescriptionRequestDto requestDto) {
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Prescription data saved successfully",
@@ -24,7 +24,7 @@ public class PrescriptionController {
     }
 
     @GetMapping("/view/{id}")
-    public ResponseEntity<?> viewPrescriptionById(@PathVariable Integer id){
+    public ResponseEntity<?> viewPrescriptionById(@PathVariable Integer id) {
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Prescription data fetched successfully",
@@ -32,4 +32,31 @@ public class PrescriptionController {
         ));
     }
 
+    @GetMapping("/list-medicine-name")
+    public ResponseEntity<?> listMedicineName() {
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Medicine list fetched successfully.",
+                prescriptionService.listMedicineNames()
+        ));
+    }
+
+    @GetMapping("/list-medicine-type")
+    public ResponseEntity<?> listMedicineType() {
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Medicine type list fetched successfully",
+                prescriptionService.listMedicineType()
+        ));
+    }
+
+    @GetMapping("/list-medicine-name-by-type")
+    public ResponseEntity<?> listMedicineNameByType(@RequestParam(name = "medicineType") String medicineType) {
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Medicine names fetched successfully",
+                prescriptionService.listMedicineNameByMedicineType(medicineType)
+        ));
+    }
 }

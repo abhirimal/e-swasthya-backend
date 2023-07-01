@@ -5,7 +5,8 @@ import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Prescription;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
-import com.star.eswasthyabackend.repository.PrescriptionRepository;
+import com.star.eswasthyabackend.repository.prescription.MedicineRepository;
+import com.star.eswasthyabackend.repository.prescription.PrescriptionRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
 import com.star.eswasthyabackend.service.prescription.PrescriptionService;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -22,6 +24,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final PrescriptionRepository prescriptionRepository;
     private final PatientDetailsRepository patientDetailsRepository;
     private final DoctorDetailsRepository doctorDetailsRepository;
+    private final MedicineRepository medicineRepository;
 
     @Override
     public Integer savePrescription(PrescriptionRequestDto requestDto) {
@@ -64,5 +67,18 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return prescriptionRepository.viewById(id);
     }
 
+    @Override
+    public List<Map<String, String>> listMedicineNames() {
+        return medicineRepository.listMedicineNames();
+    }
 
+    @Override
+    public List<String> listMedicineType() {
+        return medicineRepository.listMedicineType();
+    }
+
+    @Override
+    public List<String> listMedicineNameByMedicineType(String medicineType) {
+        return medicineRepository.listMedicineNameByMedicineType(medicineType);
+    }
 }

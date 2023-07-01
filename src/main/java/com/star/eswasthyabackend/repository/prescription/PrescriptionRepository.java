@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.repository;
+package com.star.eswasthyabackend.repository.prescription;
 
 import com.star.eswasthyabackend.model.Prescription;
 import org.springframework.data.jpa.repository.JpaRepository;
