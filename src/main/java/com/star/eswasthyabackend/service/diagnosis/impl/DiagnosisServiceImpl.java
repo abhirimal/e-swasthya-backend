@@ -9,13 +9,14 @@ import com.star.eswasthyabackend.dto.testResult.TestResultPatientDetailResponseD
 import com.star.eswasthyabackend.dto.testResult.TestResultResponseDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Appointment;
-import com.star.eswasthyabackend.model.Diagnosis;
+import com.star.eswasthyabackend.model.diagnosis.Diagnosis;
 import com.star.eswasthyabackend.model.Prescription;
 import com.star.eswasthyabackend.model.TestResult;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import com.star.eswasthyabackend.repository.AppointmentRepository;
-import com.star.eswasthyabackend.repository.DiagnosisRepository;
+import com.star.eswasthyabackend.repository.diagnosis.DiagnosisRepository;
+import com.star.eswasthyabackend.repository.diagnosis.DiseaseRepository;
 import com.star.eswasthyabackend.repository.prescription.PrescriptionRepository;
 import com.star.eswasthyabackend.repository.TestResultRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
@@ -40,6 +41,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     private final TestResultRepository testResultRepository;
     private final PrescriptionRepository prescriptionRepository;
     private final AppointmentRepository appointmentRepository;
+    private final DiseaseRepository diseaseRepository;
 
     @Override
     public Integer saveDiagnosis(DiagnosisRequestDto requestDto) {
@@ -163,5 +165,20 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         }
 
         return diagnosisResponseDto;
+    }
+
+    @Override
+    public List<Map<String, String>> listAllDiseaseAndType() {
+        return diseaseRepository.listAllDiseaseAndType();
+    }
+
+    @Override
+    public List<String> listDiseaseType() {
+        return diseaseRepository.listDiseaseType();
+    }
+
+    @Override
+    public List<String> listDiseaseNameByType(String diseaseType) {
+        return diseaseRepository.listDiseaseNameByType(diseaseType);
     }
 }

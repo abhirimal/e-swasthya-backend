@@ -1,6 +1,7 @@
 package com.star.eswasthyabackend.model;
 
 import com.star.eswasthyabackend.dto.testResult.TestResultRequestDto;
+import com.star.eswasthyabackend.model.diagnosis.Diagnosis;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import lombok.AllArgsConstructor;
