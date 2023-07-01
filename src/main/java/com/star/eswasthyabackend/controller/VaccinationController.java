@@ -1,7 +1,7 @@
 package com.star.eswasthyabackend.controller;
 
 import com.star.eswasthyabackend.dto.ApiResponse;
-import com.star.eswasthyabackend.dto.VaccinationRequest;
+import com.star.eswasthyabackend.dto.vaccination.VaccinationRequest;
 import com.star.eswasthyabackend.service.vaccination.VaccinationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +51,11 @@ public class VaccinationController {
         ));
     }
 
+    @GetMapping("/get-vaccine-name-list")
+    public ResponseEntity<?> getVaccineNameList(){
 
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Vaccines list fetched successfully", vaccinationService.listVaccines()
+        ));
+    }
 }

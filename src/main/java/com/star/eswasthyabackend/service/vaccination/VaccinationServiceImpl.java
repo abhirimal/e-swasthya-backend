@@ -1,11 +1,12 @@
 package com.star.eswasthyabackend.service.vaccination;
 
-import com.star.eswasthyabackend.dto.VaccinationRequest;
+import com.star.eswasthyabackend.dto.vaccination.VaccinationRequest;
 import com.star.eswasthyabackend.exception.AppException;
-import com.star.eswasthyabackend.model.Vaccination;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
-import com.star.eswasthyabackend.repository.VaccinationRepository;
+import com.star.eswasthyabackend.model.vaccination.Vaccination;
+import com.star.eswasthyabackend.repository.vaccination.VaccinationRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
+import com.star.eswasthyabackend.repository.vaccination.VaccineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class VaccinationServiceImpl implements VaccinationService {
 
     private final VaccinationRepository vaccinationRepository;
     private final PatientDetailsRepository patientDetailsRepository;
+    private final VaccineRepository vaccineRepository;
 
     @Override
     public Integer saveVaccinationReport(VaccinationRequest vaccinationRequest) {
@@ -56,5 +58,10 @@ public class VaccinationServiceImpl implements VaccinationService {
     @Override
     public List<Map<String, Object>> findByPatientId(Integer patientId) {
         return vaccinationRepository.findByPatientId(patientId);
+    }
+
+    @Override
+    public List<Map<String, String>> listVaccines() {
+        return vaccineRepository.listVaccines();
     }
 }
