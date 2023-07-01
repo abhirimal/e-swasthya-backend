@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.dto;
+package com.star.eswasthyabackend.dto.vaccination;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.star.eswasthyabackend.repository;
+package com.star.eswasthyabackend.repository.vaccination;
 
-import com.star.eswasthyabackend.model.Vaccination;
+import com.star.eswasthyabackend.model.vaccination.Vaccination;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

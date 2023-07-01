@@ -1,7 +1,6 @@
 package com.star.eswasthyabackend.model.patient;
 
 import com.star.eswasthyabackend.model.User;
-import com.star.eswasthyabackend.model.Vaccination;
 import com.star.eswasthyabackend.model.location.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +10,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter

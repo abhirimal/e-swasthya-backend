@@ -1,6 +1,6 @@
 package com.star.eswasthyabackend.service;
 
-import com.star.eswasthyabackend.repository.VaccinationRepository;
+import com.star.eswasthyabackend.repository.vaccination.VaccinationRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
@@ -8,7 +8,6 @@ import com.star.eswasthyabackend.service.user.doctor.DoctorDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 

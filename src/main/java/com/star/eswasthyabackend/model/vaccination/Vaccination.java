@@ -1,4 +1,4 @@
-package com.star.eswasthyabackend.model;
+package com.star.eswasthyabackend.model.vaccination;
 
 import com.star.eswasthyabackend.model.patient.PatientDetails;
 import lombok.AllArgsConstructor;
