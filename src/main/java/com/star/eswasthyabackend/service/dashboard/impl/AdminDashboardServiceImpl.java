@@ -32,8 +32,8 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     }
 
     @Override
-    public List<Map<String, Object>> getDiseaseCount(String diseaseName) {
-        return diagnosisRepository.getDiseaseCountByDistrict(diseaseName);
+    public List<Map<String, Object>> getDiseaseCountPerDistrict(String diseaseName) {
+        return diagnosisRepository.getDiseaseCountPerDistrict(diseaseName);
     }
 
     @Override
@@ -44,5 +44,26 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     @Override
     public List<Map<String, Object>> getVaccinationCount(String vaccineName) {
         return vaccinationRepository.findVaccinationCount(vaccineName);
+    }
+
+    @Override
+    public Map<String, String> getDiseaseCountInProvince(Integer provinceId, String diseaseName) {
+        return diagnosisRepository.getDiseaseCountInProvince(provinceId, diseaseName);
+    }
+
+    @Override
+    public Map<String, Object> getDiseaseCountPerMunicipality(Integer districtId, String diseaseName) {
+
+        Map<String, Object> totaDiseaseCountInDistrict = diagnosisRepository
+                .totalDiseaseCountInDistrict(districtId ,diseaseName);
+
+        List<Map<String, Object>> totalDiseaseCountPerMunicipality = diagnosisRepository
+                .totalDiseaseCountPerMunicipality(districtId, diseaseName);
+
+        Map<String, Object> totalDiseaseCount = new HashMap<>();
+        totalDiseaseCount.put("districtData", totaDiseaseCountInDistrict);
+        totalDiseaseCount.put("municipalityList", totalDiseaseCountPerMunicipality);
+
+        return totalDiseaseCount;
     }
 }
