@@ -21,4 +21,6 @@ public interface AdminDashboardService {
     Map<String, Object> getMedicineCountPerMunicipality(Integer districtId, String medicineName);
 
     Map<String, Object> findVaccinationCountInProvince(Integer provinceId, String vaccineName);
+
+    Map<String, Object> getVaccinationCountPerMunicipality(Integer districtId, String vaccineName);
 }

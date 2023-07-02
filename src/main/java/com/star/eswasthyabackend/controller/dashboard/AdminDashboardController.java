@@ -102,4 +102,15 @@ public class AdminDashboardController {
                 adminDashboardService.findVaccinationCountInProvince(provinceId, vaccineName)
         ));
     }
+
+    @GetMapping("/get-vaccination-count-per-municipality")
+    public ResponseEntity<?> getVaccinationCountListPerMunicipality(@RequestParam Integer districtId,
+                                                                    @RequestParam String vaccineName){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Vaccination count list per municipality fetched successfully.",
+                adminDashboardService.getVaccinationCountPerMunicipality(districtId, vaccineName)
+        ));
+    }
 }

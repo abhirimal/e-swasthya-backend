@@ -91,5 +91,26 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
             "         left join vaccination v on pd.patient_detail_id = v.patient_detail_id and v.vaccine_name = ?2\n" +
             "where province_no = ?1\n" +
             "group by province_name")
-    Map<String, Object> getMedicineCountInProvince(Integer provinceId, String vaccineName);
+    Map<String, Object> getVaccinationCountInProvince(Integer provinceId, String vaccineName);
+
+    @Query(nativeQuery = true, value = "select d.name,\n" +
+            "       count(v.vaccine_name) as \"vaccinationTotalCount\"\n" +
+            "from district d\n" +
+            "         left join location l on d.id = l.district_id\n" +
+            "         left join patient_details pd on l.id = pd.location_id\n" +
+            "         left join vaccination v on pd.patient_detail_id = v.patient_detail_id and v.vaccine_name = ?2\n" +
+            "where d.id = ?1\n" +
+            "group by d.name")
+    Map<String, Object> getVaccinationCountInDistrict(Integer districtId, String vaccineName);
+
+    @Query(nativeQuery = true, value = "SELECT m.name                             AS \"municipalityName\",\n" +
+            "       COALESCE(COUNT(v.vaccine_name), 0) AS \"vaccinationCount\"\n" +
+            "FROM municipality m\n" +
+            "         LEFT JOIN district d ON d.id = m.district_id\n" +
+            "         LEFT JOIN location l ON m.id = l.municipality_id\n" +
+            "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
+            "         LEFT JOIN vaccination v ON pd.patient_detail_id = v.patient_detail_id AND v.vaccine_name = ?2\n" +
+            "WHERE d.id = ?1\n" +
+            "GROUP BY m.name")
+    List<Map<String, Object>> getVaccinationCountPerMunicipality(Integer districtId, String vaccineName);
 }
