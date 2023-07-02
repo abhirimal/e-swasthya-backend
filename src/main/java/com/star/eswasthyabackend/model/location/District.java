@@ -21,7 +21,7 @@ public class District {
 
     private String name;
 
-    private String provinceNo;
+    private Integer provinceNo;
 
     private String provinceName;
 

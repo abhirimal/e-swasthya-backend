@@ -32,8 +32,8 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     }
 
     @Override
-    public List<Map<String, Object>> getDiseaseCount(String diseaseName) {
-        return diagnosisRepository.getDiseaseCountByDistrict(diseaseName);
+    public List<Map<String, Object>> getDiseaseCountPerDistrict(String diseaseName) {
+        return diagnosisRepository.getDiseaseCountPerDistrict(diseaseName);
     }
 
     @Override
@@ -44,6 +44,65 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     @Override
     public List<Map<String, Object>> getVaccinationCount(String vaccineName) {
         return vaccinationRepository.findVaccinationCount(vaccineName);
+    }
 
+    @Override
+    public Map<String, String> getDiseaseCountInProvince(Integer provinceId, String diseaseName) {
+        return diagnosisRepository.getDiseaseCountInProvince(provinceId, diseaseName);
+    }
+
+    @Override
+    public Map<String, Object> getDiseaseCountPerMunicipality(Integer districtId, String diseaseName) {
+
+        Map<String, Object> totaDiseaseCountInDistrict = diagnosisRepository
+                .totalDiseaseCountInDistrict(districtId ,diseaseName);
+
+        List<Map<String, Object>> totalDiseaseCountPerMunicipality = diagnosisRepository
+                .totalDiseaseCountPerMunicipality(districtId, diseaseName);
+
+        Map<String, Object> totalDiseaseCount = new HashMap<>();
+        totalDiseaseCount.put("districtData", totaDiseaseCountInDistrict);
+        totalDiseaseCount.put("municipalityList", totalDiseaseCountPerMunicipality);
+
+        return totalDiseaseCount;
+    }
+
+    @Override
+    public Map<String, String> getMedicineCountInProvince(Integer provinceId, String medicineName) {
+        return prescriptionRepository.getMedicineCountInProvince(provinceId, medicineName);
+    }
+
+    @Override
+    public Map<String, Object> getMedicineCountPerMunicipality(Integer districtId, String medicineName) {
+
+        Map<String, Object> totalMedicineCountInDistrict = prescriptionRepository
+                .getTotalMedicineCountInDistrict(districtId, medicineName);
+        List<Map<String, Object>> medicineCountListPerMunicipality = prescriptionRepository
+                .getMedicineCountListPerMunicipality(districtId, medicineName);
+
+        Map<String, Object> totalMedicineCount = new HashMap<>();
+        totalMedicineCount.put("districtData", totalMedicineCountInDistrict);
+        totalMedicineCount.put("municipalityList", medicineCountListPerMunicipality);
+
+        return totalMedicineCount;
+    }
+
+    @Override
+    public Map<String, Object> findVaccinationCountInProvince(Integer provinceId, String vaccineName) {
+        return vaccinationRepository.getVaccinationCountInProvince(provinceId, vaccineName);
+    }
+
+    @Override
+    public Map<String, Object> getVaccinationCountPerMunicipality(Integer districtId, String vaccineName) {
+
+        Map<String, Object> vaccinationCountInDistrict = vaccinationRepository
+                .getVaccinationCountInDistrict(districtId, vaccineName);
+        List<Map<String, Object>> vaccinationCountPerMunicipality = vaccinationRepository
+                .getVaccinationCountPerMunicipality(districtId, vaccineName);
+
+        Map<String, Object> totalVaccinationCount = new HashMap<>();
+        totalVaccinationCount.put("districtData", vaccinationCountInDistrict);
+        totalVaccinationCount.put("municipalityList", vaccinationCountPerMunicipality);
+        return totalVaccinationCount;
     }
 }
