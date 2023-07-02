@@ -44,6 +44,5 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     @Override
     public List<Map<String, Object>> getVaccinationCount(String vaccineName) {
         return vaccinationRepository.findVaccinationCount(vaccineName);
-
     }
 }
