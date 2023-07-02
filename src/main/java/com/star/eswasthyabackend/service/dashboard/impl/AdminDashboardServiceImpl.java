@@ -66,4 +66,29 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 
         return totalDiseaseCount;
     }
+
+    @Override
+    public Map<String, String> getMedicineCountInProvince(Integer provinceId, String medicineName) {
+        return prescriptionRepository.getMedicineCountInProvince(provinceId, medicineName);
+    }
+
+    @Override
+    public Map<String, Object> getMedicineCountPerMunicipality(Integer districtId, String medicineName) {
+
+        Map<String, Object> totalMedicineCountInDistrict = prescriptionRepository
+                .getTotalMedicineCountInDistrict(districtId, medicineName);
+        List<Map<String, Object>> medicineCountListPerMunicipality = prescriptionRepository
+                .getMedicineCountListPerMunicipality(districtId, medicineName);
+
+        Map<String, Object> totalMedicineCount = new HashMap<>();
+        totalMedicineCount.put("districtData", totalMedicineCountInDistrict);
+        totalMedicineCount.put("municipalityList", medicineCountListPerMunicipality);
+
+        return totalMedicineCount;
+    }
+
+    @Override
+    public Map<String, Object> findVaccinationCountInProvince(Integer provinceId, String vaccineName) {
+        return vaccinationRepository.getMedicineCountInProvince(provinceId, vaccineName);
+    }
 }

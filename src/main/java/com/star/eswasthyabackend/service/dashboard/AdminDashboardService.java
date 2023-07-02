@@ -15,4 +15,10 @@ public interface AdminDashboardService {
     Map<String, String> getDiseaseCountInProvince(Integer provinceId, String diseaseName);
 
     Map<String, Object> getDiseaseCountPerMunicipality(Integer districtId, String diseaseName);
+
+    Map<String, String> getMedicineCountInProvince(Integer provinceId, String medicineName);
+
+    Map<String, Object> getMedicineCountPerMunicipality(Integer districtId, String medicineName);
+
+    Map<String, Object> findVaccinationCountInProvince(Integer provinceId, String vaccineName);
 }

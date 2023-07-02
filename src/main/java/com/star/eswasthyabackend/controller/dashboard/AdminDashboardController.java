@@ -62,12 +62,44 @@ public class AdminDashboardController {
                 adminDashboardService.getMedicineCount(medicineName)));
     }
 
+    @GetMapping("/get-medicine-count-in-province")
+    public ResponseEntity<?> getMedicineCountInProvince(@RequestParam Integer provinceId,
+                                                        @RequestParam String medicineName){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Medicine count in province fetched successfully.",
+                adminDashboardService.getMedicineCountInProvince(provinceId, medicineName)
+        ));
+    }
+
+    @GetMapping("/get-medicine-count-per-municipality")
+    public ResponseEntity<?> getMedicineCountPerMunicipality(@RequestParam Integer districtId,
+                                                             @RequestParam String medicineName){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Medicine count list per municipality fetched successfully.",
+                adminDashboardService.getMedicineCountPerMunicipality(districtId, medicineName)
+        ));
+    }
+
     @GetMapping("/get-vaccination-count-per-district")
     public ResponseEntity<?> getVaccinationCount(@RequestParam("vaccineName") String vaccineName){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Vaccination per district count is fetched successfully.",
                 adminDashboardService.getVaccinationCount(vaccineName)
+        ));
+    }
+
+    @GetMapping("/get-vaccination-count-in-province")
+    public ResponseEntity<?> getVaccinationCountInProvince(Integer provinceId, String vaccineName){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Vaccination count in district fetched successfully",
+                adminDashboardService.findVaccinationCountInProvince(provinceId, vaccineName)
         ));
     }
 }
