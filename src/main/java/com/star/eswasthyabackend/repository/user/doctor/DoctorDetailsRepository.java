@@ -28,21 +28,25 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "group by doctor_detail_id", nativeQuery = true)
     Map<String, Object> findDoctorDetailsById(Integer id);
 
-    @Query(value = "select doctor_detail_id as \"doctorId\",\n" +
-            "       first_name       as \"firstName\",\n" +
-            "       last_name        as \"lastName\",\n" +
+    @Query(value = "select doctor_detail_id                 as \"doctorId\",\n" +
+            "       first_name                       as \"firstName\",\n" +
+            "       last_name                        as \"lastName\",\n" +
             "       email,\n" +
-            "       nmc_license_no   as \"nmcLicenseNumber\",\n" +
-            "       phone_number     as \"phoneNumber\",\n" +
+            "       nmc_license_no                   as \"nmcLicenseNumber\",\n" +
+            "       phone_number                     as \"phoneNumber\",\n" +
             "       experience,\n" +
             "       specialization,\n" +
             "       education,\n" +
             "       gender,\n" +
-            "       image_path as \"imagePath\",\n" +
-            "       string_agg(h.hospital_name, ',') as \"hospitalNames\"\n" +
+            "       image_path                       as \"imagePath\",\n" +
+            "       string_agg(h.hospital_name, ',') as \"hospitalNames\",\n" +
+            "       string_agg(d.name, ',') as \"districtName\"\n" +
             "from doctor_details\n" +
             "         inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
             "         inner join hospital h on h.id = dh.hospital_id\n" +
+            "         inner join hospital h2 on h2.id = dh.hospital_id\n" +
+            "         inner join location l on l.id = h.location_id\n" +
+            "         inner join district d on d.id = l.district_id\n" +
             "group by doctor_detail_id", nativeQuery = true)
     List<Map<String, Object>> listAllDoctor();
 
