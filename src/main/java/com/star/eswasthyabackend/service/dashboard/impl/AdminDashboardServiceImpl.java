@@ -105,4 +105,51 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         totalVaccinationCount.put("municipalityList", vaccinationCountPerMunicipality);
         return totalVaccinationCount;
     }
+
+    @Override
+    public List<Map<String, Object>> getDiseaseCountPerDistrictByDiseaseType(String diseaseType) {
+        return diagnosisRepository.getDiseaseCountPerDistrictByDiseaseType(diseaseType);
+    }
+
+    @Override
+    public Map<String, Object> getDiseaseCountInProvinceByDiseaseType(Integer provinceId, String diseaseType) {
+        return diagnosisRepository.getDiseaseCountInProvinceByDiseaseType(provinceId, diseaseType);
+    }
+
+    @Override
+    public Map<String, Object> getDiseaseCountPerMunicipalityByDiseaseType(Integer districtId, String diseaseType) {
+        Map<String, Object> diseaseCountInDistrict = diagnosisRepository
+                .getDiseaseCountInDistrictByType(districtId, diseaseType);
+        List<Map<String, Object>> diseaseCountPerMunicipality = diagnosisRepository
+                .getDiseaseCountPerMunicipalityByType(districtId, diseaseType);
+
+        Map<String, Object> totalDiseaseCount = new HashMap<>();
+        totalDiseaseCount.put("districtData", diseaseCountInDistrict);
+        totalDiseaseCount.put("municipalityList", diseaseCountPerMunicipality);
+        return totalDiseaseCount;
+    }
+
+    @Override
+    public List<Map<String, Object>> getMedicineCountPerDistrictByMedicineType(String medicineType) {
+        return prescriptionRepository.getMedicineCountInDistrictByMedicineType(medicineType);
+    }
+
+    @Override
+    public Map<String, Object> getMedicineCountInProvinceByMedicineType(Integer provinceId, String medicineType) {
+        return prescriptionRepository.getMedicineCountInProvinceByMedicineType(provinceId, medicineType);
+    }
+
+    @Override
+    public Map<String, Object> getMedicineCountPerMunicipalityByMedicineType(Integer districtId, String medicineType) {
+        Map<String, Object> totalMedicineCountInDistrictByType = prescriptionRepository
+                .getTotalMedicineCountInDistrictByType(districtId, medicineType);
+        List<Map<String, Object>> medicineCountListPerMunicipalityByType = prescriptionRepository
+                .getMedicineCountListPerMunicipalityByType(districtId, medicineType);
+
+        Map<String, Object> totalMedicineCountByType = new HashMap<>();
+        totalMedicineCountByType.put("districtData", totalMedicineCountInDistrictByType);
+        totalMedicineCountByType.put("municipalityList", medicineCountListPerMunicipalityByType);
+
+        return totalMedicineCountByType;
+    }
 }

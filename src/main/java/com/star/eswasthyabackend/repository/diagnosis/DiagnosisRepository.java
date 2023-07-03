@@ -125,4 +125,46 @@ public interface DiagnosisRepository extends JpaRepository<Diagnosis, Integer> {
             "WHERE d.id = ?1\n" +
             "GROUP BY m.name")
     List<Map<String, Object>> totalDiseaseCountPerMunicipality(Integer districtId, String diseaseName);
+
+    @Query(nativeQuery = true, value = "SELECT d.name                                     AS \"districtName\",\n" +
+            "       COALESCE(count(diagnosis.disease_type), 0) AS \"diseaseCount\"\n" +
+            "FROM district d\n" +
+            "         LEFT JOIN location l ON l.district_id = d.id\n" +
+            "         LEFT JOIN patient_details pd ON pd.location_id = l.id\n" +
+            "         LEFT JOIN diagnosis ON diagnosis.patient_detail_id = pd.patient_detail_id\n" +
+            "    AND diagnosis.disease_type = ?1\n" +
+            "GROUP BY d.id, d.name\n" +
+            "order by d.id")
+    List<Map<String, Object>> getDiseaseCountPerDistrictByDiseaseType(String diseaseType);
+
+    @Query(nativeQuery = true, value = "select province_name          as \"provinceName\",\n" +
+            "       count(d2.disease_type) as \"diseaseCount\"\n" +
+            "from district d\n" +
+            "         left join location l on d.id = l.district_id\n" +
+            "         left join patient_details pd on l.id = pd.location_id\n" +
+            "         left join diagnosis d2 on pd.patient_detail_id = d2.patient_detail_id and d2.disease_type = ?2\n" +
+            "where province_no = ?1\n" +
+            "group by province_name")
+    Map<String, Object> getDiseaseCountInProvinceByDiseaseType(Integer provinceId, String diseaseType);
+
+    @Query(nativeQuery = true, value = "select d.name                 as \"districtName\",\n" +
+            "       count(d2.disease_type) as \"diseaseTotalCount\"\n" +
+            "from district d\n" +
+            "         left join location l on d.id = l.district_id\n" +
+            "         left join patient_details pd on l.id = pd.location_id\n" +
+            "         left join diagnosis d2 on pd.patient_detail_id = d2.patient_detail_id and d2.disease_type = ?2\n" +
+            "where d.id = ?1\n" +
+            "group by d.name")
+    Map<String, Object> getDiseaseCountInDistrictByType(Integer districtId, String diseaseType);
+
+    @Query(nativeQuery = true, value = "SELECT m.name                              AS \"municipalityName\",\n" +
+            "       COALESCE(COUNT(d2.disease_type), 0) AS \"diseaseCount\"\n" +
+            "FROM municipality m\n" +
+            "         LEFT JOIN district d ON d.id = m.district_id\n" +
+            "         LEFT JOIN location l ON m.id = l.municipality_id\n" +
+            "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
+            "         LEFT JOIN diagnosis d2 on pd.patient_detail_id = d2.patient_detail_id and d2.disease_type = ?2\n" +
+            "WHERE d.id = ?1\n" +
+            "GROUP BY m.name")
+    List<Map<String, Object>> getDiseaseCountPerMunicipalityByType(Integer districtId, String diseaseType);
 }
