@@ -89,18 +89,18 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
     @Query(nativeQuery = true,
     value = "WITH all_months AS (\n" +
-            "    SELECT 1 AS month_num, 'January' AS month_name UNION ALL\n" +
-            "    SELECT 2, 'February' UNION ALL\n" +
+            "    SELECT 1 AS month_num, 'Jan' AS month_name UNION ALL\n" +
+            "    SELECT 2, 'Feb' UNION ALL\n" +
             "    SELECT 3, 'March' UNION ALL\n" +
             "    SELECT 4, 'April' UNION ALL\n" +
             "    SELECT 5, 'May' UNION ALL\n" +
             "    SELECT 6, 'June' UNION ALL\n" +
             "    SELECT 7, 'July' UNION ALL\n" +
-            "    SELECT 8, 'August' UNION ALL\n" +
-            "    SELECT 9, 'September' UNION ALL\n" +
-            "    SELECT 10, 'October' UNION ALL\n" +
-            "    SELECT 11, 'November' UNION ALL\n" +
-            "    SELECT 12, 'December'\n" +
+            "    SELECT 8, 'Aug' UNION ALL\n" +
+            "    SELECT 9, 'Sept' UNION ALL\n" +
+            "    SELECT 10, 'Oct' UNION ALL\n" +
+            "    SELECT 11, 'Nov' UNION ALL\n" +
+            "    SELECT 12, 'Dec'\n" +
             ")\n" +
             "SELECT\n" +
             "    all_months.month_name AS month,\n" +
