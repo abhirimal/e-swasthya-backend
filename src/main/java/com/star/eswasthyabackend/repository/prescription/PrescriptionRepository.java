@@ -39,7 +39,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
             "         LEFT JOIN location l ON d.id = l.district_id\n" +
             "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
             "         LEFT JOIN prescription p ON pd.patient_detail_id = p.patient_detail_id\n" +
-            "    AND p.medicine_name ILIKE CONCAT('%', ?1, '%')\n" +
+            "    AND p.medicine_name = ?1\n" +
             "GROUP BY d.name")
     List<Map<String, Object>> findMedicineCount(String medicineName);
 
@@ -73,4 +73,45 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
             "WHERE d.id = ?1\n" +
             "GROUP BY m.name")
     List<Map<String, Object>> getMedicineCountListPerMunicipality(Integer districtId, String medicineName);
+
+    @Query(nativeQuery = true, value = "SELECT d.name                              as \"districtName\",\n" +
+            "       COALESCE(COUNT(p.medicine_type), 0) as \"medicineCount\"\n" +
+            "FROM district d\n" +
+            "         LEFT JOIN location l ON d.id = l.district_id\n" +
+            "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
+            "         LEFT JOIN prescription p ON pd.patient_detail_id = p.patient_detail_id\n" +
+            "    AND p.medicine_type = ?1\n" +
+            "GROUP BY d.name")
+    List<Map<String, Object>> getMedicineCountInDistrictByMedicineType(String medicineType);
+
+    @Query(nativeQuery = true, value = "select province_name          as \"provinceName\",\n" +
+            "       count(p.medicine_type) as \"medicineCount\"\n" +
+            "from district d\n" +
+            "         left join location l on d.id = l.district_id\n" +
+            "         left join patient_details pd on l.id = pd.location_id\n" +
+            "         left join prescription p on pd.patient_detail_id = p.patient_detail_id and medicine_type = ?2\n" +
+            "where province_no = ?1\n" +
+            "group by province_name")
+    Map<String, Object> getMedicineCountInProvinceByMedicineType(Integer provinceId, String medicineType);
+
+    @Query(nativeQuery = true, value = "select d.name                 as \"districtName\",\n" +
+            "       count(p.medicine_type) as \"medicineTotalCount\"\n" +
+            "from district d\n" +
+            "         left join location l on d.id = l.district_id\n" +
+            "         left join patient_details pd on l.id = pd.location_id\n" +
+            "         left join prescription p on pd.patient_detail_id = p.patient_detail_id and medicine_type = ?2\n" +
+            "where d.id = ?1\n" +
+            "group by d.name")
+    Map<String, Object> getTotalMedicineCountInDistrictByType(Integer districtId, String medicineType);
+
+    @Query(nativeQuery = true, value = "SELECT m.name                              AS \"municipalityName\",\n" +
+            "       COALESCE(COUNT(p.medicine_type), 0) AS \"medicineCount\"\n" +
+            "FROM municipality m\n" +
+            "         LEFT JOIN district d ON d.id = m.district_id\n" +
+            "         LEFT JOIN location l ON m.id = l.municipality_id\n" +
+            "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
+            "         left join prescription p on pd.patient_detail_id = p.patient_detail_id and medicine_type = ?2\n" +
+            "WHERE d.id = ?1\n" +
+            "GROUP BY m.name")
+    List<Map<String, Object>> getMedicineCountListPerMunicipalityByType(Integer districtId, String medicineType);
 }

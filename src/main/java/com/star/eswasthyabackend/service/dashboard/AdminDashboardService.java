@@ -23,4 +23,16 @@ public interface AdminDashboardService {
     Map<String, Object> findVaccinationCountInProvince(Integer provinceId, String vaccineName);
 
     Map<String, Object> getVaccinationCountPerMunicipality(Integer districtId, String vaccineName);
+
+    List<Map<String, Object>> getDiseaseCountPerDistrictByDiseaseType(String diseaseType);
+
+    Map<String, Object> getDiseaseCountInProvinceByDiseaseType(Integer provinceId, String diseaseType);
+
+    Map<String, Object> getDiseaseCountPerMunicipalityByDiseaseType(Integer districtId, String diseaseType);
+
+    List<Map<String, Object>> getMedicineCountPerDistrictByMedicineType(String medicineType);
+
+    Map<String, Object> getMedicineCountInProvinceByMedicineType(Integer provinceId, String medicineType);
+
+    Map<String, Object> getMedicineCountPerMunicipalityByMedicineType(Integer districtId, String medicineType);
 }

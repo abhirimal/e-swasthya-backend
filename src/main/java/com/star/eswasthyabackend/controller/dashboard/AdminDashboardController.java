@@ -24,7 +24,7 @@ public class AdminDashboardController {
         ));
     }
 
-    @GetMapping("/get-disease-count-per-district")
+    @GetMapping("/get-disease-count-per-district-by-disease-name")
     public ResponseEntity<?> getDiseaseCountPerDistrict(@RequestParam("diseaseName") String diseaseName){
         return ResponseEntity.ok(new ApiResponse(true,
                 "Disease count list per district fetched successfully",
@@ -32,7 +32,15 @@ public class AdminDashboardController {
         ));
     }
 
-    @GetMapping("/get-disease-count-in-province")
+    @GetMapping("/get-disease-count-per-district-by-disease-type")
+    public ResponseEntity<?> getDiseaseCountPerDistrictByDiseaseType(@RequestParam("diseaseType") String diseaseType){
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Disease count list per district fetched successfully",
+                adminDashboardService.getDiseaseCountPerDistrictByDiseaseType(diseaseType)
+        ));
+    }
+
+    @GetMapping("/get-disease-count-in-province-by-disease-name")
     public ResponseEntity<?> getDiseaseCountInProvince(@RequestParam Integer provinceId,
                                                        @RequestParam String diseaseName){
 
@@ -43,7 +51,18 @@ public class AdminDashboardController {
         ));
     }
 
-    @GetMapping("/get-disease-count-per-municipality")
+    @GetMapping("/get-disease-count-in-province-by-disease-type")
+    public ResponseEntity<?> getDiseaseCountInProvinceByDiseaseType(@RequestParam Integer provinceId,
+                                                       @RequestParam String diseaseType){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Disease count in a province fetched successfully.",
+                adminDashboardService.getDiseaseCountInProvinceByDiseaseType(provinceId, diseaseType)
+        ));
+    }
+
+    @GetMapping("/get-disease-count-per-municipality-by-disease-name")
     public ResponseEntity<?> getDiseaseCountPerMunicipality(@RequestParam Integer districtId,
                                                             @RequestParam String diseaseName){
 
@@ -54,7 +73,18 @@ public class AdminDashboardController {
         ));
     }
 
-    @GetMapping("/get-medicine-count-per-district")
+    @GetMapping("/get-disease-count-per-municipality-by-disease-type")
+    public ResponseEntity<?> getDiseaseCountPerMunicipalityByDiseaseType(@RequestParam Integer districtId,
+                                                            @RequestParam String diseaseType){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Disease count list per municipality fetched successfully.",
+                adminDashboardService.getDiseaseCountPerMunicipalityByDiseaseType(districtId, diseaseType)
+        ));
+    }
+
+    @GetMapping("/get-medicine-count-per-district-by-medicine-name")
     public ResponseEntity<?> getMedicineCount(@RequestParam("medicineName") String medicineName){
 
         return ResponseEntity.ok(new ApiResponse(true,
@@ -62,7 +92,15 @@ public class AdminDashboardController {
                 adminDashboardService.getMedicineCount(medicineName)));
     }
 
-    @GetMapping("/get-medicine-count-in-province")
+    @GetMapping("/get-medicine-count-per-district-by-medicine-type")
+    public ResponseEntity<?> getMedicineCountByMedicineType(@RequestParam("medicineType") String medicineType){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Medicine count per district fetched successfully",
+                adminDashboardService.getMedicineCountPerDistrictByMedicineType(medicineType)));
+    }
+
+    @GetMapping("/get-medicine-count-in-province-by-medicine-name")
     public ResponseEntity<?> getMedicineCountInProvince(@RequestParam Integer provinceId,
                                                         @RequestParam String medicineName){
 
@@ -73,7 +111,18 @@ public class AdminDashboardController {
         ));
     }
 
-    @GetMapping("/get-medicine-count-per-municipality")
+    @GetMapping("/get-medicine-count-in-province-by-medicine-type")
+    public ResponseEntity<?> getMedicineCountInProvinceByMedicineType(@RequestParam Integer provinceId,
+                                                        @RequestParam String medicineType){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Medicine count in province fetched successfully.",
+                adminDashboardService.getMedicineCountInProvinceByMedicineType(provinceId, medicineType)
+        ));
+    }
+
+    @GetMapping("/get-medicine-count-per-municipality-by-medicine-name")
     public ResponseEntity<?> getMedicineCountPerMunicipality(@RequestParam Integer districtId,
                                                              @RequestParam String medicineName){
 
@@ -81,6 +130,17 @@ public class AdminDashboardController {
                 true,
                 "Medicine count list per municipality fetched successfully.",
                 adminDashboardService.getMedicineCountPerMunicipality(districtId, medicineName)
+        ));
+    }
+
+    @GetMapping("/get-medicine-count-per-municipality-by-medicine-type")
+    public ResponseEntity<?> getMedicineCountPerMunicipalityByMedicineType(@RequestParam Integer districtId,
+                                                             @RequestParam String medicineType){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Medicine count list per municipality fetched successfully.",
+                adminDashboardService.getMedicineCountPerMunicipalityByMedicineType(districtId, medicineType)
         ));
     }
 
