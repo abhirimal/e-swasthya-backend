@@ -11,22 +11,25 @@ import java.util.Map;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
 
-    @Query(nativeQuery = true, value = "select ap.id                                       as \"appointmentId\",\n" +
-            "       concat_ws(' ', dd.first_name, dd.last_name) as \"doctorName\",\n" +
-            "       dd.doctor_detail_id                         as \"doctorId\",\n" +
-            "       dd.nmc_license_no                           as \"nmcLicenseNo\",\n" +
-            "       concat_ws(' ', pd.first_name, pd.last_name) as \"patientName\",\n" +
-            "       pd.patient_detail_id                        as \"patientId\",\n" +
-            "       pd.medical_record_number                    as \"medicalRecordNumber\",\n" +
-            "       ap.appointment_date                         as \"appointmentDate\",\n" +
-            "       ap.appointment_time                         as \"appointmentTime\",\n" +
-            "       h.hospital_name                             as \"hospitalName\",\n" +
-            "       ap.reason_for_visit                         as \"reasonForVist\",\n" +
-            "       ap.status                                   as \"status\",\n" +
-            "       ap.is_diagnosis_filled                      as \"isDiagnosisFilled\"\n" +
+    @Query(nativeQuery = true, value = "select distinct ap.id                                       as \"appointmentId\",\n" +
+            "                concat_ws(' ', dd.first_name, dd.last_name) as \"doctorName\",\n" +
+            "                dd.doctor_detail_id                         as \"doctorId\",\n" +
+            "                dd.nmc_license_no                           as \"nmcLicenseNo\",\n" +
+            "                concat_ws(' ', pd.first_name, pd.last_name) as \"patientName\",\n" +
+            "                pd.patient_detail_id                        as \"patientId\",\n" +
+            "                pd.medical_record_number                    as \"medicalRecordNumber\",\n" +
+            "                ap.appointment_date                         as \"appointmentDate\",\n" +
+            "                ap.appointment_time                         as \"appointmentTime\",\n" +
+            "                h.hospital_name                             as \"hospitalName\",\n" +
+            "                ap.reason_for_visit                         as \"reasonForVist\",\n" +
+            "                ap.status                                   as \"status\",\n" +
+            "                ap.is_diagnosis_filled                      as \"isDiagnosisFilled\",\n" +
+            "                d.disease_name                              as \"diseaseName\",\n" +
+            "                d.disease_type                              as \"diseaseType\"\n" +
             "from appointment ap\n" +
             "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
             "         inner join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
+            "         inner join diagnosis d on ap.id = d.appointment_id\n" +
             "         inner join hospital h on h.id = ap.hospital_id\n" +
             "where status != 'DELETED'\n" +
             "  and ap.id = ?1\n" +
