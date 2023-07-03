@@ -136,56 +136,56 @@ public class OneTimeDataLoader implements CommandLineRunner {
 
 
             //patient details
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(2, "51-808-213","9872102918", "70 kg",
-                    "5.10 ft", "Male", "A+","xyz.jpeg", 65, "Chautari", "1993-06-05"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(3, "21-809-130","9872102918","65 kg",
-                    "5.7 ft", "Male", "B+","xyz.jpeg", 120, "Galli Chowk", "1992-09-25"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(4, "89-129-123","9872102918","72 kg",
-                    "6.1 ft", "Male", "O+","xyz.jpeg", 600, "Khola Chowk", "1995-01-14"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(5, "51-809-891","9872102918","69 kg",
-                    "5.9 ft", "Male", "AB+","xyz.jpeg", 712, "Deurali", "1998-05-19"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(6, "48-921-892","9872102918","60 kg",
-                    "5.11 ft", "Male", "A-","xyz.jpeg", 3, "Dobilla", "2000-08-28"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(7, "32-812-521", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "B-", "xyz.jpeg", 90, "Thapa Gaun", "1989-12-01"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(8, "42-981-315", "9872102918", "73 kg",
-                    "6.2 ft", "Male", "O+", "xyz.jpeg", 450, "Shiva Mandir", "1991-07-10"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(9, "67-102-572", "9872102918", "67 kg",
-                    "5.7 ft", "Female", "AB-", "xyz.jpeg", 55, "Thuli Gaun", "1996-03-15"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(10, "19-425-918", "9872102918", "75 kg",
-                    "6.0 ft", "Female", "A+", "xyz.jpeg", 320, "Town", "1999-09-30"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(11, "56-819-632", "9872102918", "64 kg",
-                    "5.6 ft", "Male", "O-", "xyz.jpeg", 12, "Pakaudi", "2001-11-21"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(12, "78-912-120", "9872102918", "70 kg",
-                    "5.9 ft", "Female", "B+", "xyz.jpeg", 180, "Batulchowr", "1987-08-07"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(13, "32-109-712", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "AB+", "xyz.jpeg", 42, "Lamachowr", "1990-02-11"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(14, "19-721-320", "9872102918", "73 kg",
-                    "6.1 ft", "Female", "A-", "xyz.jpeg", 520, "Shrijana Nagar", "1994-06-24"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(15, "89-126-923", "9872102918", "66 kg",
-                    "5.7 ft", "Male", "O+", "xyz.jpeg", 310, "Pipal Bot", "1997-01-10"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(16, "67-312-810", "9872102918", "72 kg",
-                    "6.0 ft", "Female", "B-", "xyz.jpeg", 75, "Dallu", "2002-04-13"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(17, "21-817-402", "9872102918", "69 kg",
-                    "5.9 ft", "Male", "AB+", "xyz.jpeg", 120, "Dhaneswor", "1988-10-19"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(18, "48-921-310", "9872102918", "60 kg",
-                    "5.11 ft", "Female", "O-", "xyz.jpeg", 23, "Diyalo Tole", "1993-02-28"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(19, "73-812-730", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "A+", "xyz.jpeg", 87, "Gangate", "1995-07-04"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(20, "37-210-931", "9872102918", "73 kg",
-                    "6.2 ft", "Female", "B+", "xyz.jpeg", 600, "Pakuwa", "1998-11-12"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(21, "54-321-814", "9872102918", "67 kg",
-                    "5.7 ft", "Male", "AB-", "xyz.jpeg", 150, "Silmi", "1986-04-15"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(22, "89-430-917", "9872102918", "75 kg",
-                    "6.0 ft", "Female", "O+", "xyz.jpeg", 250, "Chautari", "1992-09-30"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(23, "27-920-624", "9872102918", "64 kg",
-                    "5.6 ft", "Male", "A-", "xyz.jpeg", 8, "Dhampus Chowk", "1996-03-03"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(24, "67-918-001", "9872102918", "70 kg",
-                    "5.9 ft", "Female", "B+", "xyz.jpeg", 100, "Bhatkeko Pool", "1985-08-27"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(25, "32-125-821", "9872102918", "68 kg",
-                    "5.8 ft", "Male", "AB+", "xyz.jpeg", 35, "Naya Bazar", "1991-02-10"));
-            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(26, "71-912-320", "9872102918", "73 kg",
-                    "6.1 ft", "Female", "A-", "xyz.jpeg", 480, "Kalimati", "1994-06-02"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(2, "51-808-213","9872102918", "70",
+                    "5.10", "Male", "A+","xyz.jpeg", 65, "Chautari", "1993-06-05"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(3, "21-809-130","9872102918","65",
+                    "5.7", "Male", "B+","xyz.jpeg", 120, "Galli Chowk", "1992-09-25"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(4, "89-129-123","9872102918","72",
+                    "6.1", "Male", "O+","xyz.jpeg", 600, "Khola Chowk", "1995-01-14"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(5, "51-809-891","9872102918","69",
+                    "5.9", "Male", "AB+","xyz.jpeg", 712, "Deurali", "1998-05-19"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(6, "48-921-892","9872102918","60",
+                    "5.11", "Male", "A-","xyz.jpeg", 3, "Dobilla", "2000-08-28"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(7, "32-812-521", "9872102918", "68",
+                    "5.8", "Male", "B-", "xyz.jpeg", 90, "Thapa Gaun", "1989-12-01"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(8, "42-981-315", "9872102918", "73",
+                    "6.2", "Male", "O+", "xyz.jpeg", 450, "Shiva Mandir", "1991-07-10"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(9, "67-102-572", "9872102918", "67",
+                    "5.7", "Female", "AB-", "xyz.jpeg", 55, "Thuli Gaun", "1996-03-15"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(10, "19-425-918", "9872102918", "75",
+                    "6.0", "Female", "A+", "xyz.jpeg", 320, "Town", "1999-09-30"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(11, "56-819-632", "9872102918", "64",
+                    "5.6", "Male", "O-", "xyz.jpeg", 12, "Pakaudi", "2001-11-21"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(12, "78-912-120", "9872102918", "70",
+                    "5.9", "Female", "B+", "xyz.jpeg", 180, "Batulchowr", "1987-08-07"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(13, "32-109-712", "9872102918", "68",
+                    "5.8", "Male", "AB+", "xyz.jpeg", 42, "Lamachowr", "1990-02-11"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(14, "19-721-320", "9872102918", "73",
+                    "6.1", "Female", "A-", "xyz.jpeg", 520, "Shrijana Nagar", "1994-06-24"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(15, "89-126-923", "9872102918", "66",
+                    "5.7", "Male", "O+", "xyz.jpeg", 310, "Pipal Bot", "1997-01-10"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(16, "67-312-810", "9872102918", "72",
+                    "6.0", "Female", "B-", "xyz.jpeg", 75, "Dallu", "2002-04-13"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(17, "21-817-402", "9872102918", "69",
+                    "5.9", "Male", "AB+", "xyz.jpeg", 120, "Dhaneswor", "1988-10-19"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(18, "48-921-310", "9872102918", "60",
+                    "5.11", "Female", "O-", "xyz.jpeg", 23, "Diyalo Tole", "1993-02-28"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(19, "73-812-730", "9872102918", "68",
+                    "5.8", "Male", "A+", "xyz.jpeg", 87, "Gangate", "1995-07-04"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(20, "37-210-931", "9872102918", "73",
+                    "6.2", "Female", "B+", "xyz.jpeg", 600, "Pakuwa", "1998-11-12"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(21, "54-321-814", "9872102918", "67",
+                    "5.7", "Male", "AB-", "xyz.jpeg", 150, "Silmi", "1986-04-15"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(22, "89-430-917", "9872102918", "75",
+                    "6.0", "Female", "O+", "xyz.jpeg", 250, "Chautari", "1992-09-30"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(23, "27-920-624", "9872102918", "64",
+                    "5.6", "Male", "A-", "xyz.jpeg", 8, "Dhampus Chowk", "1996-03-03"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(24, "67-918-001", "9872102918", "70",
+                    "5.9", "Female", "B+", "xyz.jpeg", 100, "Bhatkeko Pool", "1985-08-27"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(25, "32-125-821", "9872102918", "68",
+                    "5.8", "Male", "AB+", "xyz.jpeg", 35, "Naya Bazar", "1991-02-10"));
+            patientDetailsService.savePatientDetails(new PatientDetailsRequestDto(26, "71-912-320", "9872102918", "73",
+                    "6.1", "Female", "A-", "xyz.jpeg", 480, "Kalimati", "1994-06-02"));
 
 
             //generate doctors
