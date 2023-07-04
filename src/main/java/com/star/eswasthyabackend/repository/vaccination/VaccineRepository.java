@@ -14,8 +14,7 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Integer> {
             "from vaccine")
     Integer countVaccine();
 
-    @Query(nativeQuery = true, value = "select id           as \"id\",\n" +
-            "       vaccine_name as \"vaccineName\"\n" +
+    @Query(nativeQuery = true, value = "select distinct vaccine_name as \"vaccineName\"\n" +
             "from vaccine")
-    List<Map<String, String>> listVaccines();
+    List<String> listVaccines();
 }
