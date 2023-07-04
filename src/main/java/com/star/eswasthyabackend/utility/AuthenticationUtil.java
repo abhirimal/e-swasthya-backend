@@ -33,12 +33,18 @@ public class AuthenticationUtil {
     public Integer getPatientId(){
         String username = getUserName();
         PatientDetails patientDetail = patientDetailsRepository.loadPatientDetailByUsername(username);
+        if(patientDetail == null){
+            return null;
+        }
         return patientDetail.getPatientDetailId();
     }
 
     public Integer getDoctorId(){
         String username = getUserName();
         DoctorDetails doctorDetail = doctorDetailsRepository.loadDoctorDetailByUserName(username);
+        if(doctorDetail == null){
+            return null;
+        }
         return doctorDetail.getDoctorDetailId();
     }
 }

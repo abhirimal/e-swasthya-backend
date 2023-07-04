@@ -3,11 +3,13 @@ package com.star.eswasthyabackend.service.user.patient;
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
 import com.star.eswasthyabackend.dto.user.patient.UpdateHeightWeightRequestPojo;
 import com.star.eswasthyabackend.exception.AppException;
+import com.star.eswasthyabackend.model.Appointment;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.location.District;
 import com.star.eswasthyabackend.model.location.Location;
 import com.star.eswasthyabackend.model.location.Municipality;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
+import com.star.eswasthyabackend.repository.AppointmentRepository;
 import com.star.eswasthyabackend.repository.location.DistrictRepository;
 import com.star.eswasthyabackend.repository.location.LocationRepository;
 import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
@@ -37,6 +39,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     private final MunicipalityRepository municipalityRepository;
     private final JWTUtil jwtUtil;
     private final AuthenticationUtil authenticationUtil;
+    private final AppointmentRepository appointmentRepository;
     @Override
     public String savePatientDetails(PatientDetailsRequestDto requestDto) {
 
@@ -121,6 +124,21 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
     @Override
     public Map<String, String>  getPatientDetails(Integer id) {
+        Integer patientId = authenticationUtil.getPatientId();
+        Integer doctorId = authenticationUtil.getDoctorId();
+
+        //if patient is logged in
+        if(patientId != null){
+            if(!patientId.equals(id)){
+                throw new AppException("You are not authorized to access this resource", HttpStatus.UNAUTHORIZED);
+            }
+        }
+        else {
+            Integer countRelation = appointmentRepository.countRelationOfDoctorAndPatient(id, doctorId);
+            if(countRelation == 0){
+                throw new AppException("You are not authorized to access this resource", HttpStatus.UNAUTHORIZED);
+            }
+        }
         return patientDetailsRepository.findPatientDetail(id);
     }
 

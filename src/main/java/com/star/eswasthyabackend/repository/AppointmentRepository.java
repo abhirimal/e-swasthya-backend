@@ -127,6 +127,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "    all_months.month_num")
     List<Map<String, Object>> listAppointmentCount(Integer doctorDetailId);
 
+    @Query(nativeQuery = true, value = "select count(id)\n" +
+            "from appointment\n" +
+            "where patient_detail_id = ?1\n" +
+            "  and doctor_detail_id = ?2\n" +
+            "  and status != 'CREATED'")
+    Integer countRelationOfDoctorAndPatient(Integer id, Integer doctorId);
+
 //    @Query(nativeQuery = true, value = "with cte as (select extract(month from appointment_date) as month,\n" +
 //            "                    count(id)                            as \"appointmentCount\"\n" +
 //            "             from appointment\n" +
