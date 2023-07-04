@@ -34,7 +34,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
 
     @Query(nativeQuery = true,
     value = "SELECT d.name                              as \"districtName\",\n" +
-            "       COALESCE(COUNT(p.medicine_name), 0) as \"medicineCount\"\n" +
+            "       COALESCE(COUNT(p.medicine_name), 0) as \"count\"\n" +
             "FROM district d\n" +
             "         LEFT JOIN location l ON d.id = l.district_id\n" +
             "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
@@ -44,7 +44,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     List<Map<String, Object>> findMedicineCount(String medicineName);
 
     @Query(nativeQuery = true, value = "select province_name          as \"provinceName\",\n" +
-            "       count(p.medicine_name) as \"medicineCount\"\n" +
+            "       count(p.medicine_name) as \"count\"\n" +
             "from district d\n" +
             "         left join location l on d.id = l.district_id\n" +
             "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -54,7 +54,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     Map<String, String> getMedicineCountInProvince(Integer provinceId, String medicineName);
 
     @Query(nativeQuery = true, value = "select d.name                 as \"districtName\",\n" +
-            "       count(p.medicine_name) as \"medicineTotalCount\"\n" +
+            "       count(p.medicine_name) as \"count\"\n" +
             "from district d\n" +
             "         left join location l on d.id = l.district_id\n" +
             "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -64,7 +64,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     Map<String, Object> getTotalMedicineCountInDistrict(Integer districtId, String medicineName);
 
     @Query(nativeQuery = true, value = "SELECT m.name                              AS \"municipalityName\",\n" +
-            "       COALESCE(COUNT(p.medicine_name), 0) AS \"medicineCount\"\n" +
+            "       COALESCE(COUNT(p.medicine_name), 0) AS \"count\"\n" +
             "FROM municipality m\n" +
             "         LEFT JOIN district d ON d.id = m.district_id\n" +
             "         LEFT JOIN location l ON m.id = l.municipality_id\n" +
@@ -75,7 +75,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     List<Map<String, Object>> getMedicineCountListPerMunicipality(Integer districtId, String medicineName);
 
     @Query(nativeQuery = true, value = "SELECT d.name                              as \"districtName\",\n" +
-            "       COALESCE(COUNT(p.medicine_type), 0) as \"medicineCount\"\n" +
+            "       COALESCE(COUNT(p.medicine_type), 0) as \"count\"\n" +
             "FROM district d\n" +
             "         LEFT JOIN location l ON d.id = l.district_id\n" +
             "         LEFT JOIN patient_details pd ON l.id = pd.location_id\n" +
@@ -85,7 +85,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     List<Map<String, Object>> getMedicineCountInDistrictByMedicineType(String medicineType);
 
     @Query(nativeQuery = true, value = "select province_name          as \"provinceName\",\n" +
-            "       count(p.medicine_type) as \"medicineCount\"\n" +
+            "       count(p.medicine_type) as \"count\"\n" +
             "from district d\n" +
             "         left join location l on d.id = l.district_id\n" +
             "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -95,7 +95,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     Map<String, Object> getMedicineCountInProvinceByMedicineType(Integer provinceId, String medicineType);
 
     @Query(nativeQuery = true, value = "select d.name                 as \"districtName\",\n" +
-            "       count(p.medicine_type) as \"medicineTotalCount\"\n" +
+            "       count(p.medicine_type) as \"count\"\n" +
             "from district d\n" +
             "         left join location l on d.id = l.district_id\n" +
             "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -105,7 +105,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
     Map<String, Object> getTotalMedicineCountInDistrictByType(Integer districtId, String medicineType);
 
     @Query(nativeQuery = true, value = "SELECT m.name                              AS \"municipalityName\",\n" +
-            "       COALESCE(COUNT(p.medicine_type), 0) AS \"medicineCount\"\n" +
+            "       COALESCE(COUNT(p.medicine_type), 0) AS \"count\"\n" +
             "FROM municipality m\n" +
             "         LEFT JOIN district d ON d.id = m.district_id\n" +
             "         LEFT JOIN location l ON m.id = l.municipality_id\n" +

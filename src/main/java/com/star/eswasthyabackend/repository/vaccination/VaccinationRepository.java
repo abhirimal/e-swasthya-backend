@@ -73,7 +73,7 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
 
     @Query(nativeQuery = true,
             value = "select d.name                             as \"districtName\",\n" +
-                    "       coalesce(count(v.vaccine_name), 0) as \"vaccinationCount\"\n" +
+                    "       coalesce(count(v.vaccine_name), 0) as \"count\"\n" +
                     "from district d\n" +
                     "         left join location l on d.id = l.district_id\n" +
                     "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -84,7 +84,7 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
     List<Map<String, Object>> findVaccinationCount(String vaccineName);
 
     @Query(nativeQuery = true, value = "select province_name         as \"provinceName\",\n" +
-            "       count(v.vaccine_name) as \"vaccinationCount\"\n" +
+            "       count(v.vaccine_name) as \"count\"\n" +
             "from district d\n" +
             "         left join location l on d.id = l.district_id\n" +
             "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -94,7 +94,7 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
     Map<String, Object> getVaccinationCountInProvince(Integer provinceId, String vaccineName);
 
     @Query(nativeQuery = true, value = "select d.name,\n" +
-            "       count(v.vaccine_name) as \"vaccinationTotalCount\"\n" +
+            "       count(v.vaccine_name) as \"count\"\n" +
             "from district d\n" +
             "         left join location l on d.id = l.district_id\n" +
             "         left join patient_details pd on l.id = pd.location_id\n" +
@@ -104,7 +104,7 @@ public interface VaccinationRepository extends JpaRepository<Vaccination, Intege
     Map<String, Object> getVaccinationCountInDistrict(Integer districtId, String vaccineName);
 
     @Query(nativeQuery = true, value = "SELECT m.name                             AS \"municipalityName\",\n" +
-            "       COALESCE(COUNT(v.vaccine_name), 0) AS \"vaccinationCount\"\n" +
+            "       COALESCE(COUNT(v.vaccine_name), 0) AS \"count\"\n" +
             "FROM municipality m\n" +
             "         LEFT JOIN district d ON d.id = m.district_id\n" +
             "         LEFT JOIN location l ON m.id = l.municipality_id\n" +
