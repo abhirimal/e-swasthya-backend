@@ -112,4 +112,16 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
             "         d.province_name,\n" +
             "         l.street_address")
     Map<String, Object> getPatientDetailByUserId(Integer id);
+
+    @Query(nativeQuery = true, value = "select count(patient_detail_id)\n" +
+            "from patient_details\n" +
+            "where citizenship_no = ?1\n" +
+            "  and user_id != ?2")
+    Integer checkCitizenshipCount(String citizenshipNo, Integer userId);
+
+    @Query(nativeQuery = true, value = "select count(patient_detail_id)\n" +
+            "from patient_details\n" +
+            "where phone_number = ?1\n" +
+            "  and user_id != ?2")
+    Integer checkPhoneNumberCount(String phoneNumber, Integer userId);
 }

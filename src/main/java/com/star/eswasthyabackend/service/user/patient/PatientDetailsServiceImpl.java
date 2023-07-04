@@ -45,12 +45,6 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
             throw new AppException("User account is not verified yet.", HttpStatus.BAD_REQUEST);
         }
 
-        //check if patient details is already filled
-        Integer count = patientDetailsRepository.checkIfDataExists(requestDto.getUserId());
-        if(count >=1){
-            throw new AppException("Patient data already saved.",HttpStatus.BAD_REQUEST );
-        }
-
         PatientDetails patientDetails;
 
         if(requestDto.getPatientDetailId()!=null){
@@ -58,13 +52,28 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
                     .orElseThrow(()-> new AppException("Patient not found for given id.", HttpStatus.BAD_REQUEST));
         }
         else{
+            //check if patient details is already filled
+            Integer count = patientDetailsRepository.checkIfDataExists(requestDto.getUserId());
+            if(count >=1){
+                throw new AppException("Patient data already saved.",HttpStatus.BAD_REQUEST );
+            }
             patientDetails = new PatientDetails();
         }
 
         patientDetails.setFirstName(existingUser.getFirstName());
         patientDetails.setLastName(existingUser.getLastName());
         patientDetails.setEmail(existingUser.getEmail());
+
+        Integer phoneNumberCount = patientDetailsRepository.checkPhoneNumberCount(requestDto.getPhoneNumber(), requestDto.getUserId());
+        if(phoneNumberCount > 0){
+            throw new AppException("Phone number is already associated with another user.", HttpStatus.BAD_REQUEST);
+        }
         patientDetails.setPhoneNumber(requestDto.getPhoneNumber());
+
+        Integer citizenshipCount = patientDetailsRepository.checkCitizenshipCount(requestDto.getCitizenshipNo(), requestDto.getUserId());
+        if(citizenshipCount > 0){
+            throw new AppException("User with provided citizenship number already exists.", HttpStatus.BAD_REQUEST);
+        }
         patientDetails.setCitizenshipNo(requestDto.getCitizenshipNo());
         patientDetails.setBloodGroup(requestDto.getBloodGroup());
         patientDetails.setWeight(requestDto.getWeight());
