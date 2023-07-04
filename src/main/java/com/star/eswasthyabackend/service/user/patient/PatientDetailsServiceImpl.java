@@ -3,7 +3,6 @@ package com.star.eswasthyabackend.service.user.patient;
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
 import com.star.eswasthyabackend.dto.user.patient.UpdateHeightWeightRequestPojo;
 import com.star.eswasthyabackend.exception.AppException;
-import com.star.eswasthyabackend.model.Appointment;
 import com.star.eswasthyabackend.model.User;
 import com.star.eswasthyabackend.model.location.District;
 import com.star.eswasthyabackend.model.location.Location;
@@ -42,7 +41,6 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     private final AppointmentRepository appointmentRepository;
     @Override
     public String savePatientDetails(PatientDetailsRequestDto requestDto) {
-
 
         User existingUser = userRepository.findById(requestDto.getUserId())
                 .orElseThrow(()-> new AppException("User not found for given user id.", HttpStatus.BAD_REQUEST));
