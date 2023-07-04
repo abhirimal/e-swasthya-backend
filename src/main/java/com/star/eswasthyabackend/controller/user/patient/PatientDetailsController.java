@@ -5,6 +5,7 @@ import com.star.eswasthyabackend.dto.JwtResponse;
 import com.star.eswasthyabackend.dto.user.patient.PatientDetailsRequestDto;
 import com.star.eswasthyabackend.dto.user.patient.UpdateHeightWeightRequestPojo;
 import com.star.eswasthyabackend.service.user.patient.PatientDetailsService;
+import com.star.eswasthyabackend.utility.AuthenticationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,17 +26,15 @@ public class PatientDetailsController {
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
-    @GetMapping("/view/{id}")
-    public ResponseEntity<?> viewPatientDetail(@PathVariable Integer id) {
-
+    @GetMapping("/view/{patientId}")
+    public ResponseEntity<?> viewPatientDetail(@PathVariable Integer patientId) {
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patient details fetched successfully.",
-                patientDetailsService.getPatientDetails(id)));
+                patientDetailsService.getPatientDetails(patientId)));
     }
 
     @GetMapping("/view-by-user-id/{id}")
     public ResponseEntity<?> viewPatientDetailByUserId(@PathVariable Integer id) {
-
         return ResponseEntity.ok(new ApiResponse(true,
                 "Patient details fetched successfully.",
                 patientDetailsService.getPatientDetailsByUserId(id)));

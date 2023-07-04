@@ -20,7 +20,7 @@ public class PatientDetailsRequestDto {
     @NotBlank(message = "Citizenship Number is required")
     private String citizenshipNo;
 
-    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits without any special character.")
+    @Pattern(regexp = "^[9]+[0-9]{9}$" ,message = "Mobile number needs to start with digit 9 and be of 10 digits")
     private String phoneNumber;
 
     private String weight;
