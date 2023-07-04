@@ -14,5 +14,5 @@ public interface VaccinationService {
 
     List<Map<String, Object>> findByPatientId(Integer patientId);
 
-    List<Map<String, String>> listVaccines();
+    List<String> listVaccines();
 }

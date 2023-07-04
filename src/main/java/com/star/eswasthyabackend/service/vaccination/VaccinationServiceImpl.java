@@ -61,7 +61,7 @@ public class VaccinationServiceImpl implements VaccinationService {
     }
 
     @Override
-    public List<Map<String, String>> listVaccines() {
+    public List<String> listVaccines() {
         return vaccineRepository.listVaccines();
     }
 }
