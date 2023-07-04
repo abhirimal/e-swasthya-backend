@@ -13,6 +13,7 @@ import com.star.eswasthyabackend.repository.location.LocationRepository;
 import com.star.eswasthyabackend.repository.location.MunicipalityRepository;
 import com.star.eswasthyabackend.repository.user.UserRepository;
 import com.star.eswasthyabackend.repository.user.patient.PatientDetailsRepository;
+import com.star.eswasthyabackend.utility.AuthenticationUtil;
 import com.star.eswasthyabackend.utility.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +36,7 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
     private final DistrictRepository districtRepository;
     private final MunicipalityRepository municipalityRepository;
     private final JWTUtil jwtUtil;
+    private final AuthenticationUtil authenticationUtil;
     @Override
     public String savePatientDetails(PatientDetailsRequestDto requestDto) {
 
@@ -128,6 +131,10 @@ public class PatientDetailsServiceImpl implements PatientDetailsService {
 
     @Override
     public Map<String, Object> getPatientDetailsByUserId(Integer id) {
+        Integer loggedInUserId = authenticationUtil.getUserId();
+        if (!Objects.equals(loggedInUserId, id)){
+            throw new AppException("You are not authorized to access this resource", HttpStatus.UNAUTHORIZED);
+        }
         return patientDetailsRepository.getPatientDetailByUserId(id);
     }
 

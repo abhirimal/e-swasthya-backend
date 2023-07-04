@@ -77,4 +77,9 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "where user_id = ?1\n" +
             "group by doctor_detail_id")
     Map<String, Object> findDoctorByUserId(Integer id);
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from doctor_details\n" +
+            "where email = ?1")
+    DoctorDetails loadDoctorDetailByUserName(String username);
 }

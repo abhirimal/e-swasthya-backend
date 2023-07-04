@@ -124,4 +124,9 @@ public interface PatientDetailsRepository extends JpaRepository<PatientDetails, 
             "where phone_number = ?1\n" +
             "  and user_id != ?2")
     Integer checkPhoneNumberCount(String phoneNumber, Integer userId);
+
+    @Query(nativeQuery = true, value = "select *\n" +
+            "from patient_details\n" +
+            "where email = ?1")
+    PatientDetails loadPatientDetailByUsername(String username);
 }
