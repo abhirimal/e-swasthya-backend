@@ -27,10 +27,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
             "                d.disease_name                              as \"diseaseName\",\n" +
             "                d.disease_type                              as \"diseaseType\"\n" +
             "from appointment ap\n" +
-            "         inner join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
-            "         inner join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
-            "         inner join diagnosis d on ap.id = d.appointment_id\n" +
-            "         inner join hospital h on h.id = ap.hospital_id\n" +
+            "         left join doctor_details dd on dd.doctor_detail_id = ap.doctor_detail_id\n" +
+            "         left join patient_details pd on pd.patient_detail_id = ap.patient_detail_id\n" +
+            "         left join diagnosis d on ap.id = d.appointment_id\n" +
+            "         left join hospital h on h.id = ap.hospital_id\n" +
             "where status != 'DELETED'\n" +
             "  and ap.id = ?1\n" +
             "order by ap.appointment_date desc")
