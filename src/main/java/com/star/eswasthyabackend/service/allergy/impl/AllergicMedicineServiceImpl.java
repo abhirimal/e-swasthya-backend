@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +44,16 @@ public class AllergicMedicineServiceImpl implements AllergicMedicineService {
         );
         allergicMedicineRepository.saveAll(allergicMedicineList);
         return null;
+    }
+
+    @Override
+    public List<Map<String, String>> listAllergicMedicineByPatientId(Integer patientId) {
+        return allergicMedicineRepository.listAllergicMedicineByPatientId(patientId);
+    }
+
+    @Override
+    public Boolean deleteById(Integer allergicMedicineId) {
+        allergicMedicineRepository.deleteById(allergicMedicineId);
+        return true;
     }
 }
