@@ -34,12 +34,12 @@ public class AllergicMedicineController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteAllergyById(@RequestParam Integer allergyId){
+    public ResponseEntity<?> deleteAllergyById(@RequestParam Integer allergicMedicineId){
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
                 "Allergic medicine deleted successfully",
-                allergicMedicineService.deleteById(allergyId)
+                allergicMedicineService.deleteById(allergicMedicineId)
         ));
     }
 }

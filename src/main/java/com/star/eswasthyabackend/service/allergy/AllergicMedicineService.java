@@ -10,5 +10,5 @@ public interface AllergicMedicineService {
 
     List<Map<String, String>> listAllergicMedicineByPatientId(Integer patientId);
 
-    Boolean deleteById(Integer allergyId);
+    Boolean deleteById(Integer allergicMedicineId);
 }
