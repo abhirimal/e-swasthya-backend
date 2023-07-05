@@ -5,10 +5,7 @@ import com.star.eswasthyabackend.dto.allergy.AllergicMedicineRequestDto;
 import com.star.eswasthyabackend.service.allergy.AllergicMedicineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,4 +24,22 @@ public class AllergicMedicineController {
         );
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<?> getAllergicMedicineListByPatientId(@RequestParam Integer patientId){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Allergic medicines list fetched successfully.",
+                allergicMedicineService.listAllergicMedicineByPatientId(patientId)
+        ));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteAllergyById(@RequestParam Integer allergicMedicineId){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Allergic medicine deleted successfully",
+                allergicMedicineService.deleteById(allergicMedicineId)
+        ));
+    }
 }
