@@ -176,6 +176,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getEmailByUserId(Integer userId) {
+        return userRepository.findEmailByUserId(userId);
+    }
+
+    @Override
     public void changePassword(UserResetPasswordRequest passwordRequest) {
 
         User existingUser = userRepository.findById(passwordRequest.getId())

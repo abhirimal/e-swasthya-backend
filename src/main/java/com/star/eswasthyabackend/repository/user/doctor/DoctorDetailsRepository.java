@@ -70,12 +70,32 @@ public interface DoctorDetailsRepository extends JpaRepository<DoctorDetails, In
             "       education,\n" +
             "       gender,\n" +
             "       image_path                       as \"imagePath\",\n" +
+            "       l.street_address                 as \"address\",\n" +
+            "       d.name                           as \"districtName\",\n" +
+            "       m.name                           as \"municipalityName\",\n" +
             "       string_agg(h.hospital_name, ',') as \"hospitalNames\"\n" +
             "from doctor_details\n" +
             "         inner join doctor_hospital dh on doctor_details.doctor_detail_id = dh.doctor_id\n" +
             "         inner join hospital h on h.id = dh.hospital_id\n" +
+            "         inner join location l on l.id = doctor_details.location_id\n" +
+            "         inner join district d on d.id = l.district_id\n" +
+            "         inner join municipality m on l.municipality_id = m.id\n" +
             "where user_id = ?1\n" +
-            "group by doctor_detail_id")
+            "group by doctor_detail_id,\n" +
+            "         doctor_detail_id,\n" +
+            "         first_name,\n" +
+            "         last_name,\n" +
+            "         email,\n" +
+            "         nmc_license_no,\n" +
+            "         phone_number,\n" +
+            "         experience,\n" +
+            "         specialization,\n" +
+            "         education,\n" +
+            "         gender,\n" +
+            "         image_path,\n" +
+            "         l.street_address,\n" +
+            "         d.name,\n" +
+            "         m.name")
     Map<String, Object> findDoctorByUserId(Integer id);
 
     @Query(nativeQuery = true, value = "select *\n" +
