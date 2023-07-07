@@ -5,5 +5,4 @@ VALUES
     (3, 'Hepatitis B'),
     (4, 'Rabies'),
     (5, 'Pfizer'),
-    (6, 'Moderna'),
-    (7, 'Johnson & Johnson''s');
+    (6, 'Moderna');

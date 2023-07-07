@@ -47,4 +47,9 @@ public class AuthenticationUtil {
         }
         return doctorDetail.getDoctorDetailId();
     }
+
+    public String getRole(){
+        String username = getUserName();
+        return String.valueOf(userRepository.loadRoleByUserName(username));
+    }
 }
