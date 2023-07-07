@@ -19,4 +19,6 @@ public interface UserService {
     Integer verifyResetPasswordLink(Integer id, String token);
 
     void saveCustomUser(User user);
+
+    String getEmailByUserId(Integer userId);
 }

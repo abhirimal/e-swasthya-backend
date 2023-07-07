@@ -77,4 +77,13 @@ public class UserController {
                 null)
         );
     }
+
+    @GetMapping("/get-email")
+    public ResponseEntity<?> findEmailByUserId(@RequestParam Integer userId ){
+
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Email retrieved successfully",
+                userService.getEmailByUserId(userId)
+        ));
+    }
 }
