@@ -24,7 +24,7 @@ public class Diagnosis {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Diagnosis_SEQ_GEN")
-    @SequenceGenerator(name = "Diagnosis_SEQ_GEN", sequenceName = "Diagnosis_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "Diagnosis_SEQ_GEN", sequenceName = "Diagnosis_SEQ", allocationSize = 1, initialValue = 1)
     private Integer id;
 
     private String diseaseName;

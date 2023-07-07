@@ -39,4 +39,16 @@ public class TestResultRequestDto {
     private Integer recommendedDoctorDetailId;
 
     private String imagePath;
+
+    public TestResultRequestDto(Integer id, String testName, String testType, String result, String description,
+                                String testDate, Integer patientId, Integer doctorId){
+        this.id = id;
+        this.testName = testName;
+        this.testType = testType;
+        this.result = result;
+        this.description = description;
+        this.testDate = LocalDate.parse(testDate);
+        this.patientDetailId = patientId;
+        this.recommendedDoctorDetailId = doctorId;
+    }
 }

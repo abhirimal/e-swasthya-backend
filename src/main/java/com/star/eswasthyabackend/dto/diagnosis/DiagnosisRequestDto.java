@@ -29,4 +29,14 @@ public class DiagnosisRequestDto {
 
     @NotNull(message = "Doctor Id cannot be empty")
     private Integer doctorDetailId;
+
+    public DiagnosisRequestDto(Integer id, Integer appointmentId, String diseaseName, String diseaseType, String diagnosisDescription, Integer patientId, Integer doctorId){
+        this.id=id;
+        this.appointmentId = appointmentId;
+        this.diseaseName = diseaseName;
+        this.diseaseType = diseaseType;
+        this.diagnosisDescription = diagnosisDescription;
+        this.patientDetailId = patientId;
+        this.doctorDetailId = doctorId;
+    }
 }

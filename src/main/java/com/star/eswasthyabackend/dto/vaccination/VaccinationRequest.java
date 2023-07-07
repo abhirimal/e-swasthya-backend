@@ -1,5 +1,6 @@
 package com.star.eswasthyabackend.dto.vaccination;
 
+import com.star.eswasthyabackend.repository.vaccination.VaccinationRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,4 +25,12 @@ public class VaccinationRequest {
 
     @NotNull(message = "Patient Id cannot be empty")
     private Integer patientId;
+
+    public VaccinationRequest(Integer id, String vaccineName, String vaccinationDate, Integer dosage, Integer patientId){
+        this.id = id;
+        this.vaccineName = vaccineName;
+        this.vaccinationDate = LocalDate.parse(vaccinationDate);
+        this.dosage = dosage;
+        this.patientId = patientId;
+    }
 }
