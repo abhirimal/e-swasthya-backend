@@ -81,4 +81,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public List<String> listMedicineNameByMedicineType(String medicineType) {
         return medicineRepository.listMedicineNameByMedicineType(medicineType);
     }
+
+    @Override
+    public List<Map<String, String>> listPrescriptionByPatientId(Integer patientId) {
+        return prescriptionRepository.listPrescriptionByPatientId(patientId);
+    }
 }

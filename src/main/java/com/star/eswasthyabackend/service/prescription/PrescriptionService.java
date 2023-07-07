@@ -15,4 +15,6 @@ public interface PrescriptionService {
     List<String> listMedicineType();
 
     List<String> listMedicineNameByMedicineType(String medicineType);
+
+    List<Map<String, String>> listPrescriptionByPatientId(Integer patientId);
 }
