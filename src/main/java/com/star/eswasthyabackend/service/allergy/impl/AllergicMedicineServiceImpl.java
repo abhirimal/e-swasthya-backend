@@ -12,10 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -33,16 +30,17 @@ public class AllergicMedicineServiceImpl implements AllergicMedicineService {
         List<AllergicMedicine> allergicMedicineList = new ArrayList<>();
         allergicMedicineRequestDto.getAllergicMedicineList().forEach(
                 allergyRequest -> {
-                    AllergicMedicine allergicMedicine;
-                    if (allergyRequest.getId() != null) {
-                        allergicMedicine = allergicMedicineRepository.findById(allergyRequest.getId())
-                                .orElseThrow(() -> new AppException("Allergic Medicine not found for given id.", HttpStatus.BAD_REQUEST));
-                    } else {
-                        allergicMedicine = new AllergicMedicine();
+                    AllergicMedicine allergicMedicine = allergicMedicineRepository
+                            .findAllergicMedicineByNameAndPatientId(allergyRequest.getAllergicMedicineName(), allergicMedicineRequestDto.getPatientDetailId());
+                    if (allergicMedicine != null){
+                        allergicMedicineList.add(allergicMedicine);
                     }
-                    allergicMedicine.setAllergicMedicineName(allergyRequest.getAllergicMedicineName());
-                    allergicMedicine.setPatientDetails(patientDetails);
-                    allergicMedicineList.add(allergicMedicine);
+                    else {
+                        allergicMedicine = new AllergicMedicine();
+                        allergicMedicine.setAllergicMedicineName(allergyRequest.getAllergicMedicineName());
+                        allergicMedicine.setPatientDetails(patientDetails);
+                        allergicMedicineList.add(allergicMedicine);
+                    }
                 }
         );
         allergicMedicineRepository.saveAll(allergicMedicineList);

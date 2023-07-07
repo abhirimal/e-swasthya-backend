@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/allergic-medicine")
@@ -15,10 +17,10 @@ public class AllergicMedicineController {
     private final AllergicMedicineService allergicMedicineService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveAllergy(@RequestBody AllergicMedicineRequestDto allergicMedicineRequestDto) {
+    public ResponseEntity<?> saveAllergy(@RequestBody @Valid AllergicMedicineRequestDto allergicMedicineRequestDto) {
 
         return ResponseEntity.ok(new ApiResponse(true,
-                "AllergicMedicine saved successfully",
+                "Allergic Medicines saved successfully",
                 allergicMedicineService.saveAllergyList(allergicMedicineRequestDto)
                 )
         );
