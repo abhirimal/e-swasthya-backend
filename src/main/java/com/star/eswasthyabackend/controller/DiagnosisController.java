@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class DiagnosisController {
     private final DiagnosisService diagnosisService;
 
     @PostMapping("/save-diagnosis-test-result-prescription")
-    public ResponseEntity<?> saveDiagnosisTestResultAndPrescription(@RequestBody DiagnosisTestResultPrescriptionRequestDto requestDto){
+    public ResponseEntity<?> saveDiagnosisTestResultAndPrescription(@Valid @RequestBody DiagnosisTestResultPrescriptionRequestDto requestDto){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Data saved successfully",

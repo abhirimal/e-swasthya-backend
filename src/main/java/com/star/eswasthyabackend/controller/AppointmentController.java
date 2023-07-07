@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/appointment")
@@ -18,7 +20,7 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody AppointmentRequest appointmentRequest) {
+    public ResponseEntity<?> save(@Valid @RequestBody AppointmentRequest appointmentRequest) {
         IdSmsDto idSmsDto = appointmentService.save(appointmentRequest);
         String otp = idSmsDto.getOtp();
         Integer id = idSmsDto.getId();
@@ -31,7 +33,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/resend-otp")
-    public ResponseEntity<?> resendOTP(@RequestBody UpdateAppointmentApprovalDto approvalDto) {
+    public ResponseEntity<?> resendOTP(@Valid @RequestBody UpdateAppointmentApprovalDto approvalDto) {
         IdSmsDto idSmsDto = appointmentService.resendOTP(approvalDto);
         String otp = idSmsDto.getOtp();
         Integer id = idSmsDto.getId();
@@ -93,7 +95,7 @@ public class AppointmentController {
     }
 
     @PatchMapping("/update-appointment-approval")
-    public ResponseEntity<?> updateAppointmentApproval(@RequestBody UpdateAppointmentApprovalDto approvalDto) {
+    public ResponseEntity<?> updateAppointmentApproval(@Valid @RequestBody UpdateAppointmentApprovalDto approvalDto) {
 
         return ResponseEntity.ok(new ApiResponse(
                 true,
