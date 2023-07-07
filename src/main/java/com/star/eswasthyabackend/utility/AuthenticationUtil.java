@@ -50,6 +50,6 @@ public class AuthenticationUtil {
 
     public String getRole(){
         String username = getUserName();
-        return String.valueOf(userRepository.loadRoleByUserName(username));
+        return userRepository.loadRoleByUserName(username);
     }
 }
