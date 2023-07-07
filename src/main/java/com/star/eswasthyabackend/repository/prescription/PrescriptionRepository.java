@@ -114,4 +114,19 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
             "WHERE d.id = ?1\n" +
             "GROUP BY m.name")
     List<Map<String, Object>> getMedicineCountListPerMunicipalityByType(Integer districtId, String medicineType);
+
+    @Query(nativeQuery = true, value = "select p.id,\n" +
+            "       p.medicine_name     as \"medicationName\",\n" +
+            "       p.dosage_in_unit    as \"dosageInUnit\",\n" +
+            "       p.frequency_per_day as \"frequencyPerDay\",\n" +
+            "       p.additional_note   as \"additionalNote\",\n" +
+            "       p.start_date        as \"startDate\",\n" +
+            "       p.end_date          as \"endDate\",\n" +
+            "       p.duration_in_days  as \"durationInDays\",\n" +
+            "       p.is_active         as \"isActive\",\n" +
+            "       p.doctor_detail_id  as \"doctorDetailId\",\n" +
+            "       p.patient_detail_id as \"patientDetailId\"\n" +
+            "from prescription p\n" +
+            "where patient_detail_id = ?1")
+    List<Map<String, String>> listPrescriptionByPatientId(Integer patientId);
 }

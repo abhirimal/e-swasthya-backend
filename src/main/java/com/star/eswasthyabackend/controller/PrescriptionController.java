@@ -59,4 +59,14 @@ public class PrescriptionController {
                 prescriptionService.listMedicineNameByMedicineType(medicineType)
         ));
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> listPrescriptionByPatientId(@RequestParam Integer patientId){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Prescription list fetched successfully",
+                prescriptionService.listPrescriptionByPatientId(patientId)
+        ));
+    }
 }
