@@ -16,4 +16,9 @@ public interface AIDiagnosedRepository extends JpaRepository<AIDiagnosedDisease,
             "from ai_diagnosed_disease\n" +
             "where appointment_id = ?1")
     Map<String, Object> findByAppointmentId(Integer appointmentId);
+
+    @Query(nativeQuery = true, value = "select count(id)\n" +
+            "from ai_diagnosed_disease\n" +
+            "where appointment_id = ?1")
+    Integer countData(Integer appointmentId);
 }

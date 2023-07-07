@@ -25,6 +25,12 @@ public class AIDiagnosedDiseaseImpl implements AIDiagnosedDiseaseService {
 
         Appointment appointment = appointmentRepository.findById(requestDto.getAppointmentId())
                 .orElseThrow(()-> new AppException("Appointment not found for given id", HttpStatus.BAD_REQUEST));
+        //check if ai is already associated with appointment
+        Integer countData = aiDiagnosedRepository.countData(requestDto.getAppointmentId());
+        if(countData > 0){
+            throw new AppException("There is already AI Diagnosed data associated with given appointment id", HttpStatus.BAD_REQUEST);
+        }
+
         AIDiagnosedDisease aiDiagnosedDisease = new AIDiagnosedDisease();
         aiDiagnosedDisease.setName("Pneumonia");
         aiDiagnosedDisease.setImagePath(requestDto.getImagePath());
