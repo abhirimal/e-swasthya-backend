@@ -27,14 +27,14 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
     public Integer saveTestResult(TestResultRequestDto requestDto) {
 
-        TestResult testResult;
-        if(requestDto.getId()!=null){
-            testResult = testResultRepository.findById(requestDto.getId())
-                    .orElseThrow(()-> new AppException("Test result not found", HttpStatus.BAD_REQUEST));
-        }
-        else {
-            testResult = new TestResult();
-        }
+        TestResult testResult = new TestResult();
+//        if(requestDto.getId()!=null){
+//            testResult = testResultRepository.findById(requestDto.getId())
+//                    .orElseThrow(()-> new AppException("Test result not found", HttpStatus.BAD_REQUEST));
+//        }
+//        else {
+//            testResult = new TestResult();
+//        }
         testResult.setTestName(requestDto.getTestName());
         testResult.setTestType(requestDto.getTestType());
         testResult.setResult(requestDto.getResult());

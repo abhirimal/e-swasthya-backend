@@ -33,4 +33,15 @@ public class AppointmentRequest {
 
     @NotNull(message = "Hospital id cannot be empty")
     private Integer hospitalId;
+
+    private String status;
+
+    public AppointmentRequest(Integer id, String reasonForVisit, String status, Integer doctorId,Integer patientId, Integer hospitalId) {
+        this.id = id;
+        this.reasonForVisit = reasonForVisit;
+        this.patientDetailId = patientId;
+        this.doctorDetailId = doctorId;
+        this.hospitalId = hospitalId;
+        this.status = status;
+    }
 }

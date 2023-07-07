@@ -46,24 +46,28 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Override
     public Integer saveDiagnosis(DiagnosisRequestDto requestDto) {
 
-        Diagnosis diagnosis;
-        if (requestDto.getId() != null) {
-            diagnosis = diagnosisRepository.findById(requestDto.getId())
-                    .orElseThrow(() -> new AppException("Diagnosis not found for given id.", HttpStatus.BAD_REQUEST));
-        } else {
-            diagnosis = new Diagnosis();
-        }
+        Diagnosis diagnosis = new Diagnosis();
+//        if (requestDto.getId() != null) {
+//            diagnosis = diagnosisRepository.findById(requestDto.getId())
+//                    .orElseThrow(() -> new AppException("Diagnosis not found for given id.", HttpStatus.BAD_REQUEST));
+//        } else {
+//            diagnosis = new Diagnosis();
+//        }
         diagnosis.setDiagnosisDescription(requestDto.getDiagnosisDescription());
         diagnosis.setDiseaseName(requestDto.getDiseaseName());
+        diagnosis.setDiseaseType(requestDto.getDiseaseType());
         diagnosis.setDate(LocalDate.now());
 
         PatientDetails patientDetail = patientDetailsRepository.findById(requestDto.getPatientDetailId())
                 .orElseThrow(() -> new AppException("Patient not found for given id", HttpStatus.BAD_REQUEST));
         DoctorDetails doctorDetail = doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
                 .orElseThrow(() -> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
+        Appointment appointment = appointmentRepository.findById(requestDto.getAppointmentId())
+                        .orElseThrow(()-> new AppException("Appointment not found for given id", HttpStatus.BAD_REQUEST));
 
         diagnosis.setPatientDetail(patientDetail);
         diagnosis.setDoctorDetail(doctorDetail);
+        diagnosis.setAppointment(appointment);
         diagnosisRepository.saveAndFlush(diagnosis);
 
         return diagnosis.getId();

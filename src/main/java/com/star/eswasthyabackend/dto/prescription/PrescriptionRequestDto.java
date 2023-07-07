@@ -29,6 +29,8 @@ public class PrescriptionRequestDto {
 
     private LocalDate startDate;
 
+    private LocalDate endDate;
+
     @NotNull(message = "Duration cannot be empty")
     private Integer durationInDays;
 
@@ -37,4 +39,21 @@ public class PrescriptionRequestDto {
 
     @NotNull(message = "Doctor Id cannot be empty")
     private Integer doctorDetailId;
+
+    private Integer diagnosisId;
+
+    public PrescriptionRequestDto(Integer id, String medicineName, String medicineType, Double dosage, String frequencyPerDay,
+                                  String additionalNote,Integer durationInDays,String startDate, Integer patientId, Integer doctorId, Integer diagnosisId){
+        this.id = id;
+        this.medicineName = medicineName;
+        this.medicineType = medicineType;
+        this.dosageInUnit = dosage;
+        this.frequencyPerDay = frequencyPerDay;
+        this.additionalNote = additionalNote;
+        this.durationInDays = durationInDays;
+        this.startDate = LocalDate.parse(startDate);
+        this.patientDetailId = patientId;
+        this.doctorDetailId = doctorId;
+        this.diagnosisId = diagnosisId;
+    }
 }
