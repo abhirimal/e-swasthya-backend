@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.annotation.Annotation;
 
-@Service
 public class DummySmsService implements SmsService{
 
     @Override
