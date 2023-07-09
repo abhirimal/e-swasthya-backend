@@ -3,8 +3,10 @@ package com.star.eswasthyabackend.service.prescription.impl;
 import com.star.eswasthyabackend.dto.prescription.PrescriptionRequestDto;
 import com.star.eswasthyabackend.exception.AppException;
 import com.star.eswasthyabackend.model.Prescription;
+import com.star.eswasthyabackend.model.diagnosis.Diagnosis;
 import com.star.eswasthyabackend.model.doctor.DoctorDetails;
 import com.star.eswasthyabackend.model.patient.PatientDetails;
+import com.star.eswasthyabackend.repository.diagnosis.DiagnosisRepository;
 import com.star.eswasthyabackend.repository.prescription.MedicineRepository;
 import com.star.eswasthyabackend.repository.prescription.PrescriptionRepository;
 import com.star.eswasthyabackend.repository.user.doctor.DoctorDetailsRepository;
@@ -25,6 +27,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final PatientDetailsRepository patientDetailsRepository;
     private final DoctorDetailsRepository doctorDetailsRepository;
     private final MedicineRepository medicineRepository;
+    private final DiagnosisRepository diagnosisRepository;
 
     @Override
     public Integer savePrescription(PrescriptionRequestDto requestDto) {
@@ -33,16 +36,20 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 .orElseThrow(()-> new AppException("Patient not found or given id.", HttpStatus.BAD_REQUEST));
         DoctorDetails doctorDetails = doctorDetailsRepository.findById(requestDto.getDoctorDetailId())
                 .orElseThrow(()-> new AppException("Doctor not found for given id", HttpStatus.BAD_REQUEST));
-        Prescription prescription;
+        Diagnosis diagnosis = diagnosisRepository.findById(requestDto.getDiagnosisId())
+                .orElseThrow(()-> new AppException("Diagnosis not found for given id", HttpStatus.BAD_REQUEST));
 
-        if(requestDto.getId()!=null){
-            prescription = prescriptionRepository.findById(requestDto.getId())
-                    .orElseThrow(()-> new AppException("Prescription not found for given id", HttpStatus.BAD_REQUEST));
-        }
-        else{
-            prescription = new Prescription();
-        }
+        Prescription prescription = new Prescription();
+
+//        if(requestDto.getId()!=null){
+//            prescription = prescriptionRepository.findById(requestDto.getId())
+//                    .orElseThrow(()-> new AppException("Prescription not found for given id", HttpStatus.BAD_REQUEST));
+//        }
+//        else{
+//            prescription = new Prescription();
+//        }
         prescription.setMedicineName(requestDto.getMedicineName());
+        prescription.setMedicineType(requestDto.getMedicineType());
         prescription.setDosageInUnit(requestDto.getDosageInUnit());
         prescription.setFrequencyPerDay(requestDto.getFrequencyPerDay());
         prescription.setDurationInDays(requestDto.getDurationInDays());
@@ -57,6 +64,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         prescription.setPatientDetail(patientDetails);
         prescription.setDoctorDetail(doctorDetails);
+        prescription.setDiagnosis(diagnosis);
         prescriptionRepository.saveAndFlush(prescription);
 
         return prescription.getId();
@@ -80,5 +88,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public List<String> listMedicineNameByMedicineType(String medicineType) {
         return medicineRepository.listMedicineNameByMedicineType(medicineType);
+    }
+
+    @Override
+    public List<Map<String, String>> listPrescriptionByPatientId(Integer patientId) {
+        return prescriptionRepository.listPrescriptionByPatientId(patientId);
     }
 }

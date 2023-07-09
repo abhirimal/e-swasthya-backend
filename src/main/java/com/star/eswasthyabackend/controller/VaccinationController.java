@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/vaccination")
 @RequiredArgsConstructor
@@ -15,7 +17,7 @@ public class VaccinationController {
     private final VaccinationService vaccinationService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveVaccination(@RequestBody VaccinationRequest vaccinationRequest){
+    public ResponseEntity<?> saveVaccination(@Valid @RequestBody VaccinationRequest vaccinationRequest){
 
         return ResponseEntity.ok(new ApiResponse(true,
                 "Vaccination report saved successfully.",

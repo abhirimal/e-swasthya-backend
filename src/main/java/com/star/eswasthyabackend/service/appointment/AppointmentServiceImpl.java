@@ -51,15 +51,15 @@ public class AppointmentServiceImpl implements AppointmentService{
                 .orElseThrow(()-> new AppException("Hospital not found for given id", HttpStatus.BAD_REQUEST));
 
 
-        Appointment appointment;
+        Appointment appointment = new Appointment();
 
-        if(appointmentRequest.getId()!=null) {
-            appointment = appointmentRepository.findById(appointmentRequest.getId())
-                    .orElseThrow(()-> new AppException("Appointment not found for given id", HttpStatus.BAD_REQUEST));
-        }
-        else {
-            appointment = new Appointment();
-        }
+//        if(appointmentRequest.getId()!=null) {
+//            appointment = appointmentRepository.findById(appointmentRequest.getId())
+//                    .orElseThrow(()-> new AppException("Appointment not found for given id", HttpStatus.BAD_REQUEST));
+//        }
+//        else {
+//            appointment = new Appointment();
+//        }
 
         appointment.setReasonForVisit(appointmentRequest.getReasonForVisit());
         appointment.setDoctorDetails(doctor);

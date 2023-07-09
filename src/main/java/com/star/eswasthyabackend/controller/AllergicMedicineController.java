@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/allergic-medicine")
@@ -15,16 +18,31 @@ public class AllergicMedicineController {
     private final AllergicMedicineService allergicMedicineService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveAllergy(@RequestBody AllergicMedicineRequestDto allergicMedicineRequestDto) {
+    public ResponseEntity<?> saveAllergy(@RequestBody @Valid AllergicMedicineRequestDto allergicMedicineRequestDto) {
 
         return ResponseEntity.ok(new ApiResponse(true,
-                "AllergicMedicine saved successfully",
+                "Allergic Medicines saved successfully",
                 allergicMedicineService.saveAllergyList(allergicMedicineRequestDto)
                 )
         );
     }
 
-    @GetMapping("/list-allergic-medicine")
+    @GetMapping("/list")
+    public ResponseEntity<?> getAllergicMedicineListByPatientId(@RequestParam Integer patientId){
 
+        return ResponseEntity.ok(new ApiResponse(true,
+                "Allergic medicines list fetched successfully.",
+                allergicMedicineService.listAllergicMedicineByPatientId(patientId)
+        ));
+    }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteAllergyById(@RequestParam Integer allergicMedicineId){
+
+        return ResponseEntity.ok(new ApiResponse(
+                true,
+                "Allergic medicine deleted successfully",
+                allergicMedicineService.deleteById(allergicMedicineId)
+        ));
+    }
 }

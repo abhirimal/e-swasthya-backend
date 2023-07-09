@@ -25,14 +25,14 @@ public class VaccinationServiceImpl implements VaccinationService {
     @Override
     public Integer saveVaccinationReport(VaccinationRequest vaccinationRequest) {
 
-        Vaccination vaccination;
+        Vaccination vaccination = new Vaccination();
 
-        if (vaccinationRequest.getId() != null) {
-            vaccination = vaccinationRepository.findById(vaccinationRequest.getId())
-                    .orElseThrow(() -> new AppException("Vaccination Report not found", HttpStatus.BAD_REQUEST));
-        } else {
-            vaccination = new Vaccination();
-        }
+//        if (vaccinationRequest.getId() != null) {
+//            vaccination = vaccinationRepository.findById(vaccinationRequest.getId())
+//                    .orElseThrow(() -> new AppException("Vaccination Report not found", HttpStatus.BAD_REQUEST));
+//        } else {
+//            vaccination = new Vaccination();
+//        }
 
         PatientDetails patientDetails = patientDetailsRepository.findById(vaccinationRequest.getPatientId())
                 .orElseThrow(() -> new AppException("Patient not found for given id.", HttpStatus.BAD_REQUEST));

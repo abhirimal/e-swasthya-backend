@@ -22,7 +22,8 @@ import java.time.LocalTime;
 public class Appointment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_seq_gen")
+    @SequenceGenerator(name = "appointment_seq_gen", sequenceName = "appointment_seq", initialValue = 1, allocationSize = 1)
     private Integer id;
 
     private String reasonForVisit;

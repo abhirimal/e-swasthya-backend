@@ -18,4 +18,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             "from users")
     Integer countUser();
 
+    @Query(nativeQuery = true, value = "select email\n" +
+            "from users\n" +
+            "where id = ?1")
+    String findEmailByUserId(Integer userId);
+
+    @Query(nativeQuery = true, value = "select role\n" +
+            "from users\n" +
+            "where email = ?1")
+    String loadRoleByUserName(String username);
 }
