@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface PatientDetailsService {
     String savePatientDetails(PatientDetailsRequestDto requestDto);
+
     Map<String, String> getPatientDetails(Integer id);
 
     List<Map<String, String>> getAll();
