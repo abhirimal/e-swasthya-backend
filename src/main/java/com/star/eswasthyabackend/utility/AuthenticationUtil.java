@@ -19,32 +19,33 @@ public class AuthenticationUtil {
     private final PatientDetailsRepository patientDetailsRepository;
     private final DoctorDetailsRepository doctorDetailsRepository;
 
-    public String getUserName(){
+    public String getUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
 
-    public Integer getUserId(){
+    public Integer getUserId() {
         String username = getUserName();
         User user = userRepository.loadUserByUsername(username);
         return user.getId();
     }
 
-    public Integer getPatientId(){
+    public Integer getPatientId() {
         String username = getUserName();
         PatientDetails patientDetail = patientDetailsRepository.loadPatientDetailByUsername(username);
-        if(patientDetail == null){
+        if (patientDetail == null) {
             return null;
         }
         return patientDetail.getPatientDetailId();
     }
 
-    public Integer getDoctorId(){
+    public Integer getDoctorId() {
         String username = getUserName();
         DoctorDetails doctorDetail = doctorDetailsRepository.loadDoctorDetailByUserName(username);
-        if(doctorDetail == null){
+        if (doctorDetail == null) {
             return null;
         }
+
         return doctorDetail.getDoctorDetailId();
     }
 
