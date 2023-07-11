@@ -225,36 +225,36 @@ public class OneTimeDataLoader implements CommandLineRunner {
                     "sita.tiwari@yopmail.com", true, true, "DOCTOR"));
             userService.saveCustomUser(new User(36, "Prakash", "Tamang", "12345678",
                     "prakash.tamang@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(37, "Manoj", "Chaudhary", "12345678",
-//                    "manoj.chaudhary@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(38, "Komal", "Bhattarai", "12345678",
-//                    "komal.bhattarai@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(39, "Priyanka", "Pande", "12345678",
-//                    "priyanka.pande@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(40, "Rajesh", "Rai", "12345678",
-//                    "rajesh.rai@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(41, "Ravi", "Singh", "12345678",
-//                    "ravi.singh@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(42, "Saraswati", "Gupta", "12345678",
-//                    "saraswati.gupta@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(43, "Dinesh", "Yadav", "12345678",
-//                    "dinesh.yadav@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(44, "Suman", "Adhikari", "12345678",
-//                    "suman.adhikari@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(45, "Sunita", "Pande", "12345678",
-//                    "sunita.pande@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(46, "Amit", "Chaudhary", "12345678",
-//                    "amit.chaudhary@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(47, "Sanjay", "Shrestha", "12345678",
-//                    "sanjay.shrestha@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(48, "Deepika", "Gurung", "12345678",
-//                    "deepika.gurung@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(49, "Shiva", "Bhatt", "12345678",
-//                    "shiva.bhatt@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(50, "Ashish", "Thapa", "12345678",
-//                    "ashish.thapa@yopmail.com", true, true, "DOCTOR"));
-//            userService.saveCustomUser(new User(51, "Aakash", "Shrestha", "12345678",
-//                    "aakash.shrestha@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(37, "Manoj", "Chaudhary", "12345678",
+                    "manoj.chaudhary@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(38, "Komal", "Bhattarai", "12345678",
+                    "komal.bhattarai@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(39, "Priyanka", "Pande", "12345678",
+                    "priyanka.pande@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(40, "Rajesh", "Rai", "12345678",
+                    "rajesh.rai@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(41, "Ravi", "Singh", "12345678",
+                    "ravi.singh@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(42, "Saraswati", "Gupta", "12345678",
+                    "saraswati.gupta@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(43, "Dinesh", "Yadav", "12345678",
+                    "dinesh.yadav@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(44, "Suman", "Adhikari", "12345678",
+                    "suman.adhikari@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(45, "Sunita", "Pande", "12345678",
+                    "sunita.pande@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(46, "Amit", "Chaudhary", "12345678",
+                    "amit.chaudhary@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(47, "Sanjay", "Shrestha", "12345678",
+                    "sanjay.shrestha@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(48, "Deepika", "Gurung", "12345678",
+                    "deepika.gurung@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(49, "Shiva", "Bhatt", "12345678",
+                    "shiva.bhatt@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(50, "Ashish", "Thapa", "12345678",
+                    "ashish.thapa@yopmail.com", true, true, "DOCTOR"));
+            userService.saveCustomUser(new User(51, "Aakash", "Shrestha", "12345678",
+                    "aakash.shrestha@yopmail.com", true, true, "DOCTOR"));
 
             //doctor details
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(27, "7891",
@@ -296,66 +296,66 @@ public class OneTimeDataLoader implements CommandLineRunner {
             doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(36, "8157",
                     "9810987654", "MBBS", "Urologist", "14 years",
                     "Male", Arrays.asList(4, 9), "Soltimode", 68, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(37, "5790",
-//                    "9847654321", "MD", "Cardiologist", "7 years",
-//                    "Female", Arrays.asList(2, 3, 5), "Purano Buspark", 183, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(38, "6784",
-//                    "9812309876", "MS", "Dermatologist", "11 years",
-//                    "Male", Arrays.asList(1, 6, 7), "Naya Galli", 410, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(39, "4203",
-//                    "9845678902", "MBBS", "Gastroenterologist", "16 years",
-//                    "Female", Arrays.asList(3, 4), "Hanuman Chowk", 74, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(40, "8752",
-//                    "9867543219", "MD", "Neurologist", "13 years",
-//                    "Male", Arrays.asList(2, 5, 9), "Naadi Pur", 625, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(41, "1468",
-//                    "9856784327", "MS", "Obstetrician/Gynecologist", "8 years",
-//                    "Female", Arrays.asList(1, 3, 7), "Bagar", 368, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(42, "6512",
-//                    "9810765438", "MBBS", "Orthopedic Surgeon", "5 years",
-//                    "Male", Arrays.asList(4, 6), "Tudikhel", 162, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(43, "2109",
-//                    "9841098766", "MD", "Pediatrician", "10 years",
-//                    "Female", Arrays.asList(1, 2, 9), "Gadesh mandir", 550, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(44, "4873",
-//                    "9812345671", "MS", "Psychiatrist", "19 years",
-//                    "Male", Arrays.asList(3, 4), "Chauni Gate", 715, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(45, "7635",
-//                    "9865432108", "MBBS", "Radiologist", "7 years",
-//                    "Female", Arrays.asList(2, 5, 8), "Jalapa Chowk", 397, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(46, "9034",
-//                    "9810987652", "MD", "Urologist", "18 years",
-//                    "Male", Arrays.asList(1, 6), "Manamaiju", 645, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(47, "3076",
-//                    "9847654320", "MS", "Cardiologist", "10 years",
-//                    "Female", Arrays.asList(3, 7), "Naag Pokhari", 589, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(48, "8342",
-//                    "9812309875", "MBBS", "Dermatologist", "14 years",
-//                    "Male", Arrays.asList(2, 4, 9), "Bhalu danda", 194, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(49, "2938",
-//                    "9845678903", "MD", "Gastroenterologist", "11 years",
-//                    "Female", Arrays.asList(1, 5), "Janak chowk", 128, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(50, "7361",
-//                    "9867543218", "MS", "Neurologist", "17 years",
-//                    "Male", Arrays.asList(3, 6, 8), "Sanepa", 675, "xyz.jpeg"));
-//
-//            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(51, "9152",
-//                    "9856784325", "MBBS", "Obstetrician/Gynecologist", "9 years",
-//                    "Female", Arrays.asList(1, 2, 7), "Purano chautari", 97, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(37, "5790",
+                    "9847654321", "MD", "Cardiologist", "7 years",
+                    "Female", Arrays.asList(2, 3, 5), "Purano Buspark", 183, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(38, "6784",
+                    "9812309876", "MS", "Dermatologist", "11 years",
+                    "Male", Arrays.asList(1, 6, 7), "Naya Galli", 410, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(39, "4203",
+                    "9845678902", "MBBS", "Gastroenterologist", "16 years",
+                    "Female", Arrays.asList(3, 4), "Hanuman Chowk", 74, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(40, "8752",
+                    "9867543219", "MD", "Neurologist", "13 years",
+                    "Male", Arrays.asList(2, 5, 9), "Naadi Pur", 625, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(41, "1468",
+                    "9856784327", "MS", "Obstetrician/Gynecologist", "8 years",
+                    "Female", Arrays.asList(1, 3, 7), "Bagar", 368, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(42, "6512",
+                    "9810765438", "MBBS", "Orthopedic Surgeon", "5 years",
+                    "Male", Arrays.asList(4, 6), "Tudikhel", 162, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(43, "2109",
+                    "9841098766", "MD", "Pediatrician", "10 years",
+                    "Female", Arrays.asList(1, 2, 9), "Gadesh mandir", 550, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(44, "4873",
+                    "9812345671", "MS", "Psychiatrist", "19 years",
+                    "Male", Arrays.asList(3, 4), "Chauni Gate", 715, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(45, "7635",
+                    "9865432108", "MBBS", "Radiologist", "7 years",
+                    "Female", Arrays.asList(2, 5, 8), "Jalapa Chowk", 397, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(46, "9034",
+                    "9810987652", "MD", "Urologist", "18 years",
+                    "Male", Arrays.asList(1, 6), "Manamaiju", 645, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(47, "3076",
+                    "9847654320", "MS", "Cardiologist", "10 years",
+                    "Female", Arrays.asList(3, 7), "Naag Pokhari", 589, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(48, "8342",
+                    "9812309875", "MBBS", "Dermatologist", "14 years",
+                    "Male", Arrays.asList(2, 4, 9), "Bhalu danda", 194, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(49, "2938",
+                    "9845678903", "MD", "Gastroenterologist", "11 years",
+                    "Female", Arrays.asList(1, 5), "Janak chowk", 128, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(50, "7361",
+                    "9867543218", "MS", "Neurologist", "17 years",
+                    "Male", Arrays.asList(3, 6, 8), "Sanepa", 675, "xyz.jpeg"));
+
+            doctorDetailsService.saveDoctorDetails(new DoctorDetailsRequestDto(51, "9152",
+                    "9856784325", "MBBS", "Obstetrician/Gynecologist", "9 years",
+                    "Female", Arrays.asList(1, 2, 7), "Purano chautari", 97, "xyz.jpeg"));
 
             //save appointment data
             appointmentService.save(new AppointmentRequest(1, "Annual Physical Exam", "ACCEPTED", 30, 4, 5));
